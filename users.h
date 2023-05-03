@@ -11,6 +11,8 @@ typedef struct {
     char* gustos[5];
 }user;
 
+int menu();
+
 void init_users(user* users);
 
 void rellenar_datos(user* users);
