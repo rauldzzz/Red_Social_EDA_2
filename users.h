@@ -13,8 +13,8 @@ typedef struct {
 
 int menu();
 
-void init_users(user* users);
+void rellenar_datos(user user1);
 
-void rellenar_datos(user* users);
+void lista_usuarios(user* usuarios, user nuevo_usuario, int cantidad_usuarios);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H
