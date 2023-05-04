@@ -61,12 +61,19 @@ void rellenar_datos(user *user1) {
 }
 
 
-void lista_usuarios(user* usuarios, user nuevo_usuario, int cantidad_usuarios){
+user* lista_usuarios(user* usuarios, user nuevo_usuario, int cantidad_usuarios){
     if (cantidad_usuarios == 0){
         usuarios = malloc(sizeof(user));
     } else{
-        usuarios = (user*) realloc(usuarios, sizeof(user)+ sizeof(user));
+        usuarios = (user*) realloc(usuarios, (cantidad_usuarios+1)*sizeof(user));
     }
     usuarios[cantidad_usuarios] = nuevo_usuario;
     cantidad_usuarios++;
+    return usuarios;
+}
+
+void print_users(user* usuarios, int cantidad_users){
+    for(int i=0; i<cantidad_users; i++){
+        printf("%d) %s\n",i+1, usuarios[i].name);
+    }
 }

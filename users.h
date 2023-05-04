@@ -18,6 +18,8 @@ int menu();
 
 void rellenar_datos(user *user1);
 
-void lista_usuarios(user* usuarios, user nuevo_usuario, int cantidad_usuarios);
+user *lista_usuarios(user* usuarios, user nuevo_usuario, int cantidad_usuarios);
+
+void print_users();
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H
