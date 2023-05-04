@@ -17,8 +17,37 @@ int menu(){
     printf("%s\n", menu);
     for (int i = 0; i < 40; ++i) printf("#");
     printf("\n");
+    printf("1.Insertar nuevo usuario\n");
+    printf("2.Listar todos los usuarios existentes \n");
+    printf("3.Operar como un usuario específico\n ");
+    printf("4.Salir\n" );
+    scanf("Elija el número de la opción deseada %d",&choice);
+    if(0 < choice <= 4) scanf("Opción inexistente. Elija el número de la opción deseada %d",&choice);
+    while(choice <= 4){
+        if(choice == 1 );
+        if(choice == 2 );
+        if(choice == 3 ){
+            int option;
+            printf("a.Enviar solicitudes de amistad ");
+            printf("b.Gestionar las solicitudes pendientes ");
+            printf("c.Realizar una publicación ");
+            printf("d.Listar las publicaciones del usuario seleccionado ");
+            scanf("Elija la letra de la opción deseada %c",&option);
+            if(0 < choice <= 4) scanf("Opción inexistente.Elija la letra de la opción deseada %c",&option);
+            if(option == "a" || option == "A" );
+            if(option == "b" || option == "B" );
+            if(option == "c" || option == "C" );
+            if(option == "d" || option == "D" );
+        }
+        if(choice == 4) break;
+    }
+
 
 }
+
+
+
+
 
 //Colocar el rellenar_datos() aqui Paula
 void rellenar_datos(user *user1) {
