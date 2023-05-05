@@ -21,25 +21,33 @@ int menu(){
     printf("2.Listar todos los usuarios existentes \n");
     printf("3.Operar como un usuario especifico\n");
     printf("4.Salir\n" );
-    scanf("Elija el número de la opción deseada %d",&choice);
-    if(0 < choice <= 4) scanf("Opción inexistente. Elija el número de la opción deseada %d",&choice);
+    printf("Elija el número de la opción deseada\n");
+    scanf("%d\n",&choice);
     while(choice <= 4){
         if(choice == 1 );
-        if(choice == 2 );
-        if(choice == 3 ){
+        else if(choice == 2 );
+        else if(choice == 3 ){
             int option;
             printf("a.Enviar solicitudes de amistad ");
             printf("b.Gestionar las solicitudes pendientes ");
             printf("c.Realizar una publicación ");
             printf("d.Listar las publicaciones del usuario seleccionado ");
             scanf("Elija la letra de la opción deseada %c",&option);
-            if(0 < choice <= 4) scanf("Opción inexistente.Elija la letra de la opción deseada %c",&option);
+
             if(option == "a" || option == "A" );
-            if(option == "b" || option == "B" );
-            if(option == "c" || option == "C" );
-            if(option == "d" || option == "D" );
+            else if(option == "b" || option == "B" );
+            else if(option == "c" || option == "C" );
+            else if(option == "d" || option == "D" );
+            else{
+                printf("Opción inexistente.Elija la letra de la opción deseada\n");
+                scanf("%c\n",&option);
+            }
         }
-        if(choice == 4) break;
+        else if(choice == 4) break;
+        else{
+           printf("Opción inexistente.Elija el número de la opción deseada\n");
+           scanf("%d\n",&choice);
+        }
     }
 
 
