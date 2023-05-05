@@ -19,7 +19,7 @@ int menu(){
     printf("\n");
     printf("1.Insertar nuevo usuario\n");
     printf("2.Listar todos los usuarios existentes \n");
-    printf("3.Operar como un usuario específico\n ");
+    printf("3.Operar como un usuario especifico\n");
     printf("4.Salir\n" );
     scanf("Elija el número de la opción deseada %d",&choice);
     if(0 < choice <= 4) scanf("Opción inexistente. Elija el número de la opción deseada %d",&choice);
@@ -88,7 +88,6 @@ void rellenar_datos(user *user1) {
         scanf("%s", user1->gustos[i]);
     }
 }
-
 
 user* lista_usuarios(user* usuarios, user nuevo_usuario, int cantidad_usuarios){
     if (cantidad_usuarios == 0){
