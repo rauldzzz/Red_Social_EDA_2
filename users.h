@@ -14,12 +14,17 @@ typedef struct {
     char gustos[MAX_GUSTOS][MAX_STRING_LENGTH];
 } user;
 
+typedef struct  {
+    user *lista_de_usuarios;
+    int cantidad_usuarios;
+} user_list;
+
 int menu();
 
-void rellenar_datos(user *user1);
+user rellenar_datos(user user1);
 
-user *lista_usuarios(user* usuarios, user nuevo_usuario, int cantidad_usuarios);
+user_list lista_usuarios(user_list usuarios, user nuevo_usuario);
 
-void print_users();
+void print_users(user_list  usuarios);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H
