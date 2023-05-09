@@ -118,13 +118,13 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
 }
 
 
-user buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
+user* buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
     // implementación de búsqueda binaria
     int inicio = 0, fin = usuarios->cantidad_usuarios - 1, medio;
     while (inicio <= fin) {
         medio = (inicio + fin) / 2;
         if (strcmp(usuarios->lista_de_usuarios[medio].name, name) == 0){
-            return (usuarios->lista_de_usuarios[medio]);
+            return &(usuarios->lista_de_usuarios[medio]);
         }
         else if (strcmp(usuarios->lista_de_usuarios[medio].name, name) > 0) {
             fin = medio - 1;
@@ -187,13 +187,15 @@ void add_desconicido(){
 
 void buscar_amigo(user_list* usuarios){
     char nombre[MAX_STRING_LENGTH];
-    user usuario_amigo;
+    user* usuario_amigo;
     do {
         printf("\nInserta nombre de usuario: ");
         scanf("%s", &nombre);
     } while (!isupper(nombre[0]) || !islower(nombre[1]));
-
-
+    usuario_amigo = buscar_usuario(usuarios, nombre);
+    if (usuario_amigo != NULL) {
+        strcpy(usuario_amigo->name, nombre);
+    }
 
 }
 
