@@ -27,4 +27,6 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario);
 
 void print_users(user_list  usuarios);
 
+user buscador_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]);
+
 #endif //RED_SOCIAL_PROYECTO_USERS_H
