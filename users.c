@@ -186,6 +186,14 @@ void add_desconicido(){
 //Solicitudes recibidas --> acceptar o no
 
 void buscar_amigo(user_list* usuarios){
+    char nombre[MAX_STRING_LENGTH];
+    user usuario_amigo;
+    do {
+        printf("\nInserta nombre de usuario: ");
+        scanf("%s", &nombre);
+    } while (!isupper(nombre[0]) || !islower(nombre[1]));
+
+
 
 }
 
