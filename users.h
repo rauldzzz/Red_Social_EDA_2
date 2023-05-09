@@ -6,6 +6,13 @@
 #define MAX_STRING_LENGTH 50
 #define MAX_GUSTOS 5
 
+#define TRUE 1
+#define FALSE 0
+
+
+#define SUCCESS 0
+#define ERROR -1
+
 typedef struct {
     char name[MAX_STRING_LENGTH];
     int age;

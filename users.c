@@ -135,5 +135,49 @@ user buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
     }
     printf("\nUsuario no encontrado :( \n");
 }
+/*#######################################################################*/
+user usuario_rdm(FILE * f, int num){
+    int contador = 0;
+    user user1;
+    //Hacer mas optimo
+    while(fscanf(f,"%c, %d, %c, %c, %c", &user1.name, &user1.age, &user1.mail, &user1.ubicacion, &user1.gustos) != EOF){
+        //no me acaba de cuadrar como se separan las cosas
+        if (contador == num) return user1;
+        contador ++;
+    }
+}
+
+
+void stack(){
+
+
+}
+
+
+void add_desconicido(){
+    // 1. abrimos el fichero
+    int num;
+    user user1;
+    user user2;
+    user user3;
+    int status = SUCCESS;
+    FILE *f = fopen("f_users.txt","r");
+    if (f == NULL) status = ERROR;
+    if(status == SUCCESS){
+        // 2. llamamos a la función para buscar aleatorio 3 veces
+        num = rand() % 20;
+        user1 = usuario_rdm(f,num);
+        num = rand() % 20; //hay 19 users (empieza desde el 0) pero el ultimo número no lo incluye
+        user2 = usuario_rdm(f,num);
+        num = rand() % 20;
+        user3 = usuario_rdm(f,num);
+        // 3. Recorrer lista con pila
+        // 4. Cerrar fichero --> la función de añadir usuario
+        fclose(f);
+    }
+
+
+}
+/*######################################################################*/
 
 
