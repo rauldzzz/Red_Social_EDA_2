@@ -12,6 +12,7 @@ int menu(){
 
     //Centramos la palabra 'MENU' y decoramos con #
     while (choice != 4 ) {
+        choice = -1; //La eleccion del menu
         for (int i = 0; i < 40; ++i) printf("#");
         printf("\n");
         char menu[] = "MENU";
