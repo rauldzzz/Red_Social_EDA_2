@@ -122,7 +122,6 @@ void print_users(user_list  usuarios){
         printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);
     }
 }
-
 user buscador_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]){
     for (int i = 0; i < usuarios.cantidad_usuarios; ++i) {
         if (strcmp(usuarios.lista_de_usuarios->name, name) == 0){
@@ -132,5 +131,4 @@ user buscador_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]){
     printf("\nUsuario no encontrado :( \n");
 
 }
-
 
