@@ -140,7 +140,7 @@ user usuario_rdm(FILE * f, int num){
     int contador = 0;
     user user1;
     //Hacer mas optimo
-    while(fscanf(f,"%c, %d, %c, %c, %c", &user1.name, &user1.age, &user1.mail, &user1.ubicacion, &user1.gustos) != EOF){
+    while(fscanf(f,"%s, %d, %s, %s, %s, %s, %s, %s, %s", &user1.name, &user1.age, &user1.mail, &user1.ubicacion, &user1.gustos[0], &user1.gustos[1], &user1.gustos[2], &user1.gustos[3], &user1.gustos[4]) != EOF){
         //no me acaba de cuadrar como se separan las cosas
         if (contador == num) return user1;
         contador ++;
@@ -180,4 +180,17 @@ void add_desconicido(){
 }
 /*######################################################################*/
 
+/*######################################################################*/
+//Añadir amigo --> algoritmo busqueda --> error
+//solicitud de amistad
+//Solicitudes recibidas --> acceptar o no
 
+void buscar_amigo(user_list* usuarios){
+
+}
+
+
+
+
+
+/*######################################################################*/
