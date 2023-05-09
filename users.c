@@ -12,6 +12,7 @@ int menu(){
 
     //Centramos la palabra 'MENU' y decoramos con #
     while (choice != 4 ) {
+        choice = -1; //La eleccion del menu
         for (int i = 0; i < 40; ++i) printf("#");
         printf("\n");
         char menu[] = "MENU";
@@ -31,7 +32,6 @@ int menu(){
         if (choice == 1){
             usuario = rellenar_datos(usuario);
             lista_de_usuarios= lista_usuarios(lista_de_usuarios, usuario);
-            printf("\n%d\n", lista_de_usuarios.cantidad_usuarios);
         }
         else if (choice == 2){
             print_users(lista_de_usuarios);
