@@ -185,7 +185,7 @@ void add_desconicido(){
 //solicitud de amistad
 //Solicitudes recibidas --> acceptar o no
 
-void buscar_amigo(user_list* usuarios){
+int buscar_amigo(user_list* usuarios){
     char nombre[MAX_STRING_LENGTH];
     user* usuario_amigo;
     do {
@@ -193,9 +193,11 @@ void buscar_amigo(user_list* usuarios){
         scanf("%s", &nombre);
     } while (!isupper(nombre[0]) || !islower(nombre[1]));
     usuario_amigo = buscar_usuario(usuarios, nombre);
-    if (usuario_amigo != NULL) {
-        strcpy(usuario_amigo->name, nombre);
+    if (usuario_amigo != NULL) strcpy(usuario_amigo->name, nombre);
+    else{
+        return ERROR;
     }
+
 
 }
 
