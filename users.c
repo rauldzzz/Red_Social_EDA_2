@@ -3,12 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "time.h"
 
-int menu(){
+int menu(user_list lista_de_usuarios){
     int choice = -1; //La eleccion del menu
     user usuario;
-    user_list lista_de_usuarios;
-    lista_de_usuarios.cantidad_usuarios = 0;
 
     //Centramos la palabra 'MENU' y decoramos con #
     while (choice != 4 ) {
@@ -117,6 +116,12 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
     return usuarios;
 }
 
+void print_users(user_list  usuarios){
+    printf("Lista de usuarios:\n");
+    for(int i=0; i<usuarios.cantidad_usuarios; i++){
+        printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);
+    }
+}
 
 user* buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
     // implementación de búsqueda binaria
@@ -135,5 +140,108 @@ user* buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
     }
     printf("\nUsuario no encontrado :( \n");
 }
+/*#######################################################################*/
+user usuario_rdm(FILE * f, int num){
+    int contador = 0;
+    user user1;
+    //Hacer mas optimo
+    while(fscanf(f,"%s, %d, %s, %s, %s, %s, %s, %s, %s", &user1.name, &user1.age, &user1.mail, &user1.ubicacion, &user1.gustos[0], &user1.gustos[1], &user1.gustos[2], &user1.gustos[3], &user1.gustos[4]) != EOF){
+        //no me acaba de cuadrar como se separan las cosas
+        if (contador == num) return user1;
+        contador ++;
+    }
+}
+
+user generate_user(){
+    const char* names[MAX_USERS] = {"Carmen", "Lucas", "Maria", "Mario", "Jimena", "Carlos", "Albert", "Alba", "Esther", "Hugo", "Mateo", "Leo", "Dani", "Anna", "Alexia", "Sara", "Valentina", "Zoe", "Olivia", "Sergio"};
+    const char* surnames[MAX_USERS] = {"García", "Lopez", "Martinez", "Rodriguez", "Gonzalez", "Fernandez", "Sanchez", "Perez", "Gomez", "Martin", "Torres", "Romero", "Morales", "Ortega", "Delgado", "Muñoz", "Navarro", "Vargas", "Jimenez", "Rivas"};
+    const char* gustos[MAX_USERS] = {"Acción", "Aventura", "Comedia", "Drama", "Ciencia ficcion", "Terror", "Suspenso", "Romance", "Fantasia", "Animacion", "Documental", "Crimen", "Mistero", "Superheroes", "Guerra", "Western", "Musical", "Històrica", "Thriller psicologico", "Cine de autor"};
+    const char* ciudades[MAX_USERS] = {"Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Malaga", "Murcia", "Palma de Mallorca", "Bilbao", "Alicante", "Cordoba", "Valladolid", "Vigo", "Gijon", "Hospitalet de Llobregat", "A Coruña", "Granada", "Vitoria", "Elche", "Oviedo"};
+    const char* symbol[2] = {".", "_"};
+    user usuario;
+    int random_name = rand() % 20;
+    int random_surname = rand() % 20;
+    sprintf(usuario.mail, "%s.%s@gmail.com", names[random_name], surnames[random_surname]);
+    int random_age = rand() % 68 + 13;;
+    usuario.age = random_age;
+    int random_symbol = rand() % 2;
+    sprintf(usuario.name, "%s%s%d", names[random_name], symbol[random_symbol], 2023-usuario.age);
+    int random_city = rand() % 20;
+    strcpy(usuario.ubicacion, ciudades[random_city]);
+    for (int i = 0; i < MAX_GUSTOS; ++i) {
+        int random_gusto = rand() % 20;
+        strcpy(usuario.gustos[i], gustos[random_gusto]);
+    }
+    return usuario;
+}
 
 
+user_list file_users(user_list lista_de_usuarios){
+    FILE* f = fopen("f_users.txt", "w");
+    user usuario;
+    for (int i = 0; i < MAX_USERS; ++i) {
+        usuario = generate_user();
+        fprintf(f, "%s, %d, %s, %s, %s, %s, %s, %s, %s\n", usuario.name, usuario.age, usuario.mail, usuario.ubicacion, usuario.gustos[0], usuario.gustos[1], usuario.gustos[2], usuario.gustos[3], usuario.gustos[4]);
+        lista_de_usuarios= lista_usuarios(lista_de_usuarios, usuario);
+    }
+    fclose(f);
+}
+
+
+
+
+
+
+
+void add_desconicido(){
+    // 1. abrimos el fichero
+    int num;
+    user user1;
+    user user2;
+    user user3;
+    int status = SUCCESS;
+    FILE *f = fopen("f_users.txt","r");
+    if (f == NULL) status = ERROR;
+    if(status == SUCCESS){
+        // 2. llamamos a la función para buscar aleatorio 3 veces
+        num = rand() % 20;
+        user1 = usuario_rdm(f,num);
+        num = rand() % 20; //hay 19 users (empieza desde el 0) pero el ultimo número no lo incluye
+        user2 = usuario_rdm(f,num);
+        num = rand() % 20;
+        user3 = usuario_rdm(f,num);
+        // 3. Recorrer lista con pila
+        // 4. Cerrar fichero --> la función de añadir usuario
+        fclose(f);
+    }
+
+
+}
+/*######################################################################*/
+
+/*######################################################################*/
+//Añadir amigo --> algoritmo busqueda --> error
+//solicitud de amistad
+//Solicitudes recibidas --> acceptar o no
+
+int buscar_amigo(user_list* usuarios){
+    char nombre[MAX_STRING_LENGTH];
+    user* usuario_amigo;
+    do {
+        printf("\nInserta nombre de usuario: ");
+        scanf("%s", &nombre);
+    } while (!isupper(nombre[0]) || !islower(nombre[1]));
+    usuario_amigo = buscar_usuario(usuarios, nombre);
+    if (usuario_amigo != NULL) strcpy(usuario_amigo->name, nombre);
+    else{
+        return ERROR;
+    }
+
+
+}
+
+
+
+
+
+/*######################################################################*/

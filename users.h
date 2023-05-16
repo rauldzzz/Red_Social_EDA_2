@@ -5,6 +5,14 @@
 
 #define MAX_STRING_LENGTH 50
 #define MAX_GUSTOS 5
+#define MAX_USERS 20
+
+#define TRUE 1
+#define FALSE 0
+
+
+#define SUCCESS 0
+#define ERROR -1
 
 typedef struct {
     char name[MAX_STRING_LENGTH];
@@ -28,5 +36,9 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario);
 void print_users(user_list  usuarios);
 
 user buscador_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]);
+
+user generate_user();
+
+user_list file_users(user_list lista_usuarios);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H

@@ -4,9 +4,26 @@
 #include <string.h>
 
 int main() {
-    menu();
+    FILE* f = fopen("f_users.txt", "r");
+
+    if (f == NULL) {
+        // El archivo no existe o no se puede abrir en modo de lectura
+        f = fopen("f_users.txt", "w");
+        fclose(f);
+    } else {
+        // El archivo existe y tiene contenido, no se debe modificar
+        printf("El archivo f_users.txt ya contiene datos. No se debe modificar.\n");
+        fclose(f);
+    }
+    user_list lista_de_usuarios;
+    lista_de_usuarios.cantidad_usuarios = 0;
+    lista_de_usuarios= file_users(lista_de_usuarios);
+    menu(lista_de_usuarios);
+
+
     return 0;
 }
+
  /* Parte del main de la interfaz para llenar los datos básicos de los usuarios
     Usuario usuario;
 
