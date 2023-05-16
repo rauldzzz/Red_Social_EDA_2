@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/karen/Documents/GitHub/Red_Social_EDA_2/amigos.c" "CMakeFiles/Red_Social_Proyecto.dir/amigos.c.o" "gcc" "CMakeFiles/Red_Social_Proyecto.dir/amigos.c.o.d"
   "/Users/karen/Documents/GitHub/Red_Social_EDA_2/main.c" "CMakeFiles/Red_Social_Proyecto.dir/main.c.o" "gcc" "CMakeFiles/Red_Social_Proyecto.dir/main.c.o.d"
   "/Users/karen/Documents/GitHub/Red_Social_EDA_2/users.c" "CMakeFiles/Red_Social_Proyecto.dir/users.c.o" "gcc" "CMakeFiles/Red_Social_Proyecto.dir/users.c.o.d"
   )

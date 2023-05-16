@@ -76,6 +76,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/amigos.c">
+			<Option target="Red_Social_Proyecto"/>
+		</Unit>
+		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/amigos.h">
+			<Option target="Red_Social_Proyecto"/>
+		</Unit>
 		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/main.c">
 			<Option target="Red_Social_Proyecto"/>
 		</Unit>

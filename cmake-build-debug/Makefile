@@ -129,6 +129,30 @@ Red_Social_Proyecto/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Red_Social_Proyecto.dir/build.make CMakeFiles/Red_Social_Proyecto.dir/build
 .PHONY : Red_Social_Proyecto/fast
 
+amigos.o: amigos.c.o
+.PHONY : amigos.o
+
+# target to build an object file
+amigos.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Red_Social_Proyecto.dir/build.make CMakeFiles/Red_Social_Proyecto.dir/amigos.c.o
+.PHONY : amigos.c.o
+
+amigos.i: amigos.c.i
+.PHONY : amigos.i
+
+# target to preprocess a source file
+amigos.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Red_Social_Proyecto.dir/build.make CMakeFiles/Red_Social_Proyecto.dir/amigos.c.i
+.PHONY : amigos.c.i
+
+amigos.s: amigos.c.s
+.PHONY : amigos.s
+
+# target to generate assembly for a file
+amigos.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Red_Social_Proyecto.dir/build.make CMakeFiles/Red_Social_Proyecto.dir/amigos.c.s
+.PHONY : amigos.c.s
+
 main.o: main.c.o
 .PHONY : main.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Red_Social_Proyecto"
+	@echo "... amigos.o"
+	@echo "... amigos.i"
+	@echo "... amigos.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

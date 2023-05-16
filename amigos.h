@@ -5,6 +5,9 @@
 #include <string.h>
 #include "users.h"
 
-
+typedef struct{
+    int* stack;
+    int top;
+}Stack;
 
 #endif //RED_SOCIAL_PROYECTO_AMIGOS_H
