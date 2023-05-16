@@ -20,6 +20,7 @@ typedef struct {
     char mail[MAX_STRING_LENGTH];
     char ubicacion[MAX_STRING_LENGTH];
     char gustos[MAX_GUSTOS][MAX_STRING_LENGTH];
+    char solicitudes_amistad[MAX_USERS][MAX_STRING_LENGTH];
 } user;
 
 typedef struct  {
@@ -40,5 +41,7 @@ user buscador_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]);
 user generate_user();
 
 user_list file_users(user_list lista_usuarios);
+
+int buscar_amigo(user_list* usuarios);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H

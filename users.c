@@ -186,12 +186,6 @@ user_list file_users(user_list lista_de_usuarios){
     return lista_de_usuarios;
 }
 
-
-
-
-
-
-
 void add_desconicido(){
     // 1. abrimos el fichero
     int num;
