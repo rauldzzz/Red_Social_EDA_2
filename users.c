@@ -183,6 +183,7 @@ user_list file_users(user_list lista_de_usuarios){
         lista_de_usuarios= lista_usuarios(lista_de_usuarios, usuario);
     }
     fclose(f);
+    return lista_de_usuarios;
 }
 
 
