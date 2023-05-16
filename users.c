@@ -3,12 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "time.h"
 
-int menu(){
+int menu(user_list lista_de_usuarios){
     int choice = -1; //La eleccion del menu
     user usuario;
-    user_list lista_de_usuarios;
-    lista_de_usuarios.cantidad_usuarios = 0;
 
     //Centramos la palabra 'MENU' y decoramos con #
     while (choice != 4 ) {
@@ -117,6 +116,12 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
     return usuarios;
 }
 
+void print_users(user_list  usuarios){
+    printf("Lista de usuarios:\n");
+    for(int i=0; i<usuarios.cantidad_usuarios; i++){
+        printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);
+    }
+}
 
 user* buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
     // implementación de búsqueda binaria
@@ -147,11 +152,45 @@ user usuario_rdm(FILE * f, int num){
     }
 }
 
-
-void stack(){
-
-
+user generate_user(){
+    const char* names[MAX_USERS] = {"Carmen", "Lucas", "Maria", "Mario", "Jimena", "Carlos", "Albert", "Alba", "Esther", "Hugo", "Mateo", "Leo", "Dani", "Anna", "Alexia", "Sara", "Valentina", "Zoe", "Olivia", "Sergio"};
+    const char* surnames[MAX_USERS] = {"García", "Lopez", "Martinez", "Rodriguez", "Gonzalez", "Fernandez", "Sanchez", "Perez", "Gomez", "Martin", "Torres", "Romero", "Morales", "Ortega", "Delgado", "Muñoz", "Navarro", "Vargas", "Jimenez", "Rivas"};
+    const char* gustos[MAX_USERS] = {"Acción", "Aventura", "Comedia", "Drama", "Ciencia ficcion", "Terror", "Suspenso", "Romance", "Fantasia", "Animacion", "Documental", "Crimen", "Mistero", "Superheroes", "Guerra", "Western", "Musical", "Històrica", "Thriller psicologico", "Cine de autor"};
+    const char* ciudades[MAX_USERS] = {"Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Malaga", "Murcia", "Palma de Mallorca", "Bilbao", "Alicante", "Cordoba", "Valladolid", "Vigo", "Gijon", "Hospitalet de Llobregat", "A Coruña", "Granada", "Vitoria", "Elche", "Oviedo"};
+    const char* symbol[2] = {".", "_"};
+    user usuario;
+    int random_name = rand() % 20;
+    int random_surname = rand() % 20;
+    sprintf(usuario.mail, "%s.%s@gmail.com", names[random_name], surnames[random_surname]);
+    int random_age = rand() % 68 + 13;;
+    usuario.age = random_age;
+    int random_symbol = rand() % 2;
+    sprintf(usuario.name, "%s%s%d", names[random_name], symbol[random_symbol], 2023-usuario.age);
+    int random_city = rand() % 20;
+    strcpy(usuario.ubicacion, ciudades[random_city]);
+    for (int i = 0; i < MAX_GUSTOS; ++i) {
+        int random_gusto = rand() % 20;
+        strcpy(usuario.gustos[i], gustos[random_gusto]);
+    }
+    return usuario;
 }
+
+
+user_list file_users(user_list lista_de_usuarios){
+    FILE* f = fopen("f_users.txt", "w");
+    user usuario;
+    for (int i = 0; i < MAX_USERS; ++i) {
+        usuario = generate_user();
+        fprintf(f, "%s, %d, %s, %s, %s, %s, %s, %s, %s\n", usuario.name, usuario.age, usuario.mail, usuario.ubicacion, usuario.gustos[0], usuario.gustos[1], usuario.gustos[2], usuario.gustos[3], usuario.gustos[4]);
+        lista_de_usuarios= lista_usuarios(lista_de_usuarios, usuario);
+    }
+    fclose(f);
+}
+
+
+
+
+
 
 
 void add_desconicido(){
