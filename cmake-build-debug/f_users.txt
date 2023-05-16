@@ -1,0 +1,20 @@
+Lucas.2000, 23, Lucas.Perez@gmail.com, Alicante, Ciencia ficcion, Thriller psicologico, Thriller psicologico, Comedia, Ciencia ficcion
+Carlos_1985, 38, Carlos.Fernandez@gmail.com, Barcelona, Crimen, Western, Comedia, Romance, Musical
+Leo_1984, 39, Leo.Gonzalez@gmail.com, Vigo, Comedia, Aventura, Musical, Thriller psicologico, Western
+Alba.1995, 28, Alba.Sanchez@gmail.com, Alicante, Mistero, Romance, Cine de autor, Western, Guerra
+Mario_1968, 55, Mario.Romero@gmail.com, Gijon, Ciencia ficcion, Aventura, Crimen, Superheroes, Fantasia
+Alba_1988, 35, Alba.Gonzalez@gmail.com, Vitoria, Cine de autor, Drama, Aventura, Animacion, Thriller psicologico
+Valentina.1988, 35, Valentina.Muñoz@gmail.com, Bilbao, Suspenso, Acción, Comedia, Ciencia ficcion, Fantasia
+Albert_1964, 59, Albert.Fernandez@gmail.com, Cordoba, Documental, Suspenso, Aventura, Superheroes, Fantasia
+Hugo.1998, 25, Hugo.Rodriguez@gmail.com, Granada, Acción, Suspenso, Musical, Crimen, Fantasia
+Jimena_2000, 23, Jimena.Rivas@gmail.com, Vitoria, Thriller psicologico, Thriller psicologico, Comedia, Animacion, Aventura
+Anna.1995, 28, Anna.Muñoz@gmail.com, Zaragoza, Documental, Històrica, Suspenso, Superheroes, Suspenso
+Lucas.1946, 77, Lucas.Fernandez@gmail.com, Cordoba, Animacion, Històrica, Superheroes, Històrica, Mistero
+Albert.1961, 62, Albert.Torres@gmail.com, A Coruña, Romance, Western, Guerra, Crimen, Mistero
+Mateo.2001, 22, Mateo.Torres@gmail.com, Murcia, Documental, Romance, Crimen, Romance, Històrica
+Zoe_2001, 22, Zoe.Perez@gmail.com, Malaga, Animacion, Animacion, Thriller psicologico, Aventura, Fantasia
+Maria.1976, 47, Maria.Sanchez@gmail.com, Gijon, Fantasia, Acción, Crimen, Comedia, Western
+Mateo_1994, 29, Mateo.Rivas@gmail.com, Bilbao, Drama, Western, Aventura, Comedia, Documental
+Leo.1952, 71, Leo.Navarro@gmail.com, Granada, Aventura, Fantasia, Cine de autor, Fantasia, Ciencia ficcion
+Lucas_1957, 66, Lucas.Delgado@gmail.com, Elche, Thriller psicologico, Acción, Fantasia, Romance, Romance
+Esther_1978, 45, Esther.Ortega@gmail.com, Palma de Mallorca, Aventura, Documental, Històrica, Superheroes, Guerra
