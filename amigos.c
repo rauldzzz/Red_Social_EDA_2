@@ -41,10 +41,12 @@ void free_stack(Stack* p) {
 }
 /**#####################################################################*/
 
-void seleccionar_usuarios(user_list* user,Stack* stack){
+void seleccionar_usuarios(user_list* user,Stack* p){
+    int usuario;
     //1. mirar si son amigos o no
-    user_list* no_amigos = (user_list*) malloc(sizeof(user_list));
     //2. si no lo son, añadir a la pila
+    push(p, usuario);
+
 }
 
 
