@@ -26,7 +26,25 @@ int top(Stack* p){
     if (!is_empty(p)) return p->stack[p->top];
     else{
         //LA PILA ESTA VACIA!!!!
+        return ERROR;
     }
 }
+void push(Stack* p, int valor) {
+    p->stack = realloc(p->stack, (p->top + 1) * sizeof(int));
+    p->stack[p->top] = valor;
+    p->top++;
+}
 
+void free_stack(Stack* p) {
+    free(p->stack);
+    free(p);
+}
 /**#####################################################################*/
+
+void seleccionar_usuarios(user_list* user,Stack* stack){
+    //1. mirar si son amigos o no
+    user_list* no_amigos = (user_list*) malloc(sizeof(user_list));
+    //2. si no lo son, añadir a la pila
+}
+
+
