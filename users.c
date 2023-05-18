@@ -116,7 +116,7 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
     return usuarios;
 }
 
-void print_users(user_list  usuarios){
+void print_users(user_list  usuarios){hg
     printf("Lista de usuarios:\n");
     for(int i=0; i<usuarios.cantidad_usuarios; i++){
         printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);

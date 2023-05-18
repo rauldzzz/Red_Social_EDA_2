@@ -6,6 +6,7 @@
 #define MAX_STRING_LENGTH 50
 #define MAX_GUSTOS 5
 #define MAX_USERS 20
+#define ERROR -2
 
 #define TRUE 1
 #define FALSE 0
