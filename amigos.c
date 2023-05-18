@@ -35,18 +35,40 @@ void push(Stack* p, int valor) {
     p->top++;
 }
 
+
 void free_stack(Stack* p) {
     free(p->stack);
     free(p);
 }
 /**#####################################################################*/
+void add_desconicido(){
+    // 1. abrimos el fichero
+    int num;
+    user user1;
+    user user2;
+    user user3;
+    int status = SUCCESS;
+    FILE *f = fopen("f_users.txt","r");
+    if (f == NULL) status = ERROR;
+    if(status == SUCCESS){
+        // 2. llamamos a la función para buscar aleatorio 3 veces
+        num = rand() % 20;
+        user1 = usuario_rdm(f,num);
+        num = rand() % 20; //hay 19 users (empieza desde el 0) pero el ultimo número no lo incluye
+        user2 = usuario_rdm(f,num);
+        num = rand() % 20;
+        user3 = usuario_rdm(f,num);
+        // 3. Recorrer lista con pila
+        Stack* p = init_stack();
+        push(p, user1);
+        push(p,user2);
+        push(user3);
 
-void seleccionar_usuarios(user_list* user,Stack* p){
-    int usuario;
-    //1. mirar si son amigos o no
-    //2. si no lo son, añadir a la pila
-    push(p, usuario);
+        // 4. Cerrar fichero --> la función de añadir usuario
+        fclose(f);
+        free_stack(p);
+    }
+
 
 }
-
 

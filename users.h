@@ -45,4 +45,6 @@ user_list file_users(user_list lista_usuarios);
 
 int buscar_amigo(user_list* usuarios);
 
+user usuario_rdm(FILE * f, int num);
+
 #endif //RED_SOCIAL_PROYECTO_USERS_H
