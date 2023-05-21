@@ -36,10 +36,11 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle
             print_users(lista_de_usuarios);
         }
         else if (choice == 3) {
-            user u;
+            char u;
             printf("Nombre de usuario:");
-            scanf("%s", u.name);
-            buscador_usuario(lista_de_usuarios, u.name);
+            scanf("%s", &u);
+            usuario = buscar_usuario(lista_de_usuarios, &u);
+            //if (usuario );
 
             int option = -1;
             while (option != 5) {
@@ -204,7 +205,7 @@ int buscar_amigo(user_list* usuarios){
     user* usuario_amigo;
     do {
         printf("\nInserta nombre de usuario: ");
-        scanf("%s", &nombre);
+        scanf("%s", nombre);
     } while (!isupper(nombre[0]) || !islower(nombre[1]));
     usuario_amigo = buscar_usuario(usuarios, nombre);
     if (usuario_amigo != NULL) strcpy(usuario_amigo->name, nombre);
