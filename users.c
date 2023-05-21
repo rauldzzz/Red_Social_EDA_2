@@ -5,7 +5,7 @@
 #include <ctype.h>
 #include "time.h"
 
-int menu(user_list lista_de_usuarios){
+int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle
     int choice = -1; //La eleccion del menu
     user usuario;
 
@@ -36,6 +36,11 @@ int menu(user_list lista_de_usuarios){
             print_users(lista_de_usuarios);
         }
         else if (choice == 3) {
+            user u;
+            printf("Nombre de usuario:");
+            scanf("%s", u.name);
+            buscador_usuario(lista_de_usuarios, u.name);
+
             int option = -1;
             while (option != 5) {
                 printf("\n1.Enviar solicitudes de amistad\n");
@@ -50,12 +55,12 @@ int menu(user_list lista_de_usuarios){
                 else if (option == 3);
                 else if (option == 4);
                 else if (option == 5) printf("\nSaliendo...\n\n");
-                else printf("Opcion inexistente.Elija la letra de la opcion deseada\n");
+                else printf("\nOpcion inexistente.Elija la letra de la opcion deseada\n");
 
             }
         } else if (choice == 4) printf("\nSaliendo...");
         else {
-            printf("Opcion inexistente.Elija el numero de la opcion deseada\n");
+            printf("\nOpcion inexistente.Elija el numero de la opcion deseada\n");
             scanf("%d\n", &choice);
         }
     }
@@ -116,7 +121,7 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
     return usuarios;
 }
 
-void print_users(user_list  usuarios){hg
+void print_users(user_list  usuarios){
     printf("Lista de usuarios:\n");
     for(int i=0; i<usuarios.cantidad_usuarios; i++){
         printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);
@@ -144,7 +149,7 @@ user* buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
 user usuario_rdm(FILE * f, int num){
     int contador = 0;
     user user1;
-    while(fscanf(f,"%s, %d, %s, %s, %s, %s, %s, %s, %s", &user1.name, &user1.age, &user1.mail, &user1.ubicacion, &user1.gustos[0], &user1.gustos[1], &user1.gustos[2], &user1.gustos[3], &user1.gustos[4]) != EOF){
+    while(fscanf(f,"%s, %d, %s, %s, %s, %s, %s, %s, %s", user1.name, &user1.age, user1.mail, user1.ubicacion, user1.gustos[0], user1.gustos[1], user1.gustos[2], user1.gustos[3], user1.gustos[4]) != EOF){
         if (contador == num) return user1;
         contador ++;
     }

@@ -29,6 +29,11 @@ typedef struct  {
     int cantidad_usuarios;
 } user_list;
 
+typedef struct{
+    user  *usuario;
+    user_list *seguidores;
+}amigos;
+
 int menu();
 
 user rellenar_datos(user user1);

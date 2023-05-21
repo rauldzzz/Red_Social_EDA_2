@@ -8,90 +8,90 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Red_Social_Proyecto">
-				<Option output="/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Red_Social_Proyecto" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug"/>
+				<Option output="C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Red_Social_Proyecto.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/14.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 Red_Social_Proyecto"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 Red_Social_Proyecto"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Red_Social_Proyecto/fast">
-				<Option output="/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Red_Social_Proyecto" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug"/>
+				<Option output="C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Red_Social_Proyecto.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/14.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 Red_Social_Proyecto/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 Red_Social_Proyecto/fast"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/karen/Documents/GitHub/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/amigos.c">
+		<Unit filename="C:/Users/marti/CLionProjects/Red_Social_EDA_2/amigos.c">
 			<Option target="Red_Social_Proyecto"/>
 		</Unit>
-		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/amigos.h">
+		<Unit filename="C:/Users/marti/CLionProjects/Red_Social_EDA_2/amigos.h">
 			<Option target="Red_Social_Proyecto"/>
 		</Unit>
-		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/main.c">
+		<Unit filename="C:/Users/marti/CLionProjects/Red_Social_EDA_2/main.c">
 			<Option target="Red_Social_Proyecto"/>
 		</Unit>
-		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/users.c">
+		<Unit filename="C:/Users/marti/CLionProjects/Red_Social_EDA_2/users.c">
 			<Option target="Red_Social_Proyecto"/>
 		</Unit>
-		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/users.h">
+		<Unit filename="C:/Users/marti/CLionProjects/Red_Social_EDA_2/users.h">
 			<Option target="Red_Social_Proyecto"/>
 		</Unit>
-		<Unit filename="/Users/karen/Documents/GitHub/Red_Social_EDA_2/CMakeLists.txt">
+		<Unit filename="C:/Users/marti/CLionProjects/Red_Social_EDA_2/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

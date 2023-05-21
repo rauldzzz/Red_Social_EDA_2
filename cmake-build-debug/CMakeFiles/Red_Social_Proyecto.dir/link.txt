@@ -1,1 +1,3 @@
-/Library/Developer/CommandLineTools/usr/bin/cc -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.5 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Red_Social_Proyecto.dir/main.c.o CMakeFiles/Red_Social_Proyecto.dir/users.c.o CMakeFiles/Red_Social_Proyecto.dir/amigos.c.o -o Red_Social_Proyecto 
+"C:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Red_Social_Proyecto.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\ar.exe qc CMakeFiles\Red_Social_Proyecto.dir/objects.a @CMakeFiles\Red_Social_Proyecto.dir\objects1.rsp
+C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\Red_Social_Proyecto.dir/objects.a -Wl,--no-whole-archive -o Red_Social_Proyecto.exe -Wl,--out-implib,libRed_Social_Proyecto.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Red_Social_Proyecto.dir\linklibs.rsp
