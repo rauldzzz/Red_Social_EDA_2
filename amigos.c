@@ -9,38 +9,58 @@
 /**########################## FUNCIONES PILA ##########################*/
 Stack* init_stack(){
     Stack* p = (Stack*)malloc(sizeof(Stack));
-    p->stack = NULL;
+    p->stack = (user *)malloc(sizeof(user));
     p->top = 0;
     return p;
 }
 
-int is_full(Stack* p, int N ){ //   N es la capacidad maxima de la pila A[1...N]
-    return( p->top == N);
+int is_full(Stack* p){ //   N es la capacidad maxima de la pila A[1...N]
+    if ( p->top == MAX_STACK){
+        return TRUE;
+    }
+    return FALSE;
 }
 
 int is_empty(Stack* p){
-    return(p->top == 0);
-}
-
-int top(Stack* p){
-    if (!is_empty(p)) return p->stack[p->top];
-    else{
-        //LA PILA ESTA VACIA!!!!
-        return ERROR;
+    if (p->top == 0){
+        return TRUE;
     }
-}
-void push(Stack* p, int valor) {
-    p->stack = realloc(p->stack, (p->top + 1) * sizeof(int));
-    p->stack[p->top] = valor;
-    p->top++;
+    return FALSE;
 }
 
+user top(Stack* p){
+    if (is_empty(p) != TRUE) return p->stack[p->top];
+    else printf("\nLa pila esta llena\n");
+}
+
+Stack* push(Stack* p, user valor) {
+    if (is_full(p) != TRUE) {
+        p->stack = realloc(p->stack, (p->top + 1) * sizeof(user));
+        p->top++;
+        p->stack[p->top] = valor;
+    } else {
+        printf("\nLa pila esta llena\n");
+    }
+    return p;
+}
+
+Stack* pop(Stack* p) {
+    if (is_empty(p) != TRUE) {
+        p->stack = realloc(p->stack, (p->top - 1) * sizeof(user));
+        p->top--;
+    } else {
+        printf("\nLa pila esta vacia\n");
+    }
+    return p;
+}
 
 void free_stack(Stack* p) {
     free(p->stack);
     free(p);
 }
+
 /**#####################################################################*/
+
 void add_desconicido(){
     // 1. abrimos el fichero
     int num;
