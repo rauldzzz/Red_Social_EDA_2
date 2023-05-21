@@ -39,7 +39,7 @@ int is_empty_q(Queue* q);
 
 user* first(Queue* q);
 
-Queue* enqueue(Queue* q, int e);
+Queue* enqueue(Queue* q, user* e);
 
 Queue* dequeue(Queue* q);
 
