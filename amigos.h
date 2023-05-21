@@ -14,7 +14,7 @@ typedef struct{
     int head;
     int tail;
     int elements;
-    int* A;
+    user* A;
 }Queue;
 
 Stack* init_stack();
@@ -33,14 +33,14 @@ void add_desconicido();
 
 Queue* init_queue();
 
-int is_full_q(Queue* q,int N);
+int is_full_q(Queue* q);
 
 int is_empty_q(Queue* q);
 
-int first(Queue* q);
+user* first(Queue* q);
 
-Queue* enqueue(Queue* q, int e, int N);
+Queue* enqueue(Queue* q, int e);
 
-Queue* dequeue(Queue* q, int N);
+Queue* dequeue(Queue* q);
 
 #endif //RED_SOCIAL_PROYECTO_AMIGOS_H
