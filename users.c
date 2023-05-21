@@ -116,7 +116,7 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
     return usuarios;
 }
 
-void print_users(user_list  usuarios){
+void print_users(user_list  usuarios){hg
     printf("Lista de usuarios:\n");
     for(int i=0; i<usuarios.cantidad_usuarios; i++){
         printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);
@@ -187,35 +187,6 @@ user_list file_users(user_list lista_de_usuarios){
 }
 
 
-
-
-
-
-
-void add_desconicido(){
-    // 1. abrimos el fichero
-    int num;
-    user user1;
-    user user2;
-    user user3;
-    int status = SUCCESS;
-    FILE *f = fopen("f_users.txt","r");
-    if (f == NULL) status = ERROR;
-    if(status == SUCCESS){
-        // 2. llamamos a la función para buscar aleatorio 3 veces
-        num = rand() % 20;
-        user1 = usuario_rdm(f,num);
-        num = rand() % 20; //hay 19 users (empieza desde el 0) pero el ultimo número no lo incluye
-        user2 = usuario_rdm(f,num);
-        num = rand() % 20;
-        user3 = usuario_rdm(f,num);
-        // 3. Recorrer lista con pila
-        // 4. Cerrar fichero --> la función de añadir usuario
-        fclose(f);
-    }
-
-
-}
 /*######################################################################*/
 
 /*######################################################################*/

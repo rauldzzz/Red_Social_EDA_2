@@ -6,6 +6,7 @@
 #define MAX_STRING_LENGTH 50
 #define MAX_GUSTOS 5
 #define MAX_USERS 20
+#define ERROR -2
 
 #define TRUE 1
 #define FALSE 0
@@ -20,6 +21,7 @@ typedef struct {
     char mail[MAX_STRING_LENGTH];
     char ubicacion[MAX_STRING_LENGTH];
     char gustos[MAX_GUSTOS][MAX_STRING_LENGTH];
+    char solicitudes_amistad[MAX_USERS][MAX_STRING_LENGTH];
 } user;
 
 typedef struct  {
@@ -40,5 +42,9 @@ user buscador_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]);
 user generate_user();
 
 user_list file_users(user_list lista_usuarios);
+
+int buscar_amigo(user_list* usuarios);
+
+user usuario_rdm(FILE * f, int num);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H

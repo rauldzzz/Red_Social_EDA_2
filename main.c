@@ -5,7 +5,6 @@
 
 int main() {
     FILE* f = fopen("f_users.txt", "r");
-
     if (f == NULL) {
         // El archivo no existe o no se puede abrir en modo de lectura
         f = fopen("f_users.txt", "w");
