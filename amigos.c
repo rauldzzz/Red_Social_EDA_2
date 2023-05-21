@@ -82,7 +82,7 @@ void add_desconicido(){
         Stack* p = init_stack();
         push(p, user1);
         push(p,user2);
-        push(user3);
+        //push(user3);
 
         // 4. Cerrar fichero --> la función de añadir usuario
         fclose(f);

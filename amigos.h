@@ -14,6 +14,13 @@ typedef struct{
     int top;
 }Stack;
 
+typedef struct{
+    int head;
+    int tail;
+    int elements;
+    user* A;
+}Queue;
+
 Stack* init_stack();
 
 int is_full(Stack* p);
@@ -29,6 +36,19 @@ Stack* pop(Stack* p);
 void free_stack(Stack* p);
 
 void add_desconicido();
+
+Queue* init_queue();
+
+int is_full_q(Queue* q);
+
+int is_empty_q(Queue* q);
+
+user* first(Queue* q);
+
+Queue* enqueue(Queue* q, user* e);
+
+Queue* dequeue(Queue* q);
+
 
 /**#####################################################################*/
 
