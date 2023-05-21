@@ -72,3 +72,56 @@ void add_desconicido(){
 
 }
 
+/**########################## FUNCIONES COLA ##########################*/
+Queue* init_queue(){
+    Queue* q = malloc(sizeof(Queue));
+    //Alocar memeoria para A?
+    q->head = 1;
+    q->tail = 1;
+    q->elements = 0;
+    return q;
+}
+int is_full_q(Queue* q, int N){
+    return(q->elements == N);
+}
+int is_empty_q(Queue* q){
+    return(q->elements == 0);
+}
+int first(Queue* q){
+    if (is_empty_q(q)) {
+       printf("Queue is empty");
+       //retornem error o algo?
+       return ERROR;
+    }
+    else{
+        return q->A[q->head];
+    }
+}
+Queue* enqueue(Queue* q, int e, int N){
+    if(q->elements == N) {
+        printf("Queue is full");
+    }
+    else{
+        q->A[q->tail] = e;
+        q->tail = q->tail + 1;
+        if(q->tail > N){
+            q->tail = 1;
+            q->elements = q->elements + 1;
+        }
+    }
+    return q;
+}
+Queue* dequeue(Queue* q, int N){
+    if(is_empty_q(q)) {
+        printf("Queue is empty");
+    }
+    else{
+        q->head = q->head + 1;
+        if(q->head > N){
+            q->head = 1;
+            q->elements = q->elements - 1;
+        }
+    }
+    return q;
+}
+/**#####################################################################*/
