@@ -32,7 +32,10 @@ typedef struct  {
 typedef struct{
     user  *usuario;
     user_list *seguidores;
-}amigos;
+    int num_seguidores;
+    user_list *solicitudes;
+    user_list *pendientes;
+}Amigos;
 
 int menu();
 
