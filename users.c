@@ -130,8 +130,8 @@ void print_users(user_list  usuarios){
     }
 }
 
-user* buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
-    if (usuarios == NULL || usuarios->cantidad_usuarios == 0) {
+user* buscar_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]){
+    if (usuarios.lista_de_usuarios == NULL || usuarios.cantidad_usuarios == 0) {
         printf("\nNo hay usuarios en la lista\n");
         return NULL;
     }
@@ -139,9 +139,9 @@ user* buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
         printf("\nEl nombre de usuario proporcionado está vacío\n");
         return NULL;
     }
-    for (int i = 0; i < usuarios->cantidad_usuarios; ++i) {
-        if (strcmp(usuarios->lista_de_usuarios[i].name, name) == 0){
-            return &(usuarios->lista_de_usuarios[i]);
+    for (int i = 0; i < usuarios.cantidad_usuarios; ++i) {
+        if (strcmp(usuarios.lista_de_usuarios[i].name, name) == 0){
+            return &(usuarios.lista_de_usuarios[i]);
         }
     }
     printf("\nUsuario no encontrado :( \n");
