@@ -116,7 +116,7 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
     return usuarios;
 }
 
-void print_users(user_list  usuarios){hg
+void print_users(user_list  usuarios){
     printf("Lista de usuarios:\n");
     for(int i=0; i<usuarios.cantidad_usuarios; i++){
         printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);
@@ -124,22 +124,23 @@ void print_users(user_list  usuarios){hg
 }
 
 user* buscar_usuario(user_list* usuarios, char name[MAX_STRING_LENGTH]){
-    // implementación de búsqueda binaria
-    int inicio = 0, fin = usuarios->cantidad_usuarios - 1, medio;
-    while (inicio <= fin) {
-        medio = (inicio + fin) / 2;
-        if (strcmp(usuarios->lista_de_usuarios[medio].name, name) == 0){
-            return &(usuarios->lista_de_usuarios[medio]);
-        }
-        else if (strcmp(usuarios->lista_de_usuarios[medio].name, name) > 0) {
-            fin = medio - 1;
-        }
-        else {
-            inicio = medio + 1;
+    if (usuarios == NULL || usuarios->cantidad_usuarios == 0) {
+        printf("\nNo hay usuarios en la lista\n");
+        return NULL;
+    }
+    if (name[0] == '\0') {
+        printf("\nEl nombre de usuario proporcionado está vacío\n");
+        return NULL;
+    }
+    for (int i = 0; i < usuarios->cantidad_usuarios; ++i) {
+        if (strcmp(usuarios->lista_de_usuarios[i].name, name) == 0){
+            return &(usuarios->lista_de_usuarios[i]);
         }
     }
     printf("\nUsuario no encontrado :( \n");
+    return NULL;
 }
+
 /*#######################################################################*/
 user usuario_rdm(FILE * f, int num){
     int contador = 0;
