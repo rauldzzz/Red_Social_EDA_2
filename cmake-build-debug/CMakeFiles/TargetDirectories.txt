@@ -1,3 +1,3 @@
-C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/CMakeFiles/Red_Social_Proyecto.dir
-C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/marti/CLionProjects/Red_Social_EDA_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/rauld/Documents/Trabajos Uni/Red Social Proyecto/cmake-build-debug/CMakeFiles/Red_Social_Proyecto.dir
+C:/Users/rauld/Documents/Trabajos Uni/Red Social Proyecto/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/rauld/Documents/Trabajos Uni/Red Social Proyecto/cmake-build-debug/CMakeFiles/rebuild_cache.dir

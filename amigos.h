@@ -10,7 +10,7 @@
 #define MAX_STACK 20
 
 typedef struct{
-    user *stack;
+    char *stack;
     int top;
 }Stack;
 
@@ -27,7 +27,7 @@ int is_full(Stack* p);
 
 int is_empty(Stack* p);
 
-user top(Stack* p);
+char* top(Stack* p);
 
 Stack* push(Stack* p, user valor);
 
@@ -49,7 +49,7 @@ Queue enqueue(Queue* q, char* e);
 
 Queue* dequeue(Queue* q);
 
-Queue* enviar_solicitud_amistad( char* nombre, Queue cola_amigos)
+Queue* enviar_solicitud_amistad( char* nombre, Queue cola_amigos);
 /**#####################################################################*/
 
 

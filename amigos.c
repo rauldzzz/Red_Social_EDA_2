@@ -133,7 +133,7 @@ Queue enqueue(Queue* q, char* e){
             q->elements = q->elements + 1;
         }
     }
-    return q;
+    return *q;
 }
 Queue* dequeue(Queue* q){
     if(is_empty_q(q)) {
