@@ -54,6 +54,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 printf("5.Salir\n");
                 printf("Elija el numero de la opcion deseada: ");
                 scanf("%d", &option);
+
                 if (option == 1){
                     char usuario_buscado;
 
@@ -74,8 +75,9 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             }
         } else if (choice == 4) printf("\nSaliendo...");
         else {
-            printf("\nOpcion inexistente.\nElija el numero de la opcion deseada:\n");
+            printf("\nOpcion inexistente.\nElija el numero de la opcion deseada:");
             scanf("%d\n", &choice);
+            fflush(stdin);
         }
     }
 
