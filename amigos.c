@@ -112,9 +112,9 @@ int is_full_q(Queue* q){
 int is_empty_q(Queue* q){
     return(q->elements == 0);
 }
-user* first(Queue* q){
+char* first(Queue* q){
     if (is_empty_q(q)) {
-       printf("Queue is empty");
+       printf("\nQueue is empty\n");
        //retornem error o algo?
     }
     else{

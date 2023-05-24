@@ -6,11 +6,9 @@
 #define MAX_STRING_LENGTH 50
 #define MAX_GUSTOS 5
 #define MAX_USERS 20
-#define ERROR -2
 
 #define TRUE 1
 #define FALSE 0
-
 
 #define SUCCESS 0
 #define ERROR -1
@@ -32,9 +30,6 @@ typedef struct  {
 typedef struct{
     user  *usuario;
     user_list *seguidores;
-    int num_seguidores;
-    user_list *solicitudes;
-    user_list *pendientes;
 }Amigos;
 
 int menu();

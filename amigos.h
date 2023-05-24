@@ -18,7 +18,7 @@ typedef struct{
     int head;
     int tail;
     int elements;
-    user* A;
+    char* A;
 }Queue;
 
 Stack* init_stack();
@@ -43,7 +43,7 @@ int is_full_q(Queue* q);
 
 int is_empty_q(Queue* q);
 
-user* first(Queue* q);
+char* first(Queue* q);
 
 Queue* enqueue(Queue* q, user* e);
 
