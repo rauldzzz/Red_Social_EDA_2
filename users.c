@@ -56,16 +56,19 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 scanf("%d", &option);
 
                 if (option == 1){
-                    char usuario_buscado;
-
+                    char* usuario_buscado;
+                    user u_actual;
                     printf("Escribe el nombre de usuario que quieres seguir:");
-                    scanf("%s", &usuario_buscado);
-                    while(buscar_usuario(lista_de_usuarios, &usuario_buscado) == NULL) {
+                    scanf("%s", usuario_buscado);
+                    while(buscar_usuario(lista_de_usuarios, usuario_buscado) == NULL) {
                         printf("Escribe el nombre de usuario que quieres seguir:");
-                        scanf("%s", &usuario_buscado);
+                        scanf("%s", usuario_buscado);
                     }
-
-
+                    u_actual = *buscar_usuario(lista_de_usuarios, usuario_buscado);
+                    if (u_actual.solicitudes_amistad == NULL){
+                        u_actual.solicitudes_amistad = init_queue();
+                    }
+                    u_actual.solicitudes_amistad = enviar_solicitud_amistad(usuario_buscado, *u_actual.solicitudes_amistad);
                 }
                 else if (option == 2);
                 else if (option == 3);
@@ -232,9 +235,5 @@ int buscar_amigo(user_list* usuarios){
 
 
 }
-
-
-
-
 
 /*######################################################################*/

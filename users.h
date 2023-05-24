@@ -2,6 +2,7 @@
 #define RED_SOCIAL_PROYECTO_USERS_H
 #include <stdlib.h>
 #include <string.h>
+#include "amigos.h"
 
 #define MAX_STRING_LENGTH 50
 #define MAX_GUSTOS 5
@@ -19,7 +20,7 @@ typedef struct {
     char mail[MAX_STRING_LENGTH];
     char ubicacion[MAX_STRING_LENGTH];
     char gustos[MAX_GUSTOS][MAX_STRING_LENGTH];
-    char solicitudes_amistad[MAX_USERS][MAX_STRING_LENGTH];
+    Queue* solicitudes_amistad;
 } user;
 
 typedef struct  {
@@ -28,8 +29,8 @@ typedef struct  {
 } user_list;
 
 typedef struct{
-    user  *usuario;
-    user_list *seguidores;
+    user  usuario;
+    user_list seguidores;
 }Amigos;
 
 int menu();

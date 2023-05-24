@@ -45,11 +45,11 @@ int is_empty_q(Queue* q);
 
 char* first(Queue* q);
 
-Queue* enqueue(Queue* q, user* e);
+Queue enqueue(Queue* q, char* e);
 
 Queue* dequeue(Queue* q);
 
-
+Queue* enviar_solicitud_amistad( char* nombre, Queue cola_amigos)
 /**#####################################################################*/
 
 
