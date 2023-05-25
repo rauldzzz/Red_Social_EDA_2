@@ -121,7 +121,7 @@ char* first(Queue* q){
         return &(q->A[q->head]);
     }
 }
-Queue enqueue(Queue* q, char* e){
+Queue* enqueue(Queue* q, char* e){
     if(q->elements == MAX_USERS) {
         printf("Queue is full");
     }
@@ -133,7 +133,7 @@ Queue enqueue(Queue* q, char* e){
             q->elements = q->elements + 1;
         }
     }
-    return *q;
+    return q;
 }
 Queue* dequeue(Queue* q){
     if(is_empty_q(q)) {
@@ -151,5 +151,5 @@ Queue* dequeue(Queue* q){
 /**#####################################################################*/
 
 Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_amigos){
-    enqueue(cola_amigos, nombre);
+    return enqueue(cola_amigos, nombre);
 }

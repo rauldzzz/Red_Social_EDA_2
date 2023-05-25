@@ -45,7 +45,7 @@ int is_empty_q(Queue* q);
 
 char* first(Queue* q);
 
-Queue enqueue(Queue* q, char* e);
+Queue* enqueue(Queue* q, char* e);
 
 Queue* dequeue(Queue* q);
 
