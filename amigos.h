@@ -29,7 +29,7 @@ int is_empty(Stack* p);
 
 char* top(Stack* p);
 
-Stack* push(Stack* p, user valor);
+Stack* push(Stack* p, char* valor);
 
 Stack* pop(Stack* p);
 
@@ -49,7 +49,7 @@ Queue enqueue(Queue* q, char* e);
 
 Queue* dequeue(Queue* q);
 
-Queue* enviar_solicitud_amistad( char* nombre, Queue cola_amigos);
+Queue* enviar_solicitud_amistad( char* nombre, Queue* cola_amigos);
 /**#####################################################################*/
 
 

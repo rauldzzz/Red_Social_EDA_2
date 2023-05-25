@@ -33,7 +33,7 @@ typedef struct{
     user_list seguidores;
 }Amigos;
 
-int menu();
+int menu(user_list lista_de_usuarios);
 
 user rellenar_datos(user user1);
 

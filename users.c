@@ -25,7 +25,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
         printf("2.Listar todos los usuarios existentes \n");
         printf("3.Operar como un usuario especifico\n");
         printf("4.Salir\n");
-        printf("Elija el numero de la opcion deseada: ");
+        printf("Elija el numero de la opcion deseada:");
         scanf("%d", &choice); //si pones una letra entra en bucle !!!!
         //choice = 1;
         if (choice == 1){
@@ -44,7 +44,6 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 printf("Asegurate de insertar antes tu nombre de usuario en la lista!\n\n");
                 state = FALSE;
             }
-
             int option = -1;
             while (option != 5 && state == TRUE) {
                 printf("\n1.Enviar solicitudes de amistad\n");
@@ -52,11 +51,11 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 printf("3.Realizar una publicacion\n");
                 printf("4.Listar las publicaciones del usuario seleccionado\n");
                 printf("5.Salir\n");
-                printf("Elija el numero de la opcion deseada: ");
+                printf("Elija el numero de la opcion deseada:");
                 scanf("%d", &option);
 
                 if (option == 1){
-                    char* usuario_buscado;
+                    char usuario_buscado[MAX_STRING_LENGTH];
                     user u_actual;
                     printf("Escribe el nombre de usuario que quieres seguir:");
                     scanf("%s", usuario_buscado);
@@ -65,10 +64,8 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                         scanf("%s", usuario_buscado);
                     }
                     u_actual = *buscar_usuario(lista_de_usuarios, usuario_buscado);
-                    if (u_actual.solicitudes_amistad == NULL){
-                        u_actual.solicitudes_amistad = init_queue();
-                    }
-                    u_actual.solicitudes_amistad = enviar_solicitud_amistad(usuario_buscado, *u_actual.solicitudes_amistad);
+                    u_actual.solicitudes_amistad = enviar_solicitud_amistad(usuario_buscado, u_actual.solicitudes_amistad);
+                    printf("\nSolicitud enviada a %s\n", usuario_buscado);
                 }
                 else if (option == 2);
                 else if (option == 3);
@@ -79,7 +76,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             }
         } else if (choice == 4) printf("\nSaliendo...");
         else {
-            printf("\nOpcion inexistente.\nElija el numero de la opcion deseada:");
+            printf("\nOpcion inexistente.\n");
             scanf("%d\n", &choice);
             fflush(stdin);
         }
@@ -127,6 +124,7 @@ user rellenar_datos(user user1) {
         scanf("%s", user1.gustos[i]);
     }
     printf("\n");
+    user1.solicitudes_amistad = init_queue();
     return user1;
 }
 
@@ -196,6 +194,7 @@ user generate_user(){
         int random_gusto = rand() % 20;
         strcpy(usuario.gustos[i], gustos[random_gusto]);
     }
+    usuario.solicitudes_amistad = init_queue();
     return usuario;
 }
 

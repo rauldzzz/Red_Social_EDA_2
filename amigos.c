@@ -28,16 +28,16 @@ int is_empty(Stack* p){
     return FALSE;
 }
 
-user top(Stack* p){
-    if (is_empty(p) != TRUE) return p->stack[p->top];
+char* top(Stack* p){
+    if (is_empty(p) != TRUE) return &p->stack[p->top];
     else printf("\nLa pila esta llena\n");
 }
 
-Stack* push(Stack* p, user valor) {
+Stack* push(Stack* p, char* valor) {
     if (is_full(p) != TRUE) {
         p->stack = realloc(p->stack, (p->top + 1) * sizeof(user));
         p->top++;
-        p->stack[p->top] = valor;
+        p->stack[p->top] = *valor;
     } else {
         printf("\nLa pila esta llena\n");
     }
@@ -60,7 +60,7 @@ void free_stack(Stack* p) {
 }
 
 /**#####################################################################*/
-
+/*
 void add_desconicido(){
     // 1. abrimos el fichero
     int num;
@@ -88,9 +88,9 @@ void add_desconicido(){
         fclose(f);
         free_stack(p);
     }
-
-
 }
+*/
+
 
 /**########################## FUNCIONES COLA ##########################*/
 Queue* init_queue(){
@@ -150,6 +150,6 @@ Queue* dequeue(Queue* q){
 }
 /**#####################################################################*/
 
-Queue* enviar_solicitud_amistad( char* nombre, Queue cola_amigos){
-    enqueue(&cola_amigos, nombre);
+Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_amigos){
+    enqueue(cola_amigos, nombre);
 }
