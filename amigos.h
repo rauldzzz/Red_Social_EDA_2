@@ -8,6 +8,8 @@
 /**########################## FUNCIONES PILA ##########################*/
 
 #define MAX_STACK 20
+#define MAX_STRING_LENGTH 50
+
 
 typedef struct{
     char *stack;
@@ -18,7 +20,7 @@ typedef struct{
     int head;
     int tail;
     int elements;
-    char* A;
+    char** A;
 }Queue;
 
 Stack* init_stack();
@@ -45,14 +47,14 @@ int is_empty_q(Queue* q);
 
 char* first(Queue* q);
 
-Queue* enqueue(Queue* q, char* e);
+Queue* enqueue(Queue* q, char e[MAX_STRING_LENGTH]);
 
 Queue* dequeue(Queue* q);
 
 Queue* enviar_solicitud_amistad( char* nombre, Queue* cola_amigos);
+
+Queue* recibir_solicitud_amistad( Queue *cola_amigos);
 /**#####################################################################*/
-
-
 
 
 #endif //RED_SOCIAL_PROYECTO_AMIGOS_H

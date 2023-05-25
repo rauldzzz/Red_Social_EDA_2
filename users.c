@@ -36,14 +36,15 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             print_users(lista_de_usuarios);
         }
         else if (choice == 3) {
-            char u;
+            char u[MAX_STRING_LENGTH];
             int state = TRUE;
             printf("Nombre de usuario:");
-            scanf("%s", &u);
-            if(buscar_usuario(lista_de_usuarios, &u) == NULL) {
+            scanf("%s", u);
+            if(buscar_usuario(lista_de_usuarios, u) == NULL) {
                 printf("Asegurate de insertar antes tu nombre de usuario en la lista!\n\n");
                 state = FALSE;
             }
+            user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
             int option = -1;
             while (option != 5 && state == TRUE) {
                 printf("\n1.Enviar solicitudes de amistad\n");
@@ -56,18 +57,19 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
 
                 if (option == 1){
                     char usuario_buscado[MAX_STRING_LENGTH];
-                    user u_actual;
+                    user usuario_amigo;
                     printf("Escribe el nombre de usuario que quieres seguir:");
                     scanf("%s", usuario_buscado);
                     while(buscar_usuario(lista_de_usuarios, usuario_buscado) == NULL) {
                         printf("Escribe el nombre de usuario que quieres seguir:");
                         scanf("%s", usuario_buscado);
                     }
-                    u_actual = *buscar_usuario(lista_de_usuarios, usuario_buscado);
-                    u_actual.solicitudes_amistad = enviar_solicitud_amistad(usuario_buscado, u_actual.solicitudes_amistad);
+                    usuario_amigo.solicitudes_amistad = enviar_solicitud_amistad(u, usuario_amigo.solicitudes_amistad);
                     printf("\nSolicitud enviada a %s\n", usuario_buscado);
                 }
-                else if (option == 2);
+                else if (option == 2){
+
+                }
                 else if (option == 3);
                 else if (option == 4);
                 else if (option == 5) printf("\nSaliendo...\n\n");

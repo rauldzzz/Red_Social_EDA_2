@@ -96,7 +96,7 @@ void add_desconicido(){
 Queue* init_queue(){
     Queue* q = malloc(sizeof(Queue));
     //Alocar memeoria para A?
-    q->A = malloc( MAX_USERS * sizeof(user));
+    q->A = (char**)malloc( MAX_USERS * sizeof(char*));
     if (q->A == NULL) {
         free(q);
         return NULL;
@@ -106,27 +106,31 @@ Queue* init_queue(){
     q->elements = 0;
     return q;
 }
+
 int is_full_q(Queue* q){
     return(q->elements == MAX_USERS);
 }
+
 int is_empty_q(Queue* q){
     return(q->elements == 0);
 }
+
 char* first(Queue* q){
     if (is_empty_q(q)) {
        printf("\nQueue is empty\n");
        //retornem error o algo?
     }
     else{
-        return &(q->A[q->head]);
+        return (q->A[q->head]);
     }
 }
-Queue* enqueue(Queue* q, char* e){
+
+Queue* enqueue(Queue* q, char e[MAX_STRING_LENGTH]){
     if(q->elements == MAX_USERS) {
         printf("Queue is full");
     }
     else{
-        q->A[q->tail] = *e;
+        q->A[q->tail] = e;
         q->tail = q->tail + 1;
         if(q->tail > MAX_USERS){
             q->tail = 1;
@@ -135,6 +139,7 @@ Queue* enqueue(Queue* q, char* e){
     }
     return q;
 }
+
 Queue* dequeue(Queue* q){
     if(is_empty_q(q)) {
         printf("Queue is empty");
@@ -148,8 +153,29 @@ Queue* dequeue(Queue* q){
     }
     return q;
 }
+
 /**#####################################################################*/
 
-Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_amigos){
-    return enqueue(cola_amigos, nombre);
+Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_solicitudes_amigos){
+    return enqueue(cola_solicitudes_amigos, nombre);
+}
+
+Queue* recibir_solicitud_amistad(Queue *cola_solicitudes_amigos){
+    printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
+    char option;
+    for (int i = 0; i < cola_solicitudes_amigos->elements;) {
+        printf("\nQuieres aceptar la solicitud de amistad de %s?", cola_solicitudes_amigos->A[i]);
+        scanf("%c", &option);
+        if (option == '0') break;
+        else if (option == 'Y'){
+
+        }
+        else if (option == 'N'){
+
+        }
+        else{
+            printf("\nOPCION INCORRECTA\n");
+            printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
+        }
+    }
 }
