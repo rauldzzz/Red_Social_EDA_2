@@ -68,7 +68,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                     printf("\nSolicitud enviada a %s\n", usuario_buscado);
                 }
                 else if (option == 2){
-
+                    recibir_solicitud_amistad();
                 }
                 else if (option == 3);
                 else if (option == 4);

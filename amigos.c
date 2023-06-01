@@ -160,7 +160,7 @@ Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_solicitudes_amigos){
     return enqueue(cola_solicitudes_amigos, nombre);
 }
 
-Queue* recibir_solicitud_amistad(Queue *cola_solicitudes_amigos){
+Queue* recibir_solicitud_amistad(Queue *cola_solicitudes_amigos, Queue *cola_amigos, char* nombre[MAX_STRING_LENGTH]){
     printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
     char option;
     for (int i = 0; i < cola_solicitudes_amigos->elements;) {
@@ -168,10 +168,11 @@ Queue* recibir_solicitud_amistad(Queue *cola_solicitudes_amigos){
         scanf("%c", &option);
         if (option == '0') break;
         else if (option == 'Y'){
-
+            dequeue(cola_solicitudes_amigos);
+            enqueue(cola_amigos, *nombre);
         }
         else if (option == 'N'){
-
+            dequeue(cola_solicitudes_amigos);
         }
         else{
             printf("\nOPCION INCORRECTA\n");

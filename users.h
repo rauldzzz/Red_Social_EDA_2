@@ -21,18 +21,20 @@ typedef struct {
     char ubicacion[MAX_STRING_LENGTH];
     char gustos[MAX_GUSTOS][MAX_STRING_LENGTH];
     Queue* solicitudes_amistad;
+    char** lista_amigos;
+
 } user;
 
 typedef struct  {
     user *lista_de_usuarios;
     int cantidad_usuarios;
 } user_list;
-
+/*
 typedef struct{
     user  usuario;
     user_list seguidores;
 }Amigos;
-
+*/
 int menu(user_list lista_de_usuarios);
 
 user rellenar_datos(user user1);

@@ -3,6 +3,7 @@
 #define RED_SOCIAL_PROYECTO_AMIGOS_H
 #include <stdlib.h>
 #include <string.h>
+#include "users.c"
 #include "users.h"
 
 /**########################## FUNCIONES PILA ##########################*/
@@ -53,7 +54,7 @@ Queue* dequeue(Queue* q);
 
 Queue* enviar_solicitud_amistad( char* nombre, Queue* cola_amigos);
 
-Queue* recibir_solicitud_amistad( Queue *cola_amigos);
+Queue* recibir_solicitud_amistad(Queue *cola_solicitudes_amigos, Queue *cola_amigos, char* nombre[MAX_STRING_LENGTH]);
 /**#####################################################################*/
 
 
