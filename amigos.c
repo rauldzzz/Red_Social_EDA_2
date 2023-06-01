@@ -179,3 +179,183 @@ Queue* recibir_solicitud_amistad(Queue *cola_solicitudes_amigos){
         }
     }
 }
+
+/**############################ DICCIONARIO ############################*/
+
+Dic create_dic(int size) {
+    Dic dic;
+    dic.table = (Node*)malloc(size * sizeof(Node));
+    dic.size = size;
+    dic.count = 0;
+    return dic;
+}
+
+int hash(char* key, int size) {
+    int hashvalue = 0;
+    for (int i = 0; i < strlen(key); i++) {
+        hashvalue = (hashvalue * 31 + key[i]) % size;
+    }
+    return hashvalue;
+}
+
+void add_word(Dic* dic, char* word) {
+    int i = hash(word, dic->size);
+    while (dic->table[i].key != NULL && strcmp(dic->table[i].key, word) != 0) {
+        i = (i + 1) % dic->size;
+    }
+    if (dic->table[i].key == NULL) {
+        dic->table[i].key = strdup(word);
+        dic->table[i].count = 1;
+        dic->count++;
+    } else {
+        dic->table[i].count++;
+    }
+}
+
+int get_word_count(Dic* dic, char* word) {
+    int i = hash(word, dic->size);
+    while (dic->table[i].key != NULL) {
+        if (strcmp(dic->table[i].key, word) == 0) {
+            return dic->table[i].count;
+        }
+        i = (i + 1) % dic->size;
+    }
+    return 0;
+}
+
+void print_most_frequent_words(Dic* dic, int n) {
+    // Ordenar la tabla por conteo descendente usando un algoritmo de ordenamiento (por ejemplo, bubble sort)
+    for (int i = 0; i < dic->count - 1; i++) {
+        for (int j = 0; j < dic->count - i - 1; j++) {
+            if (dic->table[j].count < dic->table[j + 1].count) {
+                Node temp = dic->table[j];
+                dic->table[j] = dic->table[j + 1];
+                dic->table[j + 1] = temp;
+            }
+        }
+    }
+    // Imprimir las n palabras más frecuentes
+    printf("Las %d palabras más frecuentes son:\n", n);
+    for (int i = 0; i < n && i < dic->count; i++) {
+        printf("%s: %d\n", dic->table[i].key, dic->table[i].count);
+    }
+}
+
+
+void clear_dic(Dic* dic) {
+    for (int i = 0; i < dic->size; i++) {
+        free(dic->table[i].key);
+        dic->table[i].key = NULL;
+        dic->table[i].count = 0;
+    }
+    dic->count = 0;
+}
+
+/**#####################################################################*/
+
+/**############################### POSTS ###############################*/
+
+void add_post(Dic* wordCount, Post** posts, char* post) {
+    // Separar el contenido de la publicación en palabras individuales
+    char* word = strtok(post, " ");
+    while (word != NULL) {
+        add_word(wordCount, word);
+        word = strtok(NULL, " ");
+    }
+
+    // Agregar la publicación a la lista de publicaciones de los usuarios
+    Post* newPost = (Post*)malloc(sizeof(Post));
+    newPost->content = strdup(post);
+    newPost->next = NULL;
+
+    if (*posts == NULL) {
+        *posts = newPost;
+    } else {
+        Post* currentPost = *posts;
+        while (currentPost->next != NULL) {
+            currentPost = currentPost->next;
+        }
+        currentPost->next = newPost;
+    }
+}
+
+void print_top_10_words(Dic* wordCount) {
+    print_most_frequent_words(wordCount, 10);
+}
+/*void print_all_posts(Post* posts) {
+    printf("Publicaciones de TODOS los usuarios:\n");
+    Post* currentPost = posts;
+    while (currentPost != NULL) {
+        printf("%s\n", currentPost->content);
+        currentPost = currentPost->next;
+    }
+}*/
+
+void clear_posts(Post** posts) {
+    Post* currentPost = *posts;
+    while (currentPost != NULL) {
+        Post* nextPost = currentPost->next;
+        free(currentPost->content);
+        free(currentPost);
+        currentPost = nextPost;
+    }
+    *posts = NULL;
+}
+
+Post* create_post(char* content) {
+    Post* newPost = (Post*)malloc(sizeof(Post));
+    newPost->content = strdup(content);
+    newPost->next = NULL;
+    return newPost;
+}
+/** COMO AÑADIR POSTS */
+/* Post* posts = NULL;
+
+Post* post1 = create_post("Esta es una publicacion de prueba");
+Post* post2 = create_post("Otra publicacion de ejemplo");
+Post* post3 = create_post("Esta publicacion es otra prueba");
+
+// Agregar las publicaciones a la lista
+if (posts == NULL) {
+    posts = post1;
+} else {
+    Post* currentPost = posts;
+    while (currentPost->next != NULL) {
+        currentPost = currentPost->next;
+    }
+    currentPost->next = post1;
+}
+
+post1->next = post2;
+post2->next = post3;
+
+// Imprimir las publicaciones
+Post* currentPost = posts;
+while (currentPost != NULL) {
+    printf("%s\n", currentPost->content);
+    currentPost = currentPost->next;
+}
+
+// Liberar la memoria de las publicaciones
+currentPost = posts;
+while (currentPost != NULL) {
+    Post* nextPost = currentPost->next;
+    free(currentPost->content);
+    free(currentPost);
+    currentPost = nextPost;
+}
+*/
+
+/**#####################################################################*/
+
+
+
+
+
+
+
+
+
+
+
+
