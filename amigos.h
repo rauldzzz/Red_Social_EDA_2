@@ -9,6 +9,8 @@
 
 #define MAX_STACK 20
 #define MAX_STRING_LENGTH 50
+#define MAX_POST 120
+#define MAX_USUARIOS 200
 
 
 typedef struct{
