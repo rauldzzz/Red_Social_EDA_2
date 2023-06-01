@@ -70,8 +70,8 @@ Queue* init_queue(){
     for (int i = 0; i < MAX_USERS; ++i) {
         q->A[i] = (char*)malloc(MAX_STRING_LENGTH * sizeof(char));
     }
-    q->head = 0;
-    q->tail = 0;
+    q->head = -1;
+    q->tail = -1;
     q->elements = 0;
     return q;
 }
@@ -101,9 +101,9 @@ Queue* enqueue(Queue* q, char e[MAX_STRING_LENGTH]){
         printf("Queue is full");
     }
     else{
-        strcpy(q->A[q->head], e);
         q->head = q->head + 1;
         q->elements++;
+        strcpy(q->A[q->head], e);
     }
     return q;
 }
@@ -128,17 +128,20 @@ Queue* recibir_solicitud_amistad(user usuario){
         printf("\nNo tienes solicitudes de amistad ;(\n");
         return usuario.solicitudes_amistad;
     }
-    char option;
-    for (int i = 0; i < usuario.solicitudes_amistad->elements;) {
-        printf("\nQuieres aceptar la solicitud de amistad de %s?", usuario.solicitudes_amistad->A[i]);
-        scanf("%c", &option);
-        if (option == '0') break;
+    while (is_empty_q(usuario.solicitudes_amistad) != TRUE) {
+        char option;
+        printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
+        printf("\nQuieres aceptar la solicitud de amistad de %s?", usuario.solicitudes_amistad->A[usuario.solicitudes_amistad->head]);
+        scanf(" %c", &option);
+        if (option == '0') {
+            break;
+        }
         else if (option == 'Y'){
             usuario.lista_amigos[usuario.cantidd_amigos] = (char*)malloc(MAX_STRING_LENGTH * sizeof(char));
             usuario.lista_amigos[usuario.cantidd_amigos] = first(usuario.solicitudes_amistad);
             usuario.cantidd_amigos++;
             dequeue(usuario.solicitudes_amistad);
-
+            printf("\n\n");
         }
         else if (option == 'N'){
             dequeue(usuario.solicitudes_amistad);
