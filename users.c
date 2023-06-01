@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "time.h"
+#include "amigos.c"
 
 int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
     int choice = -1; //La eleccion del menu
@@ -44,9 +45,9 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 printf("Asegurate de insertar antes tu nombre de usuario en la lista!\n\n");
                 state = FALSE;
             }
-            user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
             int option = -1;
             while (option != 5 && state == TRUE) {
+                user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
                 printf("\n1.Enviar solicitudes de amistad\n");
                 printf("2.Gestionar las solicitudes pendientes\n");
                 printf("3.Realizar una publicacion\n");
@@ -54,7 +55,6 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 printf("5.Salir\n");
                 printf("Elija el numero de la opcion deseada:");
                 scanf("%d", &option);
-
                 if (option == 1){
                     char usuario_buscado[MAX_STRING_LENGTH];
                     user usuario_amigo;
@@ -64,11 +64,12 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                         printf("Escribe el nombre de usuario que quieres seguir:");
                         scanf("%s", usuario_buscado);
                     }
+                    usuario_amigo = *buscar_usuario(lista_de_usuarios, usuario_buscado);
                     usuario_amigo.solicitudes_amistad = enviar_solicitud_amistad(u, usuario_amigo.solicitudes_amistad);
                     printf("\nSolicitud enviada a %s\n", usuario_buscado);
                 }
                 else if (option == 2){
-                    recibir_solicitud_amistad();
+                    recibir_solicitud_amistad(usuario_actual);
                 }
                 else if (option == 3);
                 else if (option == 4);
@@ -127,6 +128,8 @@ user rellenar_datos(user user1) {
     }
     printf("\n");
     user1.solicitudes_amistad = init_queue();
+    user1.cantidd_amigos = 0;
+    user1.lista_amigos = (char**)malloc( sizeof(char*));
     return user1;
 }
 
@@ -197,6 +200,8 @@ user generate_user(){
         strcpy(usuario.gustos[i], gustos[random_gusto]);
     }
     usuario.solicitudes_amistad = init_queue();
+    usuario.cantidd_amigos = 0;
+    usuario.lista_amigos = (char**)malloc( sizeof(char*));
     return usuario;
 }
 

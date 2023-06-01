@@ -22,6 +22,7 @@ typedef struct {
     char gustos[MAX_GUSTOS][MAX_STRING_LENGTH];
     Queue* solicitudes_amistad;
     char** lista_amigos;
+    int cantidd_amigos;
 
 } user;
 
@@ -52,5 +53,9 @@ user_list file_users(user_list lista_usuarios);
 int buscar_amigo(user_list* usuarios);
 
 user usuario_rdm(FILE * f, int num);
+
+Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_solicitudes_amigos);
+
+Queue* recibir_solicitud_amistad(user usuario);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H
