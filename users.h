@@ -52,6 +52,7 @@ int buscar_amigo(user_list* usuarios);
 
 user usuario_rdm(FILE * f, int num);
 
-void buscar_usuarios_por_genero(char genero[MAX_STRING_LENGTH]);
+void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios);
+
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H

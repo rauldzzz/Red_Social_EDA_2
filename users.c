@@ -20,12 +20,12 @@ int menu(user_list lista_de_usuarios) {
         printf("%s\n", menu);
         for (int i = 0; i < 40; ++i) printf("#");
         printf("\n");
-        printf("1. Insertar nuevo usuario\n");
-        printf("2. Listar todos los usuarios existentes\n");
-        printf("3. Operar como un usuario especifico\n");
+        printf("1. Eres nuevo? Crea nuevo usuario\n");
+        printf("2. Listar nuestra comunidad de cinefilos\n");
+        printf("3. Ya tienes usuario? Opera como usuario ya existente\n");
         printf("4. Buscar usuarios por genero\n");
         printf("5. Salir\n");
-        printf("Elija el número de la opción deseada: ");
+        printf("Elija el numero de la opcion deseada: ");
         scanf("%d", &choice);
 
         if (choice == 1) {
@@ -45,12 +45,12 @@ int menu(user_list lista_de_usuarios) {
             user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
             int option = -1;
             while (option != 5 && state == TRUE) {
-                printf("\n1. Enviar solicitudes de amistad\n");
-                printf("2. Gestionar las solicitudes pendientes\n");
-                printf("3. Realizar una publicacion\n");
+                printf("\n1. Envia solicitudes de amistad\n");
+                printf("2. Gestiona las solicitudes pendientes\n");
+                printf("3. ¿Que se te pasa por tu mente? Publica algo\n");
                 printf("4. Listar las publicaciones del usuario seleccionado\n");
                 printf("5. Salir\n");
-                printf("Elija el número de la opción deseada: ");
+                printf("Elija el numero de la opción deseada: ");
                 scanf("%d", &option);
 
                 if (option == 1) {
@@ -71,36 +71,37 @@ int menu(user_list lista_de_usuarios) {
                 } else if (option == 5) {
                     printf("\nSaliendo...\n\n");
                 } else {
-                    printf("\nOpción inexistente. Elija el número de la opción deseada\n");
+                    printf("\nOpción inexistente. Elija el numero de la opcion deseada\n");
                 }
             }
         } else if (choice == 4) {
             char genero[MAX_STRING_LENGTH];
             printf("\nIngrese el genero a buscar: \n");
             printf("Generos disponibles\n");
-            printf("1. Animacion\n");
-            printf("2. Aventura\n");
-            printf("3. Ciencia ficcion\n");
-            printf("4. Cine de autor\n");
-            printf("5. Comedia\n");
-            printf("6. Crimen\n");
-            printf("7. Documental\n");
-            printf("8. Drama\n");
-            printf("9. Fantasia\n");
-            printf("10. Guerra\n");
-            printf("11. Historica\n");
-            printf("12. Misterio\n");
-            printf("13. Musical\n");
-            printf("14. Romance\n");
-            printf("15. Superheroes\n");
-            printf("16. Suspenso\n");
-            printf("17. Thriller psicologico\n");
-            printf("18. Western\n");
+            printf("Animacion\n");
+            printf("Aventura\n");
+            printf("Ciencia ficcion\n");
+            printf("Cine de autor\n");
+            printf("Comedia\n");
+            printf("Crimen\n");
+            printf("Documental\n");
+            printf("Drama\n");
+            printf("Fantasia\n");
+            printf("Guerra\n");
+            printf("Historica\n");
+            printf("Misterio\n");
+            printf("Musical\n");
+            printf("Romance\n");
+            printf("Superheroes\n");
+            printf("Suspenso\n");
+            printf("Thriller psicologico\n");
+            printf("Western\n");
 
-            scanf("%s", genero);
-            buscar_usuarios_por_genero(genero);
+            scanf(" %s", genero);
+            imprimir_usuarios_por_genero(genero, &lista_de_usuarios);
+
         } else {
-            printf("\nOpción inexistente.\n");
+            printf("\nOpcion inexistente.\n");
             scanf("%d\n", &choice);
             fflush(stdin);
         }
@@ -114,7 +115,7 @@ int menu(user_list lista_de_usuarios) {
 user rellenar_datos(user user1) {
     // Validación de nombre
     do {
-        printf("\nInserta nombre de usuario (tiene que contener 1 mayuscula, 1 simbolo y 1 numero): ");
+        printf("\nInserta nombre de usuario (tiene que contener 1 mayuscula y 1 numero): ");
         scanf("%s", user1.name);
     } while (!isupper(user1.name[0]) || !islower(user1.name[1]));
 
@@ -145,24 +146,24 @@ user rellenar_datos(user user1) {
     // Insertar los géneros favoritos de cada usuario para después ver todos los usuarios que les gusta ese mismo
     printf("\nInserta tus 5 generos cinematograficos favoritos (Escribe el numero):\n");
     printf("\nGeneros disponibles:\n");
-    printf("1. Animación\n");
-    printf("2. Aventura\n");
-    printf("3. Ciencia ficción\n");
-    printf("4. Cine de autor\n");
-    printf("5. Comedia\n");
-    printf("6. Crimen\n");
-    printf("7. Documental\n");
-    printf("8. Drama\n");
-    printf("9. Fantasía\n");
-    printf("10. Guerra\n");
-    printf("11. Histórica\n");
-    printf("12. Misterio\n");
-    printf("13. Musical\n");
-    printf("14. Romance\n");
-    printf("15. Superhéroes\n");
-    printf("16. Suspenso\n");
-    printf("17. Thriller psicológico\n");
-    printf("18. Western\n");
+    printf("Animación\n");
+    printf("Aventura\n");
+    printf("Ciencia ficción\n");
+    printf("Cine de autor\n");
+    printf("Comedia\n");
+    printf("Crimen\n");
+    printf("Documental\n");
+    printf("Drama\n");
+    printf("Fantasía\n");
+    printf("Guerra\n");
+    printf("Histórica\n");
+    printf("Misterio\n");
+    printf("Musical\n");
+    printf("Romance\n");
+    printf("Superhéroes\n");
+    printf("Suspenso\n");
+    printf("Thriller psicológico\n");
+    printf("Western\n");
 
     for (int i = 0; i < MAX_GUSTOS; i++) {
         printf("Genero %d:", i + 1);
@@ -185,7 +186,7 @@ user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
 }
 
 void print_users(user_list  usuarios){
-    printf("Lista de usuarios:\n");
+    printf("Usuarios de la comunidad cinefila:\n");
     for(int i=0; i<usuarios.cantidad_usuarios; i++){
         printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);
     }
@@ -193,11 +194,11 @@ void print_users(user_list  usuarios){
 
 user* buscar_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]){
     if (usuarios.lista_de_usuarios == NULL || usuarios.cantidad_usuarios == 0) {
-        printf("\nNo hay usuarios en la lista\n");
+        printf("\nNo hay usuarios en la lista :(\n");
         return NULL;
     }
     if (name[0] == '\0') {
-        printf("\nEl nombre de usuario proporcionado está vacío\n");
+        printf("\nEl nombre de usuario proporcionado está vacío :(\n");
         return NULL;
     }
     for (int i = 0; i < usuarios.cantidad_usuarios; ++i) {
@@ -276,10 +277,8 @@ int buscar_amigo(user_list* usuarios){
     else{
         return ERROR;
     }
-
-
 }
-
+/*
 void add_post(user* user1, const char* text){
     if(strlen(text) > MAX_POST){
         printf("El texto debe tener máximo 120 caracteres.");
@@ -288,115 +287,12 @@ void add_post(user* user1, const char* text){
 
 /*######################################################################*/
 
-//Paula cositas q estic provant
-
-void add_user_to_list(user_list* lista, user usuario) {
-    if (lista->cantidad_usuarios >= MAX_USUARIOS) {
-        printf("La lista de usuarios está llena. No se puede agregar más usuarios.\n");
-        return;
-    }
-
-    lista->lista_de_usuarios[lista->cantidad_usuarios] = usuario;
-    lista->cantidad_usuarios++;
-}
-
-user_list cargar_usuarios_desde_archivo(char filename[MAX_STRING_LENGTH]) {
-    FILE* file = fopen("f_users.txt", "r");
-    if (file == NULL) {
-        printf("Error al abrir el archivo\n");
-        exit(1);
-    }
-
-    user_list usuarios;
-    usuarios.lista_de_usuarios = malloc(MAX_USUARIOS * sizeof(user));
-    usuarios.cantidad_usuarios = 0;
-
-    char line[MAX_STRING_LENGTH];
-    while (fgets(line, sizeof(line), file)) {
-        char* token = strtok(line, ",");
-        user nuevo_usuario;
-
-        strcpy(nuevo_usuario.name, token);
-        token = strtok(NULL, ",");
-        nuevo_usuario.age = atoi(token);
-        token = strtok(NULL, ",");
-        strcpy(nuevo_usuario.mail, token);
-        token = strtok(NULL, ",");
-        strcpy(nuevo_usuario.ubicacion, token);
-
-        for (int i = 0; i < MAX_GUSTOS; i++) {
-            token = strtok(NULL, ",");
-            if (token != NULL) {
-                strcpy(nuevo_usuario.gustos[i], token);
-            } else {
-                strcpy(nuevo_usuario.gustos[i], "");
-            }
-        }
-
-        usuarios.lista_de_usuarios[usuarios.cantidad_usuarios] = nuevo_usuario;
-        usuarios.cantidad_usuarios++;
-    }
-
-    fclose(file);
-
-    return usuarios;
-}
-
-char generos_cinematograficos[][MAX_STRING_LENGTH] = {
-        "Animacion",
-        "Aventura",
-        "Ciencia ficcion",
-        "Cine de autor",
-        "Comedia",
-        "Crimen",
-        "Documental",
-        "Drama",
-        "Fantasia",
-        "Guerra",
-        "Historica",
-        "Misterio",
-        "Musical",
-        "Romance",
-        "Superheroes",
-        "Suspenso",
-        "Thriller psicologico",
-        "Western"
-};
-
-
-void buscar_usuarios_por_genero(char genero[MAX_STRING_LENGTH]) {
-    user_list usuarios = cargar_usuarios_desde_archivo("usuarios.txt");
-
-    user_list usuarios_encontrados;
-    usuarios_encontrados.lista_de_usuarios = malloc(usuarios.cantidad_usuarios * sizeof(user));
-    usuarios_encontrados.cantidad_usuarios = 0;
-
-    int genero_elegido = atoi(genero);
-
-    for (int i = 0; i < usuarios.cantidad_usuarios; i++) {
-        for (int j = 0; j < MAX_GUSTOS; j++) {
-            if (strcmp(usuarios.lista_de_usuarios[i].gustos[j], generos_cinematograficos[genero_elegido - 1]) == 0) {
-                usuarios_encontrados.lista_de_usuarios[usuarios_encontrados.cantidad_usuarios] = usuarios.lista_de_usuarios[i];
-                usuarios_encontrados.cantidad_usuarios++;
-                break;
+void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios) {
+    for (int i = 0; i < lista_de_usuarios->cantidad_usuarios; ++i) {
+        for (int j = 0; j < MAX_GUSTOS; ++j) {
+            if (strcmp(lista_de_usuarios->lista_de_usuarios[i].gustos[j], genero) == 0) {
+                printf("\n%s\n", lista_de_usuarios->lista_de_usuarios[i].name);
             }
         }
     }
-
-    if (usuarios_encontrados.cantidad_usuarios == 0) {
-        printf("No se encontraron usuarios con el género '%s'\n", generos_cinematograficos[genero_elegido - 1]);
-    } else {
-        printf("Usuarios encontrados con el género '%s':\n", generos_cinematograficos[genero_elegido - 1]);
-        for (int i = 0; i < usuarios_encontrados.cantidad_usuarios; i++) {
-            user usuario = usuarios_encontrados.lista_de_usuarios[i];
-            printf("Nombre: %s\n", usuario.name);
-            printf("Edad: %d\n", usuario.age);
-            printf("Correo electrónico: %s\n", usuario.mail);
-            printf("Ubicación: %s\n", usuario.ubicacion);
-            printf("-------------------\n");
-        }
-    }
-
-    free(usuarios.lista_de_usuarios);
-    free(usuarios_encontrados.lista_de_usuarios);
 }
