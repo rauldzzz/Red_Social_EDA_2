@@ -7,12 +7,19 @@
 #define MAX_STRING_LENGTH 50
 #define MAX_GUSTOS 5
 #define MAX_USERS 20
+#define MAX_LEN_POSTS 120
 
 #define TRUE 1
 #define FALSE 0
 
 #define SUCCESS 0
 #define ERROR -1
+
+typedef struct{
+    char title[MAX_STRING_LENGTH];
+    char post[MAX_LEN_POSTS];
+    int post_idx;
+}post;
 
 typedef struct {
     char name[MAX_STRING_LENGTH];
@@ -23,19 +30,16 @@ typedef struct {
     Queue* solicitudes_amistad;
     char** lista_amigos;
     int cantidd_amigos;
-
+    post* publi;
+    int cant_post;
 } user;
 
 typedef struct  {
     user *lista_de_usuarios;
     int cantidad_usuarios;
 } user_list;
-/*
-typedef struct{
-    user  usuario;
-    user_list seguidores;
-}Amigos;
-*/
+
+
 int menu(user_list lista_de_usuarios);
 
 user rellenar_datos(user user1);
@@ -57,5 +61,11 @@ user usuario_rdm(FILE * f, int num);
 Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_solicitudes_amigos);
 
 Queue* recibir_solicitud_amistad(user usuario);
+
+void add_post(user usuario);
+
+void print_posts(user usuario);
+
+void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H

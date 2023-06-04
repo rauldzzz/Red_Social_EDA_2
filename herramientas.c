@@ -155,3 +155,76 @@ Queue* recibir_solicitud_amistad(user usuario){
 }
 
 /**#####################################################################*/
+
+/**############################ DICCIONARIO ############################*/
+
+Dic create_dic(int size) {
+    Dic dic;
+    dic.table = (Node*)malloc(size * sizeof(Node));
+    dic.size = size;
+    dic.count = 0;
+    return dic;
+}
+
+int hash(char* key, int size) {
+    int hashvalue = 0;
+    for (int i = 0; i < strlen(key); i++) {
+        hashvalue = (hashvalue * 31 + key[i]) % size;
+    }
+    return hashvalue;
+}
+
+void add_word(Dic* dic, char* word) {
+    int i = hash(word, dic->size);
+    while (dic->table[i].key != NULL && strcmp(dic->table[i].key, word) != 0) {
+        i = (i + 1) % dic->size;
+    }
+    if (dic->table[i].key == NULL) {
+        dic->table[i].key = strdup(word);
+        dic->table[i].count = 1;
+        dic->count++;
+    } else {
+        dic->table[i].count++;
+    }
+}
+
+int get_word_count(Dic* dic, char* word) {
+    int i = hash(word, dic->size);
+    while (dic->table[i].key != NULL) {
+        if (strcmp(dic->table[i].key, word) == 0) {
+            return dic->table[i].count;
+        }
+        i = (i + 1) % dic->size;
+    }
+    return 0;
+}
+
+void print_most_frequent_words(Dic* dic, int n) {
+    // Ordenar la tabla por conteo descendente usando un algoritmo de ordenamiento (por ejemplo, bubble sort)
+    for (int i = 0; i < dic->count - 1; i++) {
+        for (int j = 0; j < dic->count - i - 1; j++) {
+            if (dic->table[j].count < dic->table[j + 1].count) {
+                Node temp = dic->table[j];
+                dic->table[j] = dic->table[j + 1];
+                dic->table[j + 1] = temp;
+            }
+        }
+    }
+    // Imprimir las n palabras más frecuentes
+    printf("Las %d palabras más frecuentes son:\n", n);
+    for (int i = 0; i < n && i < dic->count; i++) {
+        printf("%s: %d\n", dic->table[i].key, dic->table[i].count);
+    }
+}
+
+
+void clear_dic(Dic* dic) {
+    for (int i = 0; i < dic->size; i++) {
+        free(dic->table[i].key);
+        dic->table[i].key = NULL;
+        dic->table[i].count = 0;
+    }
+    dic->count = 0;
+}
+
+/**#####################################################################*/

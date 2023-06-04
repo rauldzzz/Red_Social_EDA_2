@@ -11,7 +11,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
     user usuario;
 
     //Centramos la palabra 'MENU' y decoramos con #
-    while (choice != 4 ) {
+    while (choice != 5 ) {
         choice = -1; //La eleccion del menu
         for (int i = 0; i < 40; ++i) printf("#");
         printf("\n");
@@ -22,10 +22,11 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
         printf("%s\n", menu);
         for (int i = 0; i < 40; ++i) printf("#");
         printf("\n");
-        printf("1.Insertar nuevo usuario\n");
-        printf("2.Listar todos los usuarios existentes \n");
-        printf("3.Operar como un usuario especifico\n");
-        printf("4.Salir\n");
+        printf("1. Eres nuevo? Crea nuevo usuario\n");
+        printf("2. Listar nuestra comunidad de cinefilos\n");
+        printf("3. Ya tienes usuario? Opera como usuario ya existente\n");
+        printf("4. Buscar usuarios por genero\n");
+        printf("5. Salir\n");
         printf("Elija el numero de la opcion deseada:");
         scanf("%d", &choice); //si pones una letra entra en bucle !!!!
         //choice = 1;
@@ -41,43 +42,72 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             int state = TRUE;
             printf("Nombre de usuario:");
             scanf("%s", u);
-            if(buscar_usuario(lista_de_usuarios, u) == NULL) {
+            if (buscar_usuario(lista_de_usuarios, u) == NULL) {
                 printf("Asegurate de insertar antes tu nombre de usuario en la lista!\n\n");
                 state = FALSE;
             }
             int option = -1;
             while (option != 5 && state == TRUE) {
                 user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
-                printf("\n1.Enviar solicitudes de amistad\n");
-                printf("2.Gestionar las solicitudes pendientes\n");
-                printf("3.Realizar una publicacion\n");
-                printf("4.Listar las publicaciones del usuario seleccionado\n");
-                printf("5.Salir\n");
+                printf("\n1. Envia solicitudes de amistad\n");
+                printf("2. Gestiona las solicitudes pendientes\n");
+                printf("3. ¿Que se te pasa por tu mente? Publica algo\n");
+                printf("4. Listar las publicaciones del usuario seleccionado\n");
+                printf("5. Salir\n");
                 printf("Elija el numero de la opcion deseada:");
                 scanf("%d", &option);
-                if (option == 1){
+                if (option == 1) {
                     char usuario_buscado[MAX_STRING_LENGTH];
                     user usuario_amigo;
                     printf("Escribe el nombre de usuario que quieres seguir:");
                     scanf("%s", usuario_buscado);
-                    while(buscar_usuario(lista_de_usuarios, usuario_buscado) == NULL) {
+                    while (buscar_usuario(lista_de_usuarios, usuario_buscado) == NULL) {
                         printf("Escribe el nombre de usuario que quieres seguir:");
                         scanf("%s", usuario_buscado);
                     }
                     usuario_amigo = *buscar_usuario(lista_de_usuarios, usuario_buscado);
                     usuario_amigo.solicitudes_amistad = enviar_solicitud_amistad(u, usuario_amigo.solicitudes_amistad);
                     printf("\nSolicitud enviada a %s\n", usuario_buscado);
-                }
-                else if (option == 2){
+                } else if (option == 2) {
                     recibir_solicitud_amistad(usuario_actual);
+                } else if (option == 3) {
+                    add_post(usuario_actual);
+                } else if (option == 4) {
+                    print_posts(usuario_actual);
+                } else if (option == 5) printf("\nSaliendo...\n\n");
+                else {
+                    printf("\nOpcion inexistente.Elija el numero de la opcion deseada\n");
+                    option = -1;
                 }
-                else if (option == 3);
-                else if (option == 4);
-                else if (option == 5) printf("\nSaliendo...\n\n");
-                else printf("\nOpcion inexistente.Elija el numero de la opcion deseada\n");
 
             }
-        } else if (choice == 4) printf("\nSaliendo...");
+        }
+        else if (choice == 4) {
+            char genero[MAX_STRING_LENGTH];
+            printf("\nGeneros disponibles\n");
+            printf("Animacion\n");
+            printf("Aventura\n");
+            printf("Ciencia ficcion\n");
+            printf("Cine de autor\n");
+            printf("Comedia\n");
+            printf("Crimen\n");
+            printf("Documental\n");
+            printf("Drama\n");
+            printf("Fantasia\n");
+            printf("Guerra\n");
+            printf("Historica\n");
+            printf("Misterio\n");
+            printf("Musical\n");
+            printf("Romance\n");
+            printf("Superheroes\n");
+            printf("Suspenso\n");
+            printf("Thriller psicologico\n");
+            printf("Western\n");
+            printf("\nIngrese el genero a buscar:");
+            scanf(" %s", genero);
+            imprimir_usuarios_por_genero(genero, &lista_de_usuarios);
+            }
+        else if (choice == 5) printf("\nSaliendo...");
         else {
             printf("\nOpcion inexistente.\n");
             scanf("%d\n", &choice);
@@ -130,6 +160,7 @@ user rellenar_datos(user user1) {
     user1.solicitudes_amistad = init_queue();
     user1.cantidd_amigos = 0;
     user1.lista_amigos = (char**)malloc( sizeof(char*));
+    user1.cant_post = 0;
     return user1;
 }
 
@@ -202,9 +233,9 @@ user generate_user(){
     usuario.solicitudes_amistad = init_queue();
     usuario.cantidd_amigos = 0;
     usuario.lista_amigos = (char**)malloc( sizeof(char*));
+    usuario.cant_post = 0;
     return usuario;
 }
-
 
 user_list file_users(user_list lista_de_usuarios){
     FILE* f = fopen("f_users.txt", "w");
@@ -217,14 +248,6 @@ user_list file_users(user_list lista_de_usuarios){
     fclose(f);
     return lista_de_usuarios;
 }
-
-
-/*######################################################################*/
-
-/*######################################################################*/
-//Añadir amigo --> algoritmo busqueda --> error
-//solicitud de amistad
-//Solicitudes recibidas --> acceptar o no
 
 int buscar_amigo(user_list* usuarios){
     char nombre[MAX_STRING_LENGTH];
@@ -239,7 +262,42 @@ int buscar_amigo(user_list* usuarios){
         return ERROR;
     }
 
+}
+
+void add_post(user usuario){
+    if(usuario.cant_post==0){
+        usuario.publi = malloc(sizeof(post));
+    }else{
+        usuario.publi = (post*) realloc(usuario.publi, (usuario.cant_post+1)* sizeof(post));
+    }
+    char post[MAX_LEN_POSTS];
+    char title[MAX_STRING_LENGTH];
+    printf("Titulo del post:");
+    scanf("%s", usuario.publi->title);
+
+    printf("Escribe lo que quieras subir(120):");
+    scanf("%s", post);
+    if (strlen(post)<=120){
+        usuario.cant_post++;
+        usuario.publi->post_idx = usuario.cant_post - 1;
+        strcpy(usuario.publi->post, post);
+    }else printf("Es demasiado largo, tiene que que tener maximo 120 caracteres");
 
 }
 
-/*######################################################################*/
+void print_posts(user usuario){
+    printf("Tus publicaciones son:\n");
+    for (int i = 0; i < usuario.cant_post; ++i) {
+        printf("Title: %s\n Post: %s\n", usuario.publi[i].title, usuario.publi[i].post);
+    }
+}
+
+void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios) {
+    for (int i = 0; i < lista_de_usuarios->cantidad_usuarios; ++i) {
+        for (int j = 0; j < MAX_GUSTOS; ++j) {
+            if (strcmp(lista_de_usuarios->lista_de_usuarios[i].gustos[j], genero) == 0) {
+                printf("\n%s\n", lista_de_usuarios->lista_de_usuarios[i].name);
+            }
+        }
+    }
+}
