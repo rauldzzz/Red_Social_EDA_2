@@ -270,17 +270,19 @@ void add_post(user usuario){
     }else{
         usuario.publi = (post*) realloc(usuario.publi, (usuario.cant_post+1)* sizeof(post));
     }
-    char post[MAX_LEN_POSTS];
-    char title[MAX_STRING_LENGTH];
-    printf("Titulo del post:");
-    scanf("%s", usuario.publi->title);
 
-    printf("Escribe lo que quieras subir(120):");
-    scanf("%s", post);
-    if (strlen(post)<=120){
+    printf("Titulo del post:");
+    getchar();
+    scanf("%[^\n]", usuario.publi->title);
+    printf("%s", usuario.publi->title);
+    printf("\nEscribe lo que quieras subir(120):");
+    getchar();
+    scanf("%[^\n]", usuario.publi->post);
+    printf("%s", usuario.publi->post);
+    if (strlen(usuario.publi->post)<=120){
         usuario.cant_post++;
         usuario.publi->post_idx = usuario.cant_post - 1;
-        strcpy(usuario.publi->post, post);
+        strcpy(usuario.publi->post, usuario.publi->post);
     }else printf("Es demasiado largo, tiene que que tener maximo 120 caracteres");
 
 }

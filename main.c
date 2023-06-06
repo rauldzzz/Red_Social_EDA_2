@@ -2,8 +2,14 @@
 #include "users.h"
 #include <stdlib.h>
 #include <string.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 int main() {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
     FILE* f = fopen("f_users.txt", "r");
     if (f == NULL) {
         // El archivo no existe o no se puede abrir en modo de lectura
