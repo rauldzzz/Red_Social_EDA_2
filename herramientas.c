@@ -7,56 +7,62 @@
 #include "time.h"
 
 /**########################## FUNCIONES PILA ##########################*/
+// Inicializa una pila vacía
 Stack* init_stack(){
-    Stack* p = (Stack*)malloc(sizeof(Stack));
-    //p->stack = (user *)malloc(sizeof(user));
+    Stack* p = (Stack*)malloc(sizeof(Stack)); // Asigna memoria para la estructura de la pila
+    p->stack = (user *)malloc(sizeof(user)); // Inicializa el puntero superior en 0 (pila vacía)
     p->top = 0;
     return p;
 }
 
+// Verifica si la pila está llena
 int is_full(Stack* p){ //   N es la capacidad maxima de la pila A[1...N]
-    if ( p->top == MAX_STACK){
-        return TRUE;
+    if ( p->top == MAX_STACK){ // Compara el puntero superior con la capacidad máxima de la pila
+        return TRUE; // Si el puntero superior es igual a la capacidad máxima, la pila está llena
     }
-    return FALSE;
+    return FALSE; // Si no, la pila no está llena
 }
 
+// Verifica si la pila está vacía
 int is_empty(Stack* p){
-    if (p->top == 0){
-        return TRUE;
+    if (p->top == 0){ // Compara el puntero superior con 0 (pila vacía)
+        return TRUE; // Si el puntero superior es igual a 0, la pila está vacía
     }
-    return FALSE;
+    return FALSE; // Si no, la pila no está vacía
 }
-
+// Devuelve el elemento superior de la pila
 char* top(Stack* p){
-    if (is_empty(p) != TRUE) return &p->stack[p->top];
-    else printf("\nLa pila esta llena\n");
+    if (is_empty(p) != TRUE) return &p->stack[p->top]; // Si la pila no está vacía, devuelve el elemento superior
+    else printf("\nLa pila esta llena\n"); // Si la pila está vacía, imprime un mensaje de error
 }
 
+// Inserta un elemento en la parte superior de la pila (push)
 Stack* push(Stack* p, char* valor) {
     if (is_full(p) != TRUE) {
-        p->stack = realloc(p->stack, (p->top + 1) * sizeof(user));
-        p->top++;
-        p->stack[p->top] = *valor;
+        p->stack = realloc(p->stack, (p->top + 1) * sizeof(user)); // Aumenta el tamaño de la memoria asignada para la pila
+        p->top++; // Incrementa el puntero superior
+        p->stack[p->top] = *valor; // Asigna el valor al elemento superior
     } else {
-        printf("\nLa pila esta llena\n");
+        printf("\nLa pila esta llena\n"); // Si la pila está llena, imprime un mensaje de error
     }
     return p;
 }
 
+// Elimina el elemento superior de la pila (pop)
 Stack* pop(Stack* p) {
     if (is_empty(p) != TRUE) {
-        p->stack = realloc(p->stack, (p->top - 1) * sizeof(user));
-        p->top--;
+        p->stack = realloc(p->stack, (p->top - 1) * sizeof(user)); // Reduce el tamaño de la memoria asignada para la pila
+        p->top--; // Decrementa el puntero superior
     } else {
-        printf("\nLa pila esta vacia\n");
+        printf("\nLa pila esta vacia\n"); // Si la pila está vacía, imprime un mensaje de error
     }
     return p;
 }
 
+// Libera la memoria asignada para la pila
 void free_stack(Stack* p) {
-    free(p->stack);
-    free(p);
+    free(p->stack); // Libera la memoria asignada para el array de la pila
+    free(p); // Libera la memoria asignada para la estructura de la pila
 }
 
 /**#####################################################################*/
@@ -118,7 +124,7 @@ Queue* dequeue(Queue* q){
     }
     return q;
 }
-
+/**#################################????????????????####################################*/
 Queue* enviar_solicitud_amistad( char nombre[MAX_STRING_LENGTH], Queue *cola_solicitudes_amigos){
     return enqueue(cola_solicitudes_amigos, nombre);
 }
@@ -153,7 +159,7 @@ Queue* recibir_solicitud_amistad(user usuario){
     }
     return usuario.solicitudes_amistad;
 }
-
+/**#####################################################################*/
 /**#####################################################################*/
 
 /**############################ DICCIONARIO ############################*/
@@ -228,5 +234,10 @@ void clear_dic(Dic* dic) {
     }
     dic->count = 0; // Restablece el contador total de palabras en el diccionario
 }
+
+/**#####################################################################*/
+
+
+
 
 /**#####################################################################*/

@@ -2,38 +2,53 @@
 #ifndef RED_SOCIAL_PROYECTO_HERRAMIENTAS_H
 #define RED_SOCIAL_PROYECTO_HERRAMIENTAS_H
 #include "users.h"
-/**########################## FUNCIONES PILA ##########################*/
-
 #define MAX_STACK 20
 #define MAX_STRING_LENGTH 50
+/**########################## FUNCIONES PILA ##########################*/
 
+typedef struct{
+    char *stack; // Puntero a un array que representa la pila
+    int top; // Entero que indica la posición del elemento superior en la pila
+}Stack;
+
+Stack* init_stack();
+// Esta función inicializa una pila vacía y devuelve un puntero a la estructura Stack.
+
+int is_full(Stack* p);
+//Verifica si la pila está llena. Recibe un puntero a la pila y devuelve un
+// valor entero (TRUE o FALSE) indicando si la pila está llena.
+
+int is_empty(Stack* p);
+//Verifica si la pila está vacía. Recibe un puntero a la pila y devuelve un
+// valor entero (TRUE o FALSE) indicando si la pila está vacía.
+
+char* top(Stack* p);
+//Devuelve el elemento superior de la pila sin eliminarlo.
+// Recibe un puntero a la pila y devuelve un puntero al elemento superior de la pila.
+
+Stack* push(Stack* p, char* valor);
+//Inserta un elemento en la parte superior de la pila.
+// Recibe un puntero a la pila y un puntero al valor que se va a insertar.
+// Devuelve un puntero a la pila actualizada.
+
+Stack* pop(Stack* p);
+// Elimina el elemento superior de la pila.
+// Recibe un puntero a la pila y elimina el elemento superior.
+// Devuelve un puntero a la pila actualizada.
+
+void free_stack(Stack* p);
+// Libera la memoria asignada para la pila. Recibe un puntero a la pila y libera
+// la memoria tanto para la estructura de la pila como para el array que almacena
+// los elementos.
+
+/**#####################################################################*/
+/**########################## FUNCIONES COLA ##########################*/
 typedef struct{
     int head;
     int tail;
     int elements;
     char** A;
 }Queue;
-
-typedef struct{
-    char *stack;
-    int top;
-}Stack;
-
-Stack* init_stack();
-
-int is_full(Stack* p);
-
-int is_empty(Stack* p);
-
-char* top(Stack* p);
-
-Stack* push(Stack* p, char* valor);
-
-Stack* pop(Stack* p);
-
-void free_stack(Stack* p);
-
-void add_desconicido();
 
 Queue* init_queue();
 
@@ -46,7 +61,7 @@ char* first(Queue* q);
 Queue* enqueue(Queue* q, char e[MAX_STRING_LENGTH]);
 
 Queue* dequeue(Queue* q);
-
+/**#####################################################################*/
 /**############################ DICCIONARIO ############################*/
 
 typedef struct Node {
