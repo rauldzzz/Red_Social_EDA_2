@@ -69,62 +69,74 @@ void free_stack(Stack* p) {
 
 
 /**########################## FUNCIONES COLA ##########################*/
+// Inicializa una cola vacía
 Queue* init_queue(){
-    Queue* q = malloc(sizeof(Queue));
-    //Alocar memeoria para A?
-    q->A = (char**)malloc( MAX_USERS * sizeof(char*));
+    Queue* q = malloc(sizeof(Queue)); // Asigna memoria para la estructura de la cola
+    q->A = (char**)malloc( MAX_USERS * sizeof(char*)); // Asigna memoria para el array que almacenará los elementos de la cola
     for (int i = 0; i < MAX_USERS; ++i) {
-        q->A[i] = (char*)malloc(MAX_STRING_LENGTH * sizeof(char));
+        q->A[i] = (char*)malloc(MAX_STRING_LENGTH * sizeof(char)); // Asigna memoria para cada elemento del array
     }
-    q->head = -1;
-    q->tail = -1;
-    q->elements = 0;
+    q->head = -1; // Inicializa el índice de la cabeza en -1 (cola vacía)
+    q->tail = -1; // Inicializa el índice de la cola en -1 (cola vacía)
+    q->elements = 0; // Inicializa el contador de elementos en 0 (cola vacía)
     return q;
 }
 
+// Verifica si la cola está llena
 int is_full_q(Queue* q){
-    if(q->elements == MAX_USERS) return TRUE;
-    return FALSE;
+    if(q->elements == MAX_USERS) return TRUE; // Compara el contador de elementos con el máximo permitido
+    return FALSE; // Si el contador de elementos es menor que el máximo permitido, la cola no está llena
 }
 
+// Verifica si la cola está vacía
 int is_empty_q(Queue* q){
-    if (q->elements == 0)return TRUE;
-    return FALSE;
+    if (q->elements == 0)return TRUE; // Compara el contador de elementos con 0
+    return FALSE; // Si el contador de elementos es mayor que 0, la cola no está vacía
 }
 
+// Devuelve el primer elemento de la cola
 char* first(Queue* q){
     if (is_empty_q(q) == TRUE) {
-        printf("\nQueue is empty\n");
-        //retornem error o algo?
+        printf("\nQueue is empty\n"); // Si la cola está vacía, imprime un mensaje de error
     }
     else{
-        return (q->A[q->head]);
+        return (q->A[q->head]); // Devuelve el primer elemento de la cola
     }
 }
 
+// Inserta un elemento en la cola (enqueue)
 Queue* enqueue(Queue* q, char e[MAX_STRING_LENGTH]){
     if(is_full_q(q) == TRUE) {
-        printf("Queue is full");
+        printf("Queue is full"); // Si la cola está llena, imprime un mensaje de error
     }
     else{
-        q->head = q->head + 1;
-        q->elements++;
-        strcpy(q->A[q->head], e);
+        q->head = q->head + 1; // Incrementa el índice de la cabeza
+        q->elements++; // Incrementa el contador de elementos
+        strcpy(q->A[q->head], e); // Copia el elemento en el array de la cola
     }
-    return q;
+    return q; // Devuelve la cola actualizada
 }
 
+// Elimina el primer elemento de la cola (dequeue)
 Queue* dequeue(Queue* q){
     if(is_empty_q(q) == TRUE) {
-        printf("Queue is empty");
+        printf("Queue is empty"); // Si la cola está vacía, imprime un mensaje de error
     }
     else{
-        q->head = q->head - 1;
-        q->elements--;
+        q->head = q->head - 1; // Decrementa el índice de la cabeza
+        q->elements--; // Decrementa el contador de elementos
     }
-    return q;
+    return q; // Devuelve la cola actualizada
 }
-/**#################################????????????????####################################*/
+void free_queue(Queue* q) {
+    for (int i = 0; i < MAX_USERS; ++i) {
+        free(q->A[i]); // Libera la memoria asignada para cada elemento del array A
+    }
+    free(q->A); // Libera la memoria asignada para el array A
+    free(q); // Libera la memoria asignada para la estructura de la cola
+}
+
+/*#################################????????????????####################################*/
 Queue* enviar_solicitud_amistad( char nombre[MAX_STRING_LENGTH], Queue *cola_solicitudes_amigos){
     return enqueue(cola_solicitudes_amigos, nombre);
 }
@@ -159,7 +171,7 @@ Queue* recibir_solicitud_amistad(user usuario){
     }
     return usuario.solicitudes_amistad;
 }
-/**#####################################################################*/
+/*#####################################################################*/
 /**#####################################################################*/
 
 /**############################ DICCIONARIO ############################*/

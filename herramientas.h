@@ -44,23 +44,48 @@ void free_stack(Stack* p);
 /**#####################################################################*/
 /**########################## FUNCIONES COLA ##########################*/
 typedef struct{
-    int head;
-    int tail;
-    int elements;
-    char** A;
+    int head; // Índice del primer elemento en la cola
+    int tail; // Índice del último elemento en la cola
+    int elements; // Contador de elementos en la cola
+    char** A; // Puntero a un array que almacena los elementos de la cola
 }Queue;
 
 Queue* init_queue();
+//Esta función inicializa una cola vacía. Asigna memoria para la estructura
+// Queue y el array A que almacenará los elementos de la cola.
+// Inicializa los índices de la cabeza y la cola en -1, y el contador de
+// elementos en 0. Devuelve un puntero a la cola inicializada.
 
 int is_full_q(Queue* q);
+//Verifica si la cola está llena. Compara el contador de elementos con el
+// máximo permitido de usuarios en la cola. Devuelve un valor entero (TRUE o FALSE)
+// indicando si la cola está llena.
 
 int is_empty_q(Queue* q);
+// Verifica si la cola está vacía. Compara el contador de elementos con 0.
+// Devuelve un valor entero (TRUE o FALSE) indicando si la cola está vacía.
 
 char* first(Queue* q);
+// Devuelve el primer elemento de la cola sin eliminarlo. Verifica si la cola
+// está vacía y, en caso afirmativo, puede imprimir un mensaje de error.
+// Devuelve un puntero al primer elemento de la cola.
 
 Queue* enqueue(Queue* q, char e[MAX_STRING_LENGTH]);
+//Inserta un elemento en la cola. Verifica si la cola está llena y, en caso afirmativo,
+// puede imprimir un mensaje de error. Incrementa el índice de la cabeza, incrementa
+// el contador de elementos y copia el elemento en el array A de la cola.
+// Devuelve un puntero a la cola actualizada.
 
 Queue* dequeue(Queue* q);
+//Elimina el primer elemento de la cola. Verifica si la cola está vacía y, en caso
+// afirmativo, puede imprimir un mensaje de error. Decrementa el índice de la cabeza
+// y el contador de elementos. Devuelve un puntero a la cola actualizada.
+
+
+void free_queue(Queue* q);
+// itera sobre cada elemento del array A de la cola y utiliza free() para liberar la
+// memoria asignada para cada elemento. Luego, libera la memoria asignada para el
+// array A y finalmente libera la memoria asignada para la estructura de la cola.
 /**#####################################################################*/
 /**############################ DICCIONARIO ############################*/
 
