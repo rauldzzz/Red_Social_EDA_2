@@ -15,7 +15,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
         choice = -1; //La eleccion del menu
         for (int i = 0; i < 40; ++i) printf("#");
         printf("\n");
-        char menu[] = "MENU";
+        char menu[] = "SER-I-ON";
         int longitud = strlen(menu);
         int espacios = (40 - longitud) / 2;
         for (int i = 0; i < espacios; i++) putchar(' ');
@@ -39,21 +39,26 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
         }
         else if (choice == 3) {
             char u[MAX_STRING_LENGTH];
-            int state = TRUE;
-            printf("Nombre de usuario:");
-            scanf("%s", u);
-            if (buscar_usuario(lista_de_usuarios, u) == NULL) {
-                printf("Asegurate de insertar antes tu nombre de usuario en la lista!\n\n");
-                state = FALSE;
+            int state = FALSE;
+            while (state != TRUE) {
+                printf("Nombre de usuario:");
+                scanf("%s", u);
+                if (buscar_usuario(lista_de_usuarios, u) == NULL) {
+                    printf("Asegurate de insertar antes tu nombre de usuario en la lista!\n\n");
+                    state = FALSE;
+                } else {
+                    state = TRUE;
+                }
             }
             int option = -1;
-            while (option != 5 && state == TRUE) {
-                user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
+            user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
+            while (option != 6) {
                 printf("\n1. Envia solicitudes de amistad\n");
                 printf("2. Gestiona las solicitudes pendientes\n");
                 printf("3. ¿Que se te pasa por tu mente? Publica algo\n");
-                printf("4. Listar las publicaciones del usuario seleccionado\n");
-                printf("5. Salir\n");
+                printf("4. Ver tus publicaciones :)\n");
+                printf("5. Ver los post de tus amigos <3\n");
+                printf("6. Salir\n");
                 printf("Elija el numero de la opcion deseada:");
                 scanf("%d", &option);
                 if (option == 1) {
@@ -71,10 +76,16 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 } else if (option == 2) {
                     recibir_solicitud_amistad(usuario_actual);
                 } else if (option == 3) {
-                    add_post(usuario_actual);
+                    post *publi;
+                    publi = add_post(&usuario_actual);
+                    usuario_actual.publi = publi;
+                    usuario_actual.cant_post++;
                 } else if (option == 4) {
-                    print_posts(usuario_actual);
-                } else if (option == 5) printf("\nSaliendo...\n\n");
+                    print_posts(&usuario_actual);
+                } else if (option == 5) {
+
+                }
+                else if (option == 6) printf("\nSaliendo...\n\n");
                 else {
                     printf("\nOpcion inexistente.Elija el numero de la opcion deseada\n");
                     option = -1;
@@ -152,15 +163,40 @@ user rellenar_datos(user user1) {
 
     // Ingreso de gustos
     printf("\nInserta 5 gustos o preferencias:\n");
+    printf("\nGeneros disponibles\n");
+    printf("Animacion\n");
+    printf("Aventura\n");
+    printf("Ciencia ficcion\n");
+    printf("Cine de autor\n");
+    printf("Comedia\n");
+    printf("Crimen\n");
+    printf("Documental\n");
+    printf("Drama\n");
+    printf("Fantasia\n");
+    printf("Guerra\n");
+    printf("Historica\n");
+    printf("Misterio\n");
+    printf("Musical\n");
+    printf("Romance\n");
+    printf("Superheroes\n");
+    printf("Suspenso\n");
+    printf("Thriller psicologico\n");
+    printf("Western\n");
+    printf("O un gusto singular ;)\n");
     for (int i = 0; i < MAX_GUSTOS; i++) {
-        printf("Gusto %d:", i + 1);
+        printf("\nGusto %d:", i + 1);
         scanf("%s", user1.gustos[i]);
+        getchar();
     }
     printf("\n");
     user1.solicitudes_amistad = init_queue();
     user1.cantidd_amigos = 0;
     user1.lista_amigos = (char**)malloc( sizeof(char*));
     user1.cant_post = 0;
+    FILE* f = fopen("f_users.txt", "r+");
+    fseek(f, 0, SEEK_END); //vamos al final del fichero
+    fprintf(f, "%s, %d, %s, %s, %s, %s, %s, %s, %s\n", user1.name,  user1.age, user1.mail, user1.ubicacion, user1.gustos[0], user1.gustos[1], user1.gustos[2], user1.gustos[3], user1.gustos[4]);
+    fclose(f);
     return user1;
 }
 
@@ -237,13 +273,32 @@ user generate_user(){
     return usuario;
 }
 
-user_list file_users(user_list lista_de_usuarios){
+user_list file_users(user_list lista_de_usuarios, int cantidad_usuarios){
     FILE* f = fopen("f_users.txt", "w");
     user usuario;
-    for (int i = 0; i < MAX_USERS; ++i) {
+    for (int i = 0; i < cantidad_usuarios; ++i) {
         usuario = generate_user();
-        fprintf(f, "%s, %d, %s, %s, %s, %s, %s, %s, %s\n", usuario.name, usuario.age, usuario.mail, usuario.ubicacion, usuario.gustos[0], usuario.gustos[1], usuario.gustos[2], usuario.gustos[3], usuario.gustos[4]);
-        lista_de_usuarios= lista_usuarios(lista_de_usuarios, usuario);
+        fprintf(f, "%s, %d, %s, %s, %s, %s, %s, %s, %s\n", usuario.name, usuario.age, usuario.mail,
+                usuario.ubicacion, usuario.gustos[0], usuario.gustos[1], usuario.gustos[2], usuario.gustos[3],
+                usuario.gustos[4]);
+        lista_de_usuarios = lista_usuarios(lista_de_usuarios, usuario);
+    }
+    fclose(f);
+    return lista_de_usuarios;
+}
+
+user_list read_users(user_list lista_de_usuarios){
+    FILE* f = fopen("f_users.txt", "r");
+    user usuario;
+    while (fscanf(f, "%[^,\n], %d, %[^,\n], %[^,\n], %[^,\n], %[^,\n], %[^,\n], %[^,\n], %[^,\n]\n",
+                  usuario.name, &usuario.age, usuario.mail, usuario.ubicacion,
+                  usuario.gustos[0], usuario.gustos[1], usuario.gustos[2],
+                  usuario.gustos[3], usuario.gustos[4]) != EOF){
+        usuario.solicitudes_amistad = init_queue();
+        usuario.cantidd_amigos = 0;
+        usuario.lista_amigos = (char**)malloc( sizeof(char*));
+        usuario.cant_post = 0;
+        lista_de_usuarios = lista_usuarios(lista_de_usuarios, usuario);
     }
     fclose(f);
     return lista_de_usuarios;
@@ -264,33 +319,29 @@ int buscar_amigo(user_list* usuarios){
 
 }
 
-void add_post(user usuario){
-    if(usuario.cant_post==0){
-        usuario.publi = malloc(sizeof(post));
+post* add_post(user* usuario){
+    if(usuario->cant_post==0){
+        usuario->publi = malloc(sizeof(post));
     }else{
-        usuario.publi = (post*) realloc(usuario.publi, (usuario.cant_post+1)* sizeof(post));
+        usuario->publi = (post*) realloc(usuario->publi, (usuario->cant_post+1)* sizeof(post));
     }
 
-    printf("Titulo del post:");
+    printf("\nTitulo del post:");
     getchar();
-    scanf("%[^\n]", usuario.publi->title);
-    printf("%s", usuario.publi->title);
-    printf("\nEscribe lo que quieras subir(120):");
+    scanf("%[^\n]", usuario->publi[usuario->cant_post].title);
+    //printf("%s", usuario.publi->title);
+    printf("Escribe lo que quieras subir(120):");
     getchar();
-    scanf("%[^\n]", usuario.publi->post);
-    printf("%s", usuario.publi->post);
-    if (strlen(usuario.publi->post)<=120){
-        usuario.cant_post++;
-        usuario.publi->post_idx = usuario.cant_post - 1;
-        strcpy(usuario.publi->post, usuario.publi->post);
-    }else printf("Es demasiado largo, tiene que que tener maximo 120 caracteres");
-
+    scanf("%[^\n]", usuario->publi[usuario->cant_post].post);
+    //printf("%s", usuario.publi->post);
+    usuario->publi->post_idx = usuario->cant_post;
+    return usuario->publi;
 }
 
-void print_posts(user usuario){
+void print_posts(user* usuario){
     printf("Tus publicaciones son:\n");
-    for (int i = 0; i < usuario.cant_post; ++i) {
-        printf("Title: %s\n Post: %s\n", usuario.publi[i].title, usuario.publi[i].post);
+    for (int i = 0; i < usuario->cant_post; ++i) {
+        printf("\nTitle: %s\n\nPost: %s\n", usuario->publi[i].title, usuario->publi[i].post);
     }
 }
 

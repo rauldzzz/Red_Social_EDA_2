@@ -52,7 +52,9 @@ user* buscar_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]);
 
 user generate_user();
 
-user_list file_users(user_list lista_usuarios);
+user_list file_users(user_list lista_usuarios, int cantidad_usuarios);
+
+user_list read_users(user_list lista_de_usuarios);
 
 int buscar_amigo(user_list* usuarios);
 
@@ -62,9 +64,9 @@ Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_solicitudes_amigos);
 
 Queue* recibir_solicitud_amistad(user usuario);
 
-void add_post(user usuario);
+post* add_post(user* usuario);
 
-void print_posts(user usuario);
+void print_posts(user *usuario);
 
 void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios);
 

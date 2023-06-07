@@ -18,3 +18,4 @@ Mateo_1994, 29, Mateo.Rivas@gmail.com, Bilbao, Drama, Western, Aventura, Comedia
 Leo.1952, 71, Leo.Navarro@gmail.com, Granada, Aventura, Fantasia, Cine de autor, Fantasia, Ciencia ficcion
 Lucas_1957, 66, Lucas.Delgado@gmail.com, Elche, Thriller psicologico, Acción, Fantasia, Romance, Romance
 Esther_1978, 45, Esther.Ortega@gmail.com, Palma de Mallorca, Aventura, Documental, Històrica, Superheroes, Guerra
+Raul_2003, 19, raul.diaz01@estudiant.upf.edu, Barcelona, Suspenso, Aventura, Comedia, Romance, Musical
