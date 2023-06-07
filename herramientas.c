@@ -158,47 +158,49 @@ Queue* recibir_solicitud_amistad(user usuario){
 
 /**############################ DICCIONARIO ############################*/
 
+// Crea un diccionario vacío con el tamaño especificado
 Dic create_dic(int size) {
     Dic dic;
-    dic.table = (Node*)malloc(size * sizeof(Node));
+    dic.table = (Node*)malloc(size * sizeof(Node)); // Asigna memoria para el array de nodos
     dic.size = size;
     dic.count = 0;
     return dic;
 }
 
+// Función de hash para calcular el índice de una palabra en la tabla
 int hash(char* key, int size) {
     int hashvalue = 0;
     for (int i = 0; i < strlen(key); i++) {
-        hashvalue = (hashvalue * 31 + key[i]) % size;
+        hashvalue = (hashvalue * 31 + key[i]) % size; // Cálculo del valor de hash utilizando el método de multiplicación
     }
     return hashvalue;
 }
-
+// Agrega una palabra al diccionario
 void add_word(Dic* dic, char* word) {
-    int i = hash(word, dic->size);
+    int i = hash(word, dic->size); // Calcula el índice de hash para la palabra
     while (dic->table[i].key != NULL && strcmp(dic->table[i].key, word) != 0) {
-        i = (i + 1) % dic->size;
+        i = (i + 1) % dic->size; // Resolución de colisiones lineal mediante sondas lineales
     }
     if (dic->table[i].key == NULL) {
-        dic->table[i].key = strdup(word);
-        dic->table[i].count = 1;
-        dic->count++;
+        dic->table[i].key = strdup(word); // Asigna memoria y copia la palabra en el campo key del nodo
+        dic->table[i].count = 1; // Establece el contador en 1
+        dic->count++; // Incrementa el contador total de palabras en el diccionario
     } else {
-        dic->table[i].count++;
+        dic->table[i].count++; // Si la palabra ya existe, incrementa el contador de ocurrencias
     }
 }
-
+// Obtiene el número de ocurrencias de una palabra en el diccionario
 int get_word_count(Dic* dic, char* word) {
-    int i = hash(word, dic->size);
+    int i = hash(word, dic->size); // Calcula el índice de hash para la palabra
     while (dic->table[i].key != NULL) {
         if (strcmp(dic->table[i].key, word) == 0) {
-            return dic->table[i].count;
+            return dic->table[i].count; // Si encuentra la palabra, devuelve el contador asociado
         }
-        i = (i + 1) % dic->size;
+        i = (i + 1) % dic->size; // Resolución de colisiones lineal mediante sondas lineales
     }
-    return 0;
+    return 0; // Si la palabra no se encuentra, devuelve 0
 }
-
+// Imprime las n palabras más frecuentes en el diccionario
 void print_most_frequent_words(Dic* dic, int n) {
     // Ordenar la tabla por conteo descendente usando un algoritmo de ordenamiento (por ejemplo, bubble sort)
     for (int i = 0; i < dic->count - 1; i++) {
@@ -217,14 +219,14 @@ void print_most_frequent_words(Dic* dic, int n) {
     }
 }
 
-
+// Limpia el diccionario, liberando la memoria y restableciendo los valores
 void clear_dic(Dic* dic) {
     for (int i = 0; i < dic->size; i++) {
-        free(dic->table[i].key);
-        dic->table[i].key = NULL;
-        dic->table[i].count = 0;
+        free(dic->table[i].key); // Libera la memoria asignada para cada clave
+        dic->table[i].key = NULL; // Establece el puntero de clave a NULL
+        dic->table[i].count = 0; // Establece el contador a 0
     }
-    dic->count = 0;
+    dic->count = 0; // Restablece el contador total de palabras en el diccionario
 }
 
 /**#####################################################################*/
