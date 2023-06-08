@@ -141,37 +141,35 @@ Queue* enviar_solicitud_amistad( char nombre[MAX_STRING_LENGTH], Queue *cola_sol
     return enqueue(cola_solicitudes_amigos, nombre);
 }
 
-Queue* recibir_solicitud_amistad(user usuario){
-    if (is_empty_q(usuario.solicitudes_amistad) == TRUE){
+friends recibir_solicitud_amistad(user *usuario){
+    if (is_empty_q(usuario->solicitudes_amistad) == TRUE){
         printf("\nNo tienes solicitudes de amistad ;(\n");
-        return usuario.solicitudes_amistad;
-    }
-    while (is_empty_q(usuario.solicitudes_amistad) != TRUE) {
-        char option;
-        printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
-        printf("\nQuieres aceptar la solicitud de amistad de %s?", usuario.solicitudes_amistad->A[usuario.solicitudes_amistad->head]);
-        scanf(" %c", &option);
-        if (option == '0') {
-            printf("\n Saliendo...\n");
-            break;
-        }
-        else if (option == 'Y'){
-            printf("\nAhora %s y tu sois amigos <3\n", usuario.solicitudes_amistad->A[usuario.solicitudes_amistad->head]);
-            usuario.lista_amigos[usuario.cantidd_amigos] = (char*)malloc(MAX_STRING_LENGTH * sizeof(char));
-            usuario.lista_amigos[usuario.cantidd_amigos] = first(usuario.solicitudes_amistad);
-            usuario.cantidd_amigos++;
-            dequeue(usuario.solicitudes_amistad);
-        }
-        else if (option == 'N'){
-            dequeue(usuario.solicitudes_amistad);
-            printf("\nHas rechazado la solicitud de amistad ;(\n");
-        }
-        else{
-            printf("\nOPCION INCORRECTA");
+    }else {
+        while (is_empty_q(usuario->solicitudes_amistad) != TRUE) {
+            char option;
             printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
+            printf("\nQuieres aceptar la solicitud de amistad de %s?",
+                   usuario->solicitudes_amistad->A[usuario->solicitudes_amistad->head]);
+            scanf(" %c", &option);
+            if (option == '0') {
+                printf("\n Saliendo...\n");
+                break;
+            } else if (option == 'Y') {
+                printf("\nAhora %s y tu sois amigos <3\n", usuario->solicitudes_amistad->A[usuario->solicitudes_amistad->head]);
+                usuario->amigos.lista_amigos[usuario->amigos.cantidd_amigos] = (char *) malloc(MAX_STRING_LENGTH * sizeof(char));
+                usuario->amigos.lista_amigos[usuario->amigos.cantidd_amigos] = first(usuario->solicitudes_amistad);
+                usuario->amigos.cantidd_amigos++;
+                dequeue(usuario->solicitudes_amistad);
+            } else if (option == 'N') {
+                dequeue(usuario->solicitudes_amistad);
+                printf("\nHas rechazado la solicitud de amistad ;(\n");
+            } else {
+                printf("\nOPCION INCORRECTA");
+                printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
+            }
         }
     }
-    return usuario.solicitudes_amistad;
+    return usuario->amigos;
 }
 /*#####################################################################*/
 /**#####################################################################*/

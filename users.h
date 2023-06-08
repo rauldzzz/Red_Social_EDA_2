@@ -21,6 +21,11 @@ typedef struct{
     int post_idx;
 }post;
 
+typedef struct{
+    char** lista_amigos;
+    int cantidd_amigos;
+}friends;
+
 typedef struct {
     char name[MAX_STRING_LENGTH];
     int age;
@@ -28,8 +33,7 @@ typedef struct {
     char ubicacion[MAX_STRING_LENGTH];
     char gustos[MAX_GUSTOS][MAX_STRING_LENGTH];
     Queue* solicitudes_amistad;
-    char** lista_amigos;
-    int cantidd_amigos;
+    friends amigos;
     post* publi;
     int cant_post;
 } user;
@@ -64,7 +68,7 @@ user usuario_rdm(FILE * f, int num);
 
 Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_solicitudes_amigos);
 
-Queue* recibir_solicitud_amistad(user usuario);
+friends recibir_solicitud_amistad(user *usuario);
 
 post* add_post(user* usuario);
 

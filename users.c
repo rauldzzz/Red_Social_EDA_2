@@ -74,7 +74,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                     usuario_amigo.solicitudes_amistad = enviar_solicitud_amistad(u, usuario_amigo.solicitudes_amistad);
                     printf("\nSolicitud enviada a %s\n", usuario_buscado);
                 } else if (option == 2) {
-                    recibir_solicitud_amistad(usuario_actual);
+                    usuario_actual.amigos = recibir_solicitud_amistad(&usuario_actual);
                 } else if (option == 3) {
                     post *publi;
                     publi = add_post(&usuario_actual);
@@ -87,11 +87,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 } else if (option == 4) {
                     print_posts(&usuario_actual);
                 } else if (option == 5) {
-                    for (int i = 0; i < usuario_actual.cantidd_amigos; ++i) {
-                        user *aux;
-                        aux = buscar_usuario(lista_de_usuarios, usuario_actual.lista_amigos[i]);
-                        print_posts(aux);
-                    }
+
                 }
                 else if (option == 6) printf("\nSaliendo...\n\n");
                 else {
@@ -204,8 +200,8 @@ user rellenar_datos(user user1) {
     getchar();
     printf("\n");
     user1.solicitudes_amistad = init_queue();
-    user1.cantidd_amigos = 0;
-    user1.lista_amigos = (char**)malloc( sizeof(char*));
+    user1.amigos.cantidd_amigos = 0;
+    user1.amigos.lista_amigos = (char**)malloc( sizeof(char*));
     user1.cant_post = 0;
     FILE* f = fopen("f_users.txt", "r+");
     fseek(f, 0, SEEK_END); //vamos al final del fichero
@@ -290,8 +286,8 @@ user generate_user(){
         strcpy(usuario.gustos[i], gustos[random_gusto]);
     }
     usuario.solicitudes_amistad = init_queue();
-    usuario.cantidd_amigos = 0;
-    usuario.lista_amigos = (char**)malloc( sizeof(char*));
+    usuario.amigos.cantidd_amigos = 0;
+    usuario.amigos.lista_amigos = (char**)malloc( sizeof(char*));
     usuario.cant_post = 0;
     return usuario;
 }
@@ -318,8 +314,8 @@ user_list read_users(user_list lista_de_usuarios){
                   usuario.gustos[0], usuario.gustos[1], usuario.gustos[2],
                   usuario.gustos[3], usuario.gustos[4]) != EOF){
         usuario.solicitudes_amistad = init_queue();
-        usuario.cantidd_amigos = 0;
-        usuario.lista_amigos = (char**)malloc( sizeof(char*));
+        usuario.amigos.cantidd_amigos = 0;
+        usuario.amigos.lista_amigos = (char**)malloc( sizeof(char*));
         usuario.cant_post = 0;
         lista_de_usuarios = lista_usuarios(lista_de_usuarios, usuario);
     }
