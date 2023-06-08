@@ -75,6 +75,12 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                     printf("\nSolicitud enviada a %s\n", usuario_buscado);
                 } else if (option == 2) {
                     usuario_actual.amigos = recibir_solicitud_amistad(&usuario_actual);
+                    for (int i = 0; i < usuario_actual.amigos.cantidd_amigos; ++i) {
+                        user *usuario_amigo = buscar_usuario(lista_de_usuarios, usuario_actual.amigos.lista_amigos[i]);
+                        usuario_amigo->amigos.lista_amigos[i] = (char *) malloc(MAX_STRING_LENGTH * sizeof(char));
+                        usuario_amigo->amigos.lista_amigos[i] = usuario_actual.name;
+                        usuario_amigo->amigos.cantidd_amigos++;
+                    }
                 } else if (option == 3) {
                     post *publi;
                     publi = add_post(&usuario_actual);
