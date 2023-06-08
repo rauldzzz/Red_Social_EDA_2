@@ -50,6 +50,8 @@ void print_users(user_list  usuarios);
 
 user* buscar_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]);
 
+user_list actualizar_usuario(user_list lista_usuarios, user usuario_nuevo);
+
 user generate_user();
 
 user_list file_users(user_list lista_usuarios, int cantidad_usuarios);

@@ -78,18 +78,27 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 } else if (option == 3) {
                     post *publi;
                     publi = add_post(&usuario_actual);
-                    usuario_actual.publi = publi;
-                    usuario_actual.cant_post++;
+                    if (publi == NULL){
+                        free(publi);
+                    } else{
+                        usuario_actual.publi = publi;
+                        usuario_actual.cant_post++;
+                    }
                 } else if (option == 4) {
                     print_posts(&usuario_actual);
                 } else if (option == 5) {
-
+                    for (int i = 0; i < usuario_actual.cantidd_amigos; ++i) {
+                        user *aux;
+                        aux = buscar_usuario(lista_de_usuarios, usuario_actual.lista_amigos[i]);
+                        print_posts(aux);
+                    }
                 }
                 else if (option == 6) printf("\nSaliendo...\n\n");
                 else {
                     printf("\nOpcion inexistente.Elija el numero de la opcion deseada\n");
                     option = -1;
                 }
+                lista_de_usuarios = actualizar_usuario(lista_de_usuarios, usuario_actual);
 
             }
         }
@@ -134,7 +143,8 @@ user rellenar_datos(user user1) {
     // Validación de nombre
     do {
         printf("\nInserta nombre de usuario: ");
-        scanf("%s", user1.name);
+        getchar();
+        scanf("%[^,\n]", user1.name);
     } while (!isupper(user1.name[0]) || !islower(user1.name[1]));
 
     // Validación de edad
@@ -142,7 +152,8 @@ user rellenar_datos(user user1) {
     char buffer[10];
     do {
         printf("\nInserta tu edad (ej: si tienes 11 anos, escribe 11): ");
-        scanf("%s", buffer);
+        getchar();
+        scanf("%[^,\n]", buffer);
         age = atoi(buffer);
     } while (age <= 0 || age > 120);
     user1.age = age;
@@ -150,14 +161,16 @@ user rellenar_datos(user user1) {
     //Validación de correo
     do {
         printf("\nInserta tu correo electronico: ");
-        scanf("%s", user1.mail);
+        getchar();
+        scanf("%[^,\n]", user1.mail);
     } while (strchr(user1.mail, '@') == NULL || strchr(user1.mail, '.') == NULL);
 
     // Validación de ubicación
     char ciudad[50];
     do {
         printf("\nInserta tu ubicacion (ciudad): ");
-        scanf("%s", ciudad);
+        getchar();
+        scanf("%[^,\n]", ciudad);
     } while (!isupper(ciudad[0]) || !islower(ciudad[1]));
     strcpy(user1.ubicacion, ciudad);
 
@@ -185,9 +198,10 @@ user rellenar_datos(user user1) {
     printf("O un gusto singular ;)\n");
     for (int i = 0; i < MAX_GUSTOS; i++) {
         printf("\nGusto %d:", i + 1);
-        scanf("%s", user1.gustos[i]);
         getchar();
+        scanf("%[^\n]", user1.gustos[i]);
     }
+    getchar();
     printf("\n");
     user1.solicitudes_amistad = init_queue();
     user1.cantidd_amigos = 0;
@@ -234,6 +248,15 @@ user* buscar_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]){
     }
     printf("\nUsuario %s no encontrado :( \n", name);
     return NULL;
+}
+
+user_list actualizar_usuario(user_list lista_usuarios, user usuario_nuevo){
+    for (int i = 0; i < lista_usuarios.cantidad_usuarios; ++i) {
+        if (strcmp(lista_usuarios.lista_de_usuarios[i].name, usuario_nuevo.name) == 0){
+            lista_usuarios.lista_de_usuarios[i] = usuario_nuevo;
+            return lista_usuarios;
+        }
+    }
 }
 
 /*#######################################################################*/
@@ -332,10 +355,20 @@ post* add_post(user* usuario){
     //printf("%s", usuario.publi->title);
     printf("Escribe lo que quieras subir(120):");
     getchar();
-    scanf("%[^\n]", usuario->publi[usuario->cant_post].post);
+    fgets(usuario->publi[usuario->cant_post].post, MAX_LEN_POSTS-1, stdin);
     //printf("%s", usuario.publi->post);
-    usuario->publi->post_idx = usuario->cant_post;
-    return usuario->publi;
+    if (usuario->publi[usuario->cant_post].post[strlen(usuario->publi[usuario->cant_post].post) - 1] != '\n') {
+        printf("\nTu post es muuuuuuuuy largo ;(\n");
+        // Limpia el búfer de entrada
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        return NULL;
+    }else{
+        usuario->publi[usuario->cant_post].post[strcspn(usuario->publi[usuario->cant_post].post, "\n")] = '\0';
+        usuario->publi->post_idx = usuario->cant_post;
+        return usuario->publi;
+    }
+
 }
 
 void print_posts(user* usuario){
