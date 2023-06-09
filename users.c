@@ -9,7 +9,8 @@
 int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
     int choice = -1; //La eleccion del menu
     user usuario;
-
+    // Crear el diccionario
+    Dic dic = create_dic(100);
     //Centramos la palabra 'MENU' y decoramos con #
     while (choice != 5 ) {
         choice = -1; //La eleccion del menu
@@ -52,13 +53,14 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             }
             int option = -1;
             user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
-            while (option != 6) {
+            while (option != 7) {
                 printf("\n1. Envia solicitudes de amistad\n");
                 printf("2. Gestiona las solicitudes pendientes\n");
                 printf("3. ¿Que se te pasa por tu mente? Publica algo\n");
                 printf("4. Ver tus publicaciones :)\n");
                 printf("5. Ver los post de tus amigos <3\n");
-                printf("6. Salir\n");
+                printf("6. Tus palabras mas usadas!\n");
+                printf("7. Salir\n");
                 printf("Elija el numero de la opcion deseada:");
                 scanf("%d", &option);
                 if (option == 1) {
@@ -83,7 +85,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                     }
                 } else if (option == 3) {
                     post *publi;
-                    publi = add_post(&usuario_actual);
+                    publi = add_post(&usuario_actual, dic);
                     if (publi == NULL){
                         free(publi);
                     } else{
@@ -95,7 +97,11 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 } else if (option == 5) {
 
                 }
-                else if (option == 6) printf("\nSaliendo...\n\n");
+                else if(option == 6){
+                    print_dictionary(&dic);
+                    //print_most_frequent_words(&dic, 5); // Imprimir las palabras más frecuentes
+                }
+                else if (option == 7) printf("\nSaliendo...\n\n");
                 else {
                     printf("\nOpcion inexistente.Elija el numero de la opcion deseada\n");
                     option = -1;
@@ -129,7 +135,10 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             scanf(" %s", genero);
             imprimir_usuarios_por_genero(genero, &lista_de_usuarios);
             }
-        else if (choice == 5) printf("\nSaliendo...");
+        else if (choice == 5) {
+            //clear_dic(&dic);
+            printf("\nSaliendo...");
+        }
         else {
             printf("\nOpcion inexistente.\n");
             scanf("%d\n", &choice);
@@ -216,47 +225,56 @@ user rellenar_datos(user user1) {
     return user1;
 }
 
+// Función para agregar un nuevo usuario a la lista de usuarios
 user_list lista_usuarios(user_list usuarios, user nuevo_usuario){
     if (usuarios.cantidad_usuarios == 0){
-        usuarios.lista_de_usuarios = malloc(sizeof(user));
+        usuarios.lista_de_usuarios = malloc(sizeof(user)); // Asigna memoria para el primer usuario
     } else{
-        usuarios.lista_de_usuarios = (user*) realloc(usuarios.lista_de_usuarios, (usuarios.cantidad_usuarios+1)*sizeof(user));
+        usuarios.lista_de_usuarios = (user*) realloc(usuarios.lista_de_usuarios, (usuarios.cantidad_usuarios+1)*sizeof(user)); // Reasigna memoria para un usuario adicional
     }
-    usuarios.lista_de_usuarios[usuarios.cantidad_usuarios] = nuevo_usuario;
-    usuarios.cantidad_usuarios++;
-    return usuarios;
+    usuarios.lista_de_usuarios[usuarios.cantidad_usuarios] = nuevo_usuario; // Agrega el nuevo usuario a la lista
+    usuarios.cantidad_usuarios++; // Incrementa la cantidad de usuarios
+    return usuarios; // Devuelve la lista actualizada
 }
 
-void print_users(user_list  usuarios){
+// Función para imprimir la lista de usuarios
+void print_users(user_list usuarios){
     printf("Lista de usuarios:\n");
     for(int i=0; i<usuarios.cantidad_usuarios; i++){
-        printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name);
+        printf("%d) %s\n",i+1, usuarios.lista_de_usuarios[i].name); // Imprime el nombre de cada usuario en la lista
     }
 }
 
+// Función para buscar un usuario por nombre en la lista de usuarios
 user* buscar_usuario(user_list usuarios, char name[MAX_STRING_LENGTH]){
+    // Verificar si la lista de usuarios está vacía
     if (usuarios.lista_de_usuarios == NULL || usuarios.cantidad_usuarios == 0) {
         printf("\nNo hay usuarios en la lista\n");
         return NULL;
     }
+    // Verificar si el nombre de usuario proporcionado está vacío
     if (name[0] == '\0') {
         printf("\nEl nombre de usuario proporcionado está vacío\n");
         return NULL;
     }
+    // Recorrer la lista de usuarios para buscar el nombre
     for (int i = 0; i < usuarios.cantidad_usuarios; ++i) {
+        // Comparar el nombre del usuario actual con el nombre buscado
         if (strcmp(usuarios.lista_de_usuarios[i].name, name) == 0){
-            return &(usuarios.lista_de_usuarios[i]);
+            return &(usuarios.lista_de_usuarios[i]); // Devuelve un puntero al usuario encontrado
         }
     }
+    // Si no se encontró el usuario, imprimir un mensaje de error
     printf("\nUsuario %s no encontrado :( \n", name);
     return NULL;
 }
 
+// Función para actualizar la información de un usuario en la lista
 user_list actualizar_usuario(user_list lista_usuarios, user usuario_nuevo){
     for (int i = 0; i < lista_usuarios.cantidad_usuarios; ++i) {
         if (strcmp(lista_usuarios.lista_de_usuarios[i].name, usuario_nuevo.name) == 0){
-            lista_usuarios.lista_de_usuarios[i] = usuario_nuevo;
-            return lista_usuarios;
+            lista_usuarios.lista_de_usuarios[i] = usuario_nuevo; // Actualiza el usuario existente con la información del nuevo usuario
+            return lista_usuarios; // Devuelve la lista actualizada
         }
     }
 }
@@ -344,67 +362,76 @@ int buscar_amigo(user_list* usuarios){
 
 }
 
-post* add_post(user* usuario) {
+post* add_post(user* usuario, Dic dic) {
     if(usuario->cant_post==0) {  // Verificar si el usuario no tiene ningún post existente
         usuario->publi = malloc(sizeof(post));  // Asignar memoria para un solo post
     } else {
-        usuario->publi = (post*) realloc(usuario->publi, (usuario->cant_post+1)* sizeof(post));
-        // Redimensionar el bloque de memoria para almacenar un número adicional de posts
+        usuario->publi = (post*) realloc(usuario->publi, (usuario->cant_post+1)* sizeof(post)); // Redimensionar el bloque de memoria para almacenar un número adicional de posts
     }
 
     printf("\nTitulo del post:");
     getchar();  // Consumir el carácter de nueva línea residual
-
-    scanf("%[^\n]", usuario->publi[usuario->cant_post].title);
-    // Leer una línea completa de texto hasta que se encuentre un carácter de nueva línea
-    // y guardar el título del post en la estructura de usuario
+    scanf("%[^\n]", usuario->publi[usuario->cant_post].title);// Leer una línea completa de texto hasta que se encuentre un carácter de nueva línea y guardar el título del post en la estructura de usuario
+    update_dictionary(&dic, *usuario->publi[usuario->cant_post].title);
 
     int i = 0;
     while (usuario->publi[usuario->cant_post].title[i] != '\0') {
-        usuario->publi[usuario->cant_post].title[i] = toupper(usuario->publi[usuario->cant_post].title[i]);
-        // Convertir cada carácter del título a mayúsculas
+        usuario->publi[usuario->cant_post].title[i] = toupper(usuario->publi[usuario->cant_post].title[i]);// Convertir cada carácter del título a mayúsculas
         i++;
     }
 
     printf("Escribe lo que quieras subir(120):");
     getchar();  // Consumir el carácter de nueva línea residual
-
-    fgets(usuario->publi[usuario->cant_post].post, MAX_LEN_POSTS-1, stdin);
-    // Leer el contenido del post utilizando fgets(), limitado a MAX_LEN_POSTS-1 caracteres
+    fgets(usuario->publi[usuario->cant_post].post, MAX_LEN_POSTS-1, stdin); // Leer el contenido del post utilizando fgets(), limitado a MAX_LEN_POSTS-1 caracteres
 
     if (usuario->publi[usuario->cant_post].post[strlen(usuario->publi[usuario->cant_post].post) - 1] != '\n') {
-        printf("\nTu post es muuuuuuuuy largo ;(\n");
-        // Imprimir mensaje de error si el post excede la longitud permitida
+        printf("\nTu post es muuuuuuuuy largo ;(\n");// Imprimir mensaje de error si el post excede la longitud permitida
 
         // Limpia el búfer de entrada
         int c;
         while ((c = getchar()) != '\n' && c != EOF) {}
         return NULL;
     } else {
-        usuario->publi[usuario->cant_post].post[strcspn(usuario->publi[usuario->cant_post].post, "\n")] = '\0';
-        // Eliminar el carácter de nueva línea del final del post
+        usuario->publi[usuario->cant_post].post[strcspn(usuario->publi[usuario->cant_post].post, "\n")] = '\0'; // Eliminar el carácter de nueva línea del final del post
 
-        usuario->publi->post_idx = usuario->cant_post;
-        // Asignar el índice del post en la estructura de usuario
-
-        return usuario->publi;  // Devolver el puntero a la estructura de post
+        usuario->publi->post_idx = usuario->cant_post; // Asignar el índice del post en la estructura de usuario
+        update_dictionary(&dic, *usuario->publi[usuario->cant_post].post);
+        return usuario->publi; // Devolver el puntero a la estructura de post
     }
 }
 
 
 void print_posts(user* usuario){
-    printf("Tus publicaciones son:\n");
-    for (int i = 0; i < usuario->cant_post; ++i) {
-        printf("\n*%s\n%s\n", usuario->publi[i].title, usuario->publi[i].post);
+    printf("Tus publicaciones son:\n"); // Imprime el encabezado "Tus publicaciones son:"
+    for (int i = 0; i < usuario->cant_post; ++i) { // Itera sobre las publicaciones del usuario
+        printf("\n**%s**\n%s\n", usuario->publi[i].title, usuario->publi[i].post); // Imprime el título y el contenido de cada publicación
     }
 }
 
 void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios) {
-    for (int i = 0; i < lista_de_usuarios->cantidad_usuarios; ++i) {
-        for (int j = 0; j < MAX_GUSTOS; ++j) {
-            if (strcmp(lista_de_usuarios->lista_de_usuarios[i].gustos[j], genero) == 0) {
-                printf("\n%s\n", lista_de_usuarios->lista_de_usuarios[i].name);
+
+    for (int i = 0; i < lista_de_usuarios->cantidad_usuarios; ++i) { // Itera sobre la lista de usuarios
+        for (int j = 0; j < MAX_GUSTOS; ++j) { // Itera sobre los gustos de cada usuario
+            if (strcmp(lista_de_usuarios->lista_de_usuarios[i].gustos[j], genero) == 0) { // Compara el género proporcionado con los gustos de cada usuario
+                printf("\n%s\n", lista_de_usuarios->lista_de_usuarios[i].name); // Si hay una coincidencia, imprime el nombre del usuario
             }
+        }
+    }
+}
+
+void update_dictionary(Dic* dic, char text) {
+    char* word = strtok(&text, " "); // Obtener la primera palabra del texto
+    while (word != NULL) {
+        add_word(dic, word); // Agregar la palabra al diccionario
+        word = strtok(NULL, " "); // Obtener la siguiente palabra del texto
+    }
+}
+
+void print_dictionary(Dic* dic) {
+    printf("Diccionario:\n");
+    for (int i = 0; i < dic->size; i++) {
+        if (dic->table[i].key != NULL) {
+            printf("Palabra: %s, Apariciones: %d\n", dic->table[i].key, dic->table[i].count);
         }
     }
 }

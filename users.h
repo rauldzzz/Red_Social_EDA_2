@@ -70,10 +70,14 @@ Queue* enviar_solicitud_amistad( char* nombre, Queue *cola_solicitudes_amigos);
 
 friends recibir_solicitud_amistad(user *usuario);
 
-post* add_post(user* usuario);
+post* add_post(user* usuario, Dic dic);
 
 void print_posts(user *usuario);
 
 void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios);
+
+void update_dictionary(Dic* dic, char text);
+
+void print_dictionary(Dic* dic);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H
