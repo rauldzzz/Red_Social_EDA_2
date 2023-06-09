@@ -344,39 +344,58 @@ int buscar_amigo(user_list* usuarios){
 
 }
 
-post* add_post(user* usuario){
-    if(usuario->cant_post==0){
-        usuario->publi = malloc(sizeof(post));
-    }else{
+post* add_post(user* usuario) {
+    if(usuario->cant_post==0) {  // Verificar si el usuario no tiene ningún post existente
+        usuario->publi = malloc(sizeof(post));  // Asignar memoria para un solo post
+    } else {
         usuario->publi = (post*) realloc(usuario->publi, (usuario->cant_post+1)* sizeof(post));
+        // Redimensionar el bloque de memoria para almacenar un número adicional de posts
     }
 
     printf("\nTitulo del post:");
-    getchar();
+    getchar();  // Consumir el carácter de nueva línea residual
+
     scanf("%[^\n]", usuario->publi[usuario->cant_post].title);
-    //printf("%s", usuario.publi->title);
+    // Leer una línea completa de texto hasta que se encuentre un carácter de nueva línea
+    // y guardar el título del post en la estructura de usuario
+
+    int i = 0;
+    while (usuario->publi[usuario->cant_post].title[i] != '\0') {
+        usuario->publi[usuario->cant_post].title[i] = toupper(usuario->publi[usuario->cant_post].title[i]);
+        // Convertir cada carácter del título a mayúsculas
+        i++;
+    }
+
     printf("Escribe lo que quieras subir(120):");
-    getchar();
+    getchar();  // Consumir el carácter de nueva línea residual
+
     fgets(usuario->publi[usuario->cant_post].post, MAX_LEN_POSTS-1, stdin);
-    //printf("%s", usuario.publi->post);
+    // Leer el contenido del post utilizando fgets(), limitado a MAX_LEN_POSTS-1 caracteres
+
     if (usuario->publi[usuario->cant_post].post[strlen(usuario->publi[usuario->cant_post].post) - 1] != '\n') {
         printf("\nTu post es muuuuuuuuy largo ;(\n");
+        // Imprimir mensaje de error si el post excede la longitud permitida
+
         // Limpia el búfer de entrada
         int c;
         while ((c = getchar()) != '\n' && c != EOF) {}
         return NULL;
-    }else{
+    } else {
         usuario->publi[usuario->cant_post].post[strcspn(usuario->publi[usuario->cant_post].post, "\n")] = '\0';
-        usuario->publi->post_idx = usuario->cant_post;
-        return usuario->publi;
-    }
+        // Eliminar el carácter de nueva línea del final del post
 
+        usuario->publi->post_idx = usuario->cant_post;
+        // Asignar el índice del post en la estructura de usuario
+
+        return usuario->publi;  // Devolver el puntero a la estructura de post
+    }
 }
+
 
 void print_posts(user* usuario){
     printf("Tus publicaciones son:\n");
     for (int i = 0; i < usuario->cant_post; ++i) {
-        printf("\nTitle: %s\n\nPost: %s\n", usuario->publi[i].title, usuario->publi[i].post);
+        printf("\n\t*%s\n%s\n", usuario->publi[i].title, usuario->publi[i].post);
     }
 }
 
