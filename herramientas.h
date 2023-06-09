@@ -6,40 +6,23 @@
 #define MAX_STRING_LENGTH 50
 /**########################## FUNCIONES PILA ##########################*/
 
-typedef struct{
-    char *stack; // Puntero a un array que representa la pila
-    int top; // Entero que indica la posición del elemento superior en la pila
-}Stack;
+typedef struct Nodo {
+    char* usuarioID;
+    struct Nodo* siguiente;
+    int totalLikes;
+} Nodo;
 
-Stack* init_stack();
-// Esta función inicializa una pila vacía y devuelve un puntero a la estructura Stack.
+Nodo* crearNodo(char* usuarioID);
 
-int is_full(Stack* p);
-//Verifica si la pila está llena. Recibe un puntero a la pila y devuelve un
-// valor entero (TRUE o FALSE) indicando si la pila está llena.
+int estaVacia(Nodo* pila);
 
-int is_empty(Stack* p);
-//Verifica si la pila está vacía. Recibe un puntero a la pila y devuelve un
-// valor entero (TRUE o FALSE) indicando si la pila está vacía.
+void agregarLike(Nodo** pila, char* usuarioID);
 
-char* top(Stack* p);
-//Devuelve el elemento superior de la pila sin eliminarlo.
-// Recibe un puntero a la pila y devuelve un puntero al elemento superior de la pila.
+void quitarLike(Nodo** pila, char* usuarioID);
 
-Stack* push(Stack* p, char* valor);
-//Inserta un elemento en la parte superior de la pila.
-// Recibe un puntero a la pila y un puntero al valor que se va a insertar.
-// Devuelve un puntero a la pila actualizada.
+void mostrarLikes(Nodo* pila);
 
-Stack* pop(Stack* p);
-// Elimina el elemento superior de la pila.
-// Recibe un puntero a la pila y elimina el elemento superior.
-// Devuelve un puntero a la pila actualizada.
-
-void free_stack(Stack* p);
-// Libera la memoria asignada para la pila. Recibe un puntero a la pila y libera
-// la memoria tanto para la estructura de la pila como para el array que almacena
-// los elementos.
+int haDadoLike(Nodo* pila, char* usuarioID);
 
 /**#####################################################################*/
 /**########################## FUNCIONES COLA ##########################*/

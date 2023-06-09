@@ -7,62 +7,42 @@
 #include "time.h"
 
 /**########################## FUNCIONES PILA ##########################*/
-// Inicializa una pila vacía
-Stack* init_stack(){
-    Stack* p = (Stack*)malloc(sizeof(Stack)); // Asigna memoria para la estructura de la pila
-    p->stack = (user *)malloc(sizeof(user)); // Inicializa el puntero superior en 0 (pila vacía)
-    p->top = 0;
-    return p;
+
+Nodo* crearNodo(char* usuarioID) {
+    Nodo* nodo = (Nodo*)malloc(sizeof(Nodo));
+    nodo->usuarioID = strdup(usuarioID);
+    nodo->totalLikes = 0;
+    nodo->siguiente = NULL;
+    return nodo;
 }
 
-// Verifica si la pila está llena
-int is_full(Stack* p){ //   N es la capacidad maxima de la pila A[1...N]
-    if ( p->top == MAX_STACK){ // Compara el puntero superior con la capacidad máxima de la pila
-        return TRUE; // Si el puntero superior es igual a la capacidad máxima, la pila está llena
+int estaVacia(Nodo* pila) {
+    return pila == NULL;
+}
+
+void agregarLike(Nodo** pila, char* usuarioID) {
+    Nodo* nuevoNodo = crearNodo(usuarioID);
+    nuevoNodo->siguiente = *pila;
+    *pila = nuevoNodo;
+    (*pila)->totalLikes++;
+    printf("El usuario %s ha dado like al post.\n", usuarioID);
+}
+
+void quitarLike(Nodo** pila, char* usuarioID) {
+    if (estaVacia(*pila)) {
+        printf("La pila de likes está vacía. No se puede quitar un like.\n");
+        return;
     }
-    return FALSE; // Si no, la pila no está llena
+
+    Nodo* nodoTemp = *pila;
+    *pila = (*pila)->siguiente;
+    free(nodoTemp->usuarioID);
+    free(nodoTemp);
+    printf("El usuario %s ha quitado su like del post.\n", usuarioID);
 }
 
-// Verifica si la pila está vacía
-int is_empty(Stack* p){
-    if (p->top == 0){ // Compara el puntero superior con 0 (pila vacía)
-        return TRUE; // Si el puntero superior es igual a 0, la pila está vacía
-    }
-    return FALSE; // Si no, la pila no está vacía
-}
-// Devuelve el elemento superior de la pila
-char* top(Stack* p){
-    if (is_empty(p) != TRUE) return &p->stack[p->top]; // Si la pila no está vacía, devuelve el elemento superior
-    else printf("\nLa pila esta llena\n"); // Si la pila está vacía, imprime un mensaje de error
-}
-
-// Inserta un elemento en la parte superior de la pila (push)
-Stack* push(Stack* p, char* valor) {
-    if (is_full(p) != TRUE) {
-        p->stack = realloc(p->stack, (p->top + 1) * sizeof(user)); // Aumenta el tamaño de la memoria asignada para la pila
-        p->top++; // Incrementa el puntero superior
-        p->stack[p->top] = *valor; // Asigna el valor al elemento superior
-    } else {
-        printf("\nLa pila esta llena\n"); // Si la pila está llena, imprime un mensaje de error
-    }
-    return p;
-}
-
-// Elimina el elemento superior de la pila (pop)
-Stack* pop(Stack* p) {
-    if (is_empty(p) != TRUE) {
-        p->stack = realloc(p->stack, (p->top - 1) * sizeof(user)); // Reduce el tamaño de la memoria asignada para la pila
-        p->top--; // Decrementa el puntero superior
-    } else {
-        printf("\nLa pila esta vacia\n"); // Si la pila está vacía, imprime un mensaje de error
-    }
-    return p;
-}
-
-// Libera la memoria asignada para la pila
-void free_stack(Stack* p) {
-    free(p->stack); // Libera la memoria asignada para el array de la pila
-    free(p); // Libera la memoria asignada para la estructura de la pila
+void mostrarLikes(Nodo* pila) {
+    printf("\n<3 %d\n", pila->totalLikes);
 }
 
 /**#####################################################################*/
@@ -134,6 +114,16 @@ void free_queue(Queue* q) {
     }
     free(q->A); // Libera la memoria asignada para el array A
     free(q); // Libera la memoria asignada para la estructura de la cola
+}
+
+int haDadoLike(Nodo* pila, char* usuarioID) {
+    while (pila != NULL) {
+        if (strcmp(pila->usuarioID, usuarioID) == 0) {
+            return TRUE;
+        }
+        pila = pila->siguiente;
+    }
+    return FALSE;
 }
 
 /*#################################????????????????####################################*/

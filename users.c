@@ -76,14 +76,12 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 } else if (option == 2) {
                     int old_cant_users = usuario_actual.amigos.cantidd_amigos;
                     usuario_actual.amigos = recibir_solicitud_amistad(&usuario_actual);
-                    printf("\n%s\n",usuario_actual.amigos.lista_amigos[0]);
                     for (int i = old_cant_users; i < usuario_actual.amigos.cantidd_amigos; ++i) {
                         user *usuario_amigo = buscar_usuario(lista_de_usuarios, usuario_actual.amigos.lista_amigos[i]);
-                        usuario_amigo->amigos.lista_amigos[i] = (char *) malloc(MAX_STRING_LENGTH * sizeof(char));
-                        usuario_amigo->amigos.lista_amigos[i] = usuario_actual.name;
+                        usuario_amigo->amigos.lista_amigos[usuario_amigo->amigos.cantidd_amigos] = (char *) malloc(MAX_STRING_LENGTH * sizeof(char));
+                        strcpy(usuario_amigo->amigos.lista_amigos[usuario_amigo->amigos.cantidd_amigos], usuario_actual.name) ;
                         usuario_amigo->amigos.cantidd_amigos++;
                         lista_de_usuarios = actualizar_usuario(lista_de_usuarios, *usuario_amigo);
-                        printf("\n%s %s %s\n",usuario_amigo->amigos.lista_amigos[i], lista_de_usuarios.lista_de_usuarios[21].amigos.lista_amigos[i], usuario_actual.name);
                     }
                     printf("\nTienes %d amigos son:\n", usuario_actual.amigos.cantidd_amigos);
                     for (int i = 0; i < usuario_actual.amigos.cantidd_amigos; ++i) {
@@ -101,7 +99,13 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 } else if (option == 4) {
                     print_posts(&usuario_actual);
                 } else if (option == 5) {
-
+                    for (int i = 0; i < usuario_actual.amigos.cantidd_amigos; ++i) {
+                        user* imprimir_post = buscar_usuario(lista_de_usuarios, usuario_actual.amigos.lista_amigos[i]);
+                        for (int j = 0; j < imprimir_post->cant_post; ++j) {
+                            print_posts(imprimir_post);
+                            usuario_actual.publi = sistema_likes(imprimir_post, &usuario_actual, j);
+                        }
+                    }
                 }
                 else if (option == 6) printf("\nSaliendo...\n\n");
                 else {
@@ -358,7 +362,7 @@ post* add_post(user* usuario){
     }else{
         usuario->publi = (post*) realloc(usuario->publi, (usuario->cant_post+1)* sizeof(post));
     }
-
+    usuario->publi[usuario->cant_post].pilaLikes = NULL;
     printf("\nTitulo del post:");
     getchar();
     scanf("%[^\n]", usuario->publi[usuario->cant_post].title);
@@ -382,9 +386,9 @@ post* add_post(user* usuario){
 }
 
 void print_posts(user* usuario){
-    printf("Tus publicaciones son:\n");
+    printf("\nPost de %s\n", usuario->name);
     for (int i = 0; i < usuario->cant_post; ++i) {
-        printf("\nTitle: %s\n\nPost: %s\n", usuario->publi[i].title, usuario->publi[i].post);
+        printf("\n%s\n\n%s\n", usuario->publi[i].title, usuario->publi[i].post);
     }
 }
 
@@ -396,4 +400,34 @@ void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lis
             }
         }
     }
+}
+
+int buscar_string(char** lista, int longitud, char* buscar){
+    for (int i = 0; i < longitud; i++) {
+        if (strcmp(lista[i], buscar) == 0) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+post* sistema_likes(user* usuario_post, user* usuario_like, int idx_post){
+    char like[3];
+    if (haDadoLike(usuario_post->publi[idx_post].pilaLikes, usuario_like->name) == FALSE){
+        printf("\nQuieres dar <3 a este post pon '<3' sino dale al enter");
+        scanf("%s", like);
+        printf("\n");
+        if (strcmp(like, "<3") == 0){
+            agregarLike(&usuario_post->publi[idx_post].pilaLikes, usuario_like->name);
+        }
+    } else{
+        printf("\nSi quieres retirar el like pulse 'Y'");
+        scanf("%s", like);
+        printf("\n");
+        if (strcmp(like, "Y") == 0){
+            quitarLike(&usuario_post->publi[idx_post].pilaLikes, usuario_like->name);
+        }
+    }
+    mostrarLikes(usuario_post->publi[idx_post].pilaLikes);
+    return usuario_post->publi;
 }

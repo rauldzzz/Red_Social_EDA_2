@@ -19,6 +19,7 @@ typedef struct{
     char title[MAX_STRING_LENGTH];
     char post[MAX_LEN_POSTS];
     int post_idx;
+    Nodo* pilaLikes
 }post;
 
 typedef struct{
@@ -75,5 +76,9 @@ post* add_post(user* usuario);
 void print_posts(user *usuario);
 
 void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios);
+
+int buscarString(char** lista, int longitud, char* buscar);
+
+post* sistema_likes(user* usuario_post, user* usuario_like, int idx_post);
 
 #endif //RED_SOCIAL_PROYECTO_USERS_H
