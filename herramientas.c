@@ -182,6 +182,10 @@ Dic create_dic(int size) {
     dic.table = (Node*)malloc(size * sizeof(Node)); // Asigna memoria para el array de nodos
     dic.size = size;
     dic.count = 0;
+    for (int i = 0; i < size; i++) {
+        dic.table[i].key = NULL;
+        dic.table[i].count = 0;
+    }
     return dic;
 }
 
@@ -245,6 +249,8 @@ void clear_dic(Dic* dic) {
         dic->table[i].count = 0; // Establece el contador a 0
     }
     dic->count = 0; // Restablece el contador total de palabras en el diccionario
+    free(dic->table);
+    dic->table = NULL;
 }
 
 /**#####################################################################*/
