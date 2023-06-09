@@ -204,7 +204,8 @@ void add_word(Dic* dic, char* word) {
         i = (i + 1) % dic->size; // Resolución de colisiones lineal mediante sondas lineales
     }
     if (dic->table[i].key == NULL) {
-        dic->table[i].key = strdup(word); // Asigna memoria y copia la palabra en el campo key del nodo
+        dic->table[i].key = (char*)malloc((strlen(word) + 1) * sizeof(char)); // Asigna memoria para la nueva clave
+        strncpy(dic->table[i].key, word, strlen(word)); // Copia la palabra en el campo key del nodo
         dic->table[i].count = 1; // Establece el contador en 1
         dic->count++; // Incrementa el contador total de palabras en el diccionario
     } else {
