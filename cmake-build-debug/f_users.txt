@@ -20,3 +20,4 @@ Lucas_1957, 66, Lucas.Delgado@gmail.com, Elche, Thriller psicologico, Acción, F
 Esther_1978, 45, Esther.Ortega@gmail.com, Palma de Mallorca, Aventura, Documental, Històrica, Superheroes, Guerra
 Raul_2003, 19, raul.diaz01@estudiant.upf.edu, Barcelona, Suspenso, Aventura, Comedia, Romance, Musical
 Karencikii, 19, kare.cabello01@estudiant.upf.edu, Santfe, Romance, Comedia, Superheroes, Musical, Crimen
+Martina.2004, 18, martina.jarque01@estudiant.upf.edu, Barcelona, Aventura, Romance, Comedia, Musical, Ciencia Ficcion

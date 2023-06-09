@@ -172,6 +172,10 @@ Dic create_dic(int size) {
     dic.table = (Node*)malloc(size * sizeof(Node)); // Asigna memoria para el array de nodos
     dic.size = size;
     dic.count = 0;
+    for (int i = 0; i < size; i++) {
+        dic.table[i].key = NULL;
+        dic.table[i].count = 0;
+    }
     return dic;
 }
 
@@ -190,7 +194,8 @@ void add_word(Dic* dic, char* word) {
         i = (i + 1) % dic->size; // Resolución de colisiones lineal mediante sondas lineales
     }
     if (dic->table[i].key == NULL) {
-        dic->table[i].key = strdup(word); // Asigna memoria y copia la palabra en el campo key del nodo
+        dic->table[i].key = (char*)malloc((strlen(word) + 1) * sizeof(char)); // Asigna memoria para la nueva clave
+        strncpy(dic->table[i].key, word, strlen(word)); // Copia la palabra en el campo key del nodo
         dic->table[i].count = 1; // Establece el contador en 1
         dic->count++; // Incrementa el contador total de palabras en el diccionario
     } else {
@@ -210,10 +215,32 @@ int get_word_count(Dic* dic, char* word) {
 }
 // Imprime las n palabras más frecuentes en el diccionario
 void print_most_frequent_words(Dic* dic, int n) {
+    int i, j, max_index;
+    Node temp;
+
+    printf("\nTOP %d palabras que mas has usado:\n", n);
+    for (i = 0; i < dic->count - 1 && i < n; i++) {
+        max_index = i;
+        for (j = i + 1; j < dic->count; j++) {
+            if (dic->table[j].count > dic->table[max_index].count) {
+                max_index = j;
+            }
+        }
+        // Intercambia los nodos en las posiciones i y max_index
+        temp = dic->table[i];
+        dic->table[i] = dic->table[max_index];
+        dic->table[max_index] = temp;
+
+        // Imprime la palabra actual con su número de apariciones
+        int count = get_word_count(dic, dic->table[i].key);
+        printf("%s: %d\n", dic->table[i].key, count);
+    }
+    /**
     // Ordenar la tabla por conteo descendente usando un algoritmo de ordenamiento (por ejemplo, bubble sort)
     for (int i = 0; i < dic->count - 1; i++) {
         for (int j = 0; j < dic->count - i - 1; j++) {
             if (dic->table[j].count < dic->table[j + 1].count) {
+                // Intercambiar los nodos para ordenarlos
                 Node temp = dic->table[j];
                 dic->table[j] = dic->table[j + 1];
                 dic->table[j + 1] = temp;
@@ -225,6 +252,7 @@ void print_most_frequent_words(Dic* dic, int n) {
     for (int i = 0; i < n && i < dic->count; i++) {
         printf("%s: %d\n", dic->table[i].key, dic->table[i].count);
     }
+     */
 }
 
 // Limpia el diccionario, liberando la memoria y restableciendo los valores
@@ -235,6 +263,8 @@ void clear_dic(Dic* dic) {
         dic->table[i].count = 0; // Establece el contador a 0
     }
     dic->count = 0; // Restablece el contador total de palabras en el diccionario
+    free(dic->table);
+    dic->table = NULL;
 }
 
 /**#####################################################################*/
