@@ -395,7 +395,7 @@ post* add_post(user* usuario) {
 void print_posts(user* usuario){
     printf("Tus publicaciones son:\n");
     for (int i = 0; i < usuario->cant_post; ++i) {
-        printf("\n\t*%s\n%s\n", usuario->publi[i].title, usuario->publi[i].post);
+        printf("\n*%s\n%s\n", usuario->publi[i].title, usuario->publi[i].post);
     }
 }
 
