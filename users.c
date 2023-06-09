@@ -74,12 +74,20 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                     usuario_amigo.solicitudes_amistad = enviar_solicitud_amistad(u, usuario_amigo.solicitudes_amistad);
                     printf("\nSolicitud enviada a %s\n", usuario_buscado);
                 } else if (option == 2) {
+                    int old_cant_users = usuario_actual.amigos.cantidd_amigos;
                     usuario_actual.amigos = recibir_solicitud_amistad(&usuario_actual);
-                    for (int i = 0; i < usuario_actual.amigos.cantidd_amigos; ++i) {
+                    printf("\n%s\n",usuario_actual.amigos.lista_amigos[0]);
+                    for (int i = old_cant_users; i < usuario_actual.amigos.cantidd_amigos; ++i) {
                         user *usuario_amigo = buscar_usuario(lista_de_usuarios, usuario_actual.amigos.lista_amigos[i]);
                         usuario_amigo->amigos.lista_amigos[i] = (char *) malloc(MAX_STRING_LENGTH * sizeof(char));
                         usuario_amigo->amigos.lista_amigos[i] = usuario_actual.name;
                         usuario_amigo->amigos.cantidd_amigos++;
+                        lista_de_usuarios = actualizar_usuario(lista_de_usuarios, *usuario_amigo);
+                        printf("\n%s %s %s\n",usuario_amigo->amigos.lista_amigos[i], lista_de_usuarios.lista_de_usuarios[21].amigos.lista_amigos[i], usuario_actual.name);
+                    }
+                    printf("\nTienes %d amigos son:\n", usuario_actual.amigos.cantidd_amigos);
+                    for (int i = 0; i < usuario_actual.amigos.cantidd_amigos; ++i) {
+                        printf("\n%d) %s\n", i+1, usuario_actual.amigos.lista_amigos[i]);
                     }
                 } else if (option == 3) {
                     post *publi;
