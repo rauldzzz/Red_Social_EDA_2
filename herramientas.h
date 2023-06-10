@@ -90,7 +90,7 @@ void free_queue(Queue* q);
 /**############################ DICCIONARIO ############################*/
 
 typedef struct Node {
-    char* key; //cadena que almacena la palabra o clave.
+    char key[MAX_STRING_LENGTH]; //cadena que almacena la palabra o clave.
     int count; //entero que almacena el número de ocurrencias de la palabra.
 } Node; //estructura que representa un nodo en la tabla hash.
 
@@ -115,7 +115,7 @@ void freeDic(Dic* dict);
 //  Itera sobre la tabla y libera la memoria asignada para cada clave
 //  utilizando la función free().
 
-unsigned int hashFunction(Dic* dict, char* key);
+unsigned int hashFunction(Dic* dict, char key[MAX_STRING_LENGTH]);
 // recibe una cadena key y el tamaño de la tabla hash size.
 // Implementa una función de hash simple utilizando el método de
 // hash de multiplicación. Itera sobre cada carácter de la cadena
@@ -125,7 +125,7 @@ unsigned int hashFunction(Dic* dict, char* key);
 // se ajuste dentro del rango válido de índices para la tabla.
 // Retorna el valor de hash calculado.
 
-void insert(Dic* dict, char* key);
+void insert(Dic* dict, char key[MAX_STRING_LENGTH]);
 // recibe un puntero a un diccionario dict y una cadena key.
 // Esta función agrega una palabra al diccionario.
 // Primero calcula el índice de hash utilizando la función hash
@@ -138,7 +138,7 @@ void insert(Dic* dict, char* key);
 // total de palabras en el diccionario. Si la posición ya contiene la
 // palabra, simplemente se incrementa el contador de ocurrencias de esa palabra.
 
-int get_word_count(Dic* dict, char* key);
+int get_word_count(Dic* dict, char key[MAX_STRING_LENGTH]);
 // recibe un puntero a un diccionario dict y una cadena key.
 // Esta función busca la palabra en el diccionario y devuelve el
 // número de ocurrencias. Calcula el índice de hash utilizando la
@@ -164,19 +164,6 @@ void printTopNWords(Dic* dict, int n);
 // palabras más frecuentes junto con sus conteos utilizando un bucle.
 // Tenga en cuenta que n se usa para asegurarse de no imprimir más
 // palabras de las que hay en el diccionario.
-
-/**#####################################################################*/
-/**############################### POSTS ###############################*/
-typedef struct Post {
-    char* content;
-    struct Post* next;
-} Post;
-
-void print_top_10_words(Dic* wordCount);
-
-void print_all_posts(Post* posts);
-
-void clear_posts(Post** posts);
 
 /**#####################################################################*/
 

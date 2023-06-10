@@ -177,7 +177,7 @@ friends recibir_solicitud_amistad(user *usuario){
 /**############################ DICCIONARIO ############################*/
 
 // Función que calcula el valor hash de una clave utilizando el método de multiplicación
-unsigned int hashFunction(Dic* dict, char *key) {
+unsigned int hashFunction(Dic* dict, char key[MAX_STRING_LENGTH]) {
     unsigned int hash = 0;
     int i = 0;
     while (key[i] != '\0') {
@@ -209,7 +209,7 @@ void freeDic(Dic* dict) {
 }
 
 // Inserta una palabra en el diccionario o incrementa su contador si ya existe
-void insert(Dic* dict, char* key) {
+void insert(Dic* dict, char key[MAX_STRING_LENGTH]) {
     unsigned int index = hashFunction(dict, key);  // Obtiene el índice de hash para la clave
     Node* node = dict->table[index];
     while (node != NULL) {
@@ -222,7 +222,7 @@ void insert(Dic* dict, char* key) {
     }
     // La palabra no existe en el diccionario, la añadimos
     Node* newNode = (Node*)malloc(sizeof(Node));  // Crea un nuevo nodo
-    newNode->key = (char*)malloc((strlen(key) + 1) * sizeof(char));  // Asigna memoria para la clave del nodo
+    //newNode->key = (char*)malloc((strlen(key) + 1) * sizeof(char));  // Asigna memoria para la clave del nodo
     strcpy(newNode->key, key);  // Copia la clave al nuevo nodo
     newNode->count = 1;  // Inicializa el contador del nuevo nodo en 1
     dict->table[index] = newNode;  // Inserta el nuevo nodo en la tabla hash
@@ -230,7 +230,7 @@ void insert(Dic* dict, char* key) {
 }
 
 // Obtiene la frecuencia de una palabra en el diccionario
-int get_word_count(Dic* dict, char* key) {
+int get_word_count(Dic* dict, char key[MAX_STRING_LENGTH]) {
     unsigned int index = hashFunction(dict, key);  // Obtiene el índice de hash para la clave
     Node* node = dict->table[index];
     while (node != NULL) {
@@ -270,9 +270,9 @@ void printTopNWords(Dic* dict, int n) {
         }
     }
     selectionSort(words, count);  // Ordena los nodos por frecuencia de mayor a menor
-    printf("TOP %d palabras mas usadas:\n", n);
+    printf("\nTOP %d palabras mas usadas:\n", n);
     for (int i = 0; i < n && i < count; i++) {
-        printf("%s (%d veces)\n", words[i]->key, words[i]->count);  // Imprime la palabra y su frecuencia
+        printf("%d# %s (%d veces)\n", i, words[i]->key, words[i]->count);  // Imprime la palabra y su frecuencia
     }
     free(words);  // Libera la memoria asignada para el arreglo de nodos
 }

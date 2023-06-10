@@ -108,8 +108,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                 }
                 else if(option == 6){
                     print_dictionary(&dic);
-                    printTopNWords(&dic, 5);
-                    //print_most_frequent_words(&dic, 5); // Imprimir las palabras más frecuentes
+                    printTopNWords(&dic, 5);// Imprimir las palabras más frecuentes
                 }
                 else if (option == 7) printf("\nSaliendo...\n\n");
                 else {
@@ -147,7 +146,6 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             }
         else if (choice == 5) {
             printf("\nSaliendo...");
-            freeDic(&dic);
         }
         else {
             printf("\nOpcion inexistente.\n");
@@ -379,47 +377,52 @@ post* add_post(user* usuario, Dic dic) {
         usuario->publi = realloc(usuario->publi, (usuario->cant_post + 1) * sizeof(post));
     }
 
-    post* aux_post = &(usuario->publi[usuario->cant_post]); // Variable auxiliar para almacenar el nuevo post
-
-    char *t_txt=NULL;
+    //post* aux_post = &(usuario->publi[usuario->cant_post]); // Variable auxiliar para almacenar el nuevo post
 
     printf("\nTitulo del post:");
     getchar();
-    scanf("%[^\n]", aux_post->title);
-
-    int i = 0;
-    while (aux_post->title[i] != '\0') {
-        aux_post->title[i] = toupper(aux_post->title[i]);
-        i++;
-    }
-    char *p_txt = NULL;
+    scanf("%[^\n]", usuario->publi[usuario->cant_post].title);
 
     printf("Escribe lo que quieras subir(120):");
     getchar();
-    fgets(aux_post->post, MAX_LEN_POSTS-1, stdin);
+    fgets(usuario->publi[usuario->cant_post].post, MAX_LEN_POSTS-1, stdin);
 
-    if (aux_post->post[strlen(aux_post->post) - 1] != '\n') {
+    if (usuario->publi[usuario->cant_post].post[strlen(usuario->publi[usuario->cant_post].post) - 1] != '\n') {
         printf("\nTu post es muuuuuuuuy largo ;(\n");
 
         int c;
         while ((c = getchar()) != '\n' && c != EOF) {}
         return NULL;
     } else {
-        aux_post->post[strcspn(aux_post->post, "\n")] = '\0';
+        usuario->publi[usuario->cant_post].post[strcspn(usuario->publi[usuario->cant_post].post, "\n")] = '\0';
 
-        aux_post->post_idx = usuario->cant_post;
+        usuario->publi[usuario->cant_post].post_idx = usuario->cant_post;
 
-        update_dictionary(&dic, aux_post->title); // Pasar el título del post a la función update_dictionary
-        update_dictionary(&dic, aux_post->post); // Pasar el contenido del post a la función update_dictionary
+        printf("%s\n", usuario->publi->title);
+        printf("%s\n", usuario->publi->post);
 
-        return aux_post;
+        post aux_post = usuario->publi[usuario->cant_post];
+        update_dictionary(&dic, aux_post.title); // Pasar el título del post a la función update_dictionary
+        update_dictionary(&dic, aux_post.post); // Pasar el contenido del post a la función update_dictionary
+
+        printf("%s\n", usuario->publi->title);
+        printf("%s\n", usuario->publi->post);
+
+        /*
+        int i = 0;
+        while (usuario->publi[usuario->cant_post].title[i] != '\0') {
+            usuario->publi[usuario->cant_post].title[i] = toupper(usuario->publi[usuario->cant_post].title[i]);
+            i++;
+        }
+        */
+        return usuario->publi;
     }
 }
 
 void print_posts(user* usuario){
     printf("Tus publicaciones son:\n"); // Imprime el encabezado "Tus publicaciones son:"
     for (int i = 0; i < usuario->cant_post; ++i) { // Itera sobre las publicaciones del usuario
-        printf("\n**%s**\n%s\n", usuario->publi[i].title, usuario->publi[i].post); // Imprime el título y el contenido de cada publicación
+        printf("\n** %s **\n%s\n", usuario->publi[i].title, usuario->publi[i].post); // Imprime el título y el contenido de cada publicación
     }
 }
 
@@ -436,7 +439,8 @@ void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lis
 
 
 void update_dictionary(Dic* dic, char *text) {
-    char* word = strtok(&text, " "); // Obtener la primera palabra del texto
+    char *word = text;
+    word = strtok(word, " "); // Obtener la primera palabra del texto
     while (word != NULL) {
         insert(dic, word); // Agregar la palabra al diccionario
         word = strtok(NULL, " "); // Obtener la siguiente palabra del texto
