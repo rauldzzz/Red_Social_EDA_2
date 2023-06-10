@@ -76,7 +76,7 @@ void print_posts(user *usuario);
 
 void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lista_de_usuarios);
 
-void update_dictionary(Dic* dic, char text);
+void update_dictionary(Dic* dic, char *text);
 
 void print_dictionary(Dic* dic);
 
