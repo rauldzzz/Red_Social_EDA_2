@@ -25,9 +25,6 @@ int main() {
     }
     menu(lista_de_usuarios);
 
-    //Crear diccionario:
-    Dic wordCount = create_dic(100);
-
     return 0;
 }
 

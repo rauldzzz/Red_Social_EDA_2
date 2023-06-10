@@ -21,3 +21,4 @@ Esther_1978, 45, Esther.Ortega@gmail.com, Palma de Mallorca, Aventura, Documenta
 Raul_2003, 19, raul.diaz01@estudiant.upf.edu, Barcelona, Suspenso, Aventura, Comedia, Romance, Musical
 Karencikii, 19, kare.cabello01@estudiant.upf.edu, Santfe, Romance, Comedia, Superheroes, Musical, Crimen
 Martina.2004, 18, martina.jarque01@estudiant.upf.edu, Barcelona, Aventura, Romance, Comedia, Musical, Ciencia Ficcion
+Luz_Parrondo_1950, 54, luz.parrondo@gmail.com, Barcelona, Aventura, Misterio, Drama, Documental, Guerra

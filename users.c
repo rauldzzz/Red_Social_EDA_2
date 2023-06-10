@@ -9,7 +9,8 @@
 int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
     int choice = -1; //La eleccion del menu
     user usuario;
-
+    Dic dic;
+    initializeDic(&dic, 100);
     //Centramos la palabra 'MENU' y decoramos con #
     while (choice != 5 ) {
         choice = -1; //La eleccion del menu
@@ -52,13 +53,14 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             }
             int option = -1;
             user usuario_actual = *buscar_usuario(lista_de_usuarios, u);
-            while (option != 6) {
+            while (option != 7) {
                 printf("\n1. Envia solicitudes de amistad\n");
                 printf("2. Gestiona las solicitudes pendientes\n");
                 printf("3. ¿Que se te pasa por tu mente? Publica algo\n");
                 printf("4. Ver tus publicaciones :)\n");
                 printf("5. Ver los post de tus amigos <3\n");
-                printf("6. Salir\n");
+                printf("6. Tus palabras mas usadas!\n");
+                printf("7. Salir\n");
                 printf("Elija el numero de la opcion deseada:");
                 scanf("%d", &option);
                 if (option == 1) {
@@ -89,7 +91,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                     }
                 } else if (option == 3) {
                     post *publi;
-                    publi = add_post(&usuario_actual);
+                    publi = add_post(&usuario_actual, dic);
                     if (publi == NULL){
                         free(publi);
                     } else{
@@ -102,12 +104,18 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
                     for (int i = 0; i < usuario_actual.amigos.cantidd_amigos; ++i) {
                         user* imprimir_post = buscar_usuario(lista_de_usuarios, usuario_actual.amigos.lista_amigos[i]);
                         for (int j = 0; j < imprimir_post->cant_post; ++j) {
-                            print_posts(imprimir_post);
+                            printf("\n** %s **\n%s\n", imprimir_post->publi[j].title, imprimir_post->publi[j].post); // Imprime el título y el contenido de cada publicación
                             usuario_actual.publi = sistema_likes(imprimir_post, &usuario_actual, j);
                         }
                     }
                 }
-                else if (option == 6) printf("\nSaliendo...\n\n");
+                else if(option == 6){
+                    print_dictionary(&dic);
+                    printTopNWords(&dic, 5);// Imprimir las palabras más frecuentes
+                } else if (option == 7) {
+                    printf("\nSaliendo...\n");
+                    break;
+                }
                 else {
                     printf("\nOpcion inexistente.Elija el numero de la opcion deseada\n");
                     option = -1;
@@ -273,16 +281,6 @@ user_list actualizar_usuario(user_list lista_usuarios, user usuario_nuevo){
     }
 }
 
-/*#######################################################################*/
-user usuario_rdm(FILE * f, int num){
-    int contador = 0;
-    user user1;
-    while(fscanf(f,"%s, %d, %s, %s, %s, %s, %s, %s, %s", user1.name, &user1.age, user1.mail, user1.ubicacion, user1.gustos[0], user1.gustos[1], user1.gustos[2], user1.gustos[3], user1.gustos[4]) != EOF){
-        if (contador == num) return user1;
-        contador ++;
-    }
-}
-
 user generate_user(){
     const char* names[MAX_USERS] = {"Carmen", "Lucas", "Maria", "Mario", "Jimena", "Carlos", "Albert", "Alba", "Esther", "Hugo", "Mateo", "Leo", "Dani", "Anna", "Alexia", "Sara", "Valentina", "Zoe", "Olivia", "Sergio"};
     const char* surnames[MAX_USERS] = {"García", "Lopez", "Martinez", "Rodriguez", "Gonzalez", "Fernandez", "Sanchez", "Perez", "Gomez", "Martin", "Torres", "Romero", "Morales", "Ortega", "Delgado", "Muñoz", "Navarro", "Vargas", "Jimenez", "Rivas"};
@@ -341,22 +339,7 @@ user_list read_users(user_list lista_de_usuarios){
     return lista_de_usuarios;
 }
 
-int buscar_amigo(user_list* usuarios){
-    char nombre[MAX_STRING_LENGTH];
-    user* usuario_amigo;
-    do {
-        printf("\nInserta nombre de usuario: ");
-        scanf("%s", nombre);
-    } while (!isupper(nombre[0]) || !islower(nombre[1]));
-    usuario_amigo = buscar_usuario(*usuarios, nombre);
-    if (usuario_amigo != NULL) strcpy(usuario_amigo->name, nombre);
-    else{
-        return ERROR;
-    }
-
-}
-
-post* add_post(user* usuario){
+post* add_post(user* usuario, Dic dic){
     if(usuario->cant_post==0){
         usuario->publi = malloc(sizeof(post));
     }else{
@@ -380,6 +363,17 @@ post* add_post(user* usuario){
     }else{
         usuario->publi[usuario->cant_post].post[strcspn(usuario->publi[usuario->cant_post].post, "\n")] = '\0';
         usuario->publi->post_idx = usuario->cant_post;
+        usuario->publi[usuario->cant_post].totalLikes = 0;
+
+        post aux_post = usuario->publi[usuario->cant_post];
+        update_dictionary(&dic, aux_post.title); // Pasar el título del post a la función update_dictionary
+        update_dictionary(&dic, aux_post.post); // Pasar el contenido del post a la función update_dictionary
+
+        int i = 0;
+        while (usuario->publi[usuario->cant_post].title[i] != '\0') {
+            usuario->publi[usuario->cant_post].title[i] = toupper(usuario->publi[usuario->cant_post].title[i]); // Convertir el título del post a mayúsculas (estética)
+            i++;
+        }
         return usuario->publi;
     }
 
@@ -388,7 +382,7 @@ post* add_post(user* usuario){
 void print_posts(user* usuario){
     printf("\nPost de %s\n", usuario->name);
     for (int i = 0; i < usuario->cant_post; ++i) {
-        printf("\n%s\n\n%s\n", usuario->publi[i].title, usuario->publi[i].post);
+        printf("\n** %s **\n%s\n", usuario->publi[i].title, usuario->publi[i].post); // Imprime el título y el contenido de cada publicación
     }
 }
 
@@ -414,20 +408,45 @@ int buscar_string(char** lista, int longitud, char* buscar){
 post* sistema_likes(user* usuario_post, user* usuario_like, int idx_post){
     char like[3];
     if (haDadoLike(usuario_post->publi[idx_post].pilaLikes, usuario_like->name) == FALSE){
-        printf("\nQuieres dar <3 a este post pon '<3' sino dale al enter");
+        printf("\nQuieres dar <3 a este post pon '<3' sino teclea 'NO'");
         scanf("%s", like);
         printf("\n");
         if (strcmp(like, "<3") == 0){
             agregarLike(&usuario_post->publi[idx_post].pilaLikes, usuario_like->name);
+            usuario_post->publi[idx_post].totalLikes++;
         }
     } else{
-        printf("\nSi quieres retirar el like pulse 'Y'");
+        printf("\nSi quieres retirar el like pulse 'Y' sino teclea 'NO'");
         scanf("%s", like);
         printf("\n");
         if (strcmp(like, "Y") == 0){
             quitarLike(&usuario_post->publi[idx_post].pilaLikes, usuario_like->name);
+            usuario_post->publi[idx_post].totalLikes--;
         }
     }
-    mostrarLikes(usuario_post->publi[idx_post].pilaLikes);
+    printf("\n<3 %d", usuario_post->publi[idx_post].totalLikes);
     return usuario_post->publi;
+}
+
+void update_dictionary(Dic* dic, char *text) {
+    char *word = text;
+    word = strtok(word, " ,.¡!¿?()/:;"); // Obtener la primera palabra del texto
+    while (word != NULL) {
+        for (int i = 0; word[i] != '\0'; i++) {
+            word[i] = tolower(word[i]); // Pasa las palabras a minúsculas, para que cuente "hola" y "HoLa" como la misma palabra.
+        }
+        insert(dic, word); // Agregar la palabra al diccionario
+        word = strtok(NULL, " ,.¡!¿?()/:;"); // Obtener la siguiente palabra del texto
+    }
+}
+
+void print_dictionary(Dic* dic) {
+    printf("Diccionario:\n");
+    for (int i = 0; i < dic->size; i++) {
+        if (dic->table[i] != NULL) {
+            // Si hay un elemento en la posición i de la tabla hash del diccionario
+            printf("Palabra: %s, Apariciones: %d\n", dic->table[i]->key, dic->table[i]->count);
+            // Imprimir la palabra y el número de apariciones en el diccionario
+        }
+    }
 }

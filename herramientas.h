@@ -9,7 +9,6 @@
 typedef struct Nodo {
     char* usuarioID;
     struct Nodo* siguiente;
-    int totalLikes;
 } Nodo;
 
 Nodo* crearNodo(char* usuarioID);
@@ -19,8 +18,6 @@ int estaVacia(Nodo* pila);
 void agregarLike(Nodo** pila, char* usuarioID);
 
 void quitarLike(Nodo** pila, char* usuarioID);
-
-void mostrarLikes(Nodo* pila);
 
 int haDadoLike(Nodo* pila, char* usuarioID);
 
@@ -73,24 +70,32 @@ void free_queue(Queue* q);
 /**############################ DICCIONARIO ############################*/
 
 typedef struct Node {
-    char* key; //cadena que almacena la palabra o clave.
+    char key[MAX_STRING_LENGTH]; //cadena que almacena la palabra o clave.
     int count; //entero que almacena el número de ocurrencias de la palabra.
 } Node; //estructura que representa un nodo en la tabla hash.
 
 typedef struct Dic {
-    Node* table; //puntero a un array de nodos (Node).
+    Node** table; //puntero a un array de nodos (Node).
     int size; //el tamaño del array de nodos.
     int count; //el número actual de elementos en el diccionario.
 } Dic; //estructura que representa el diccionario.
 
-Dic create_dic(int size);
-// recibe un parámetro size y devuelve una instancia de Dic.
+void initializeDic(Dic* dict, int size);
+// recibe una instancia de Dic y un entero size.
 // Esta función crea un diccionario vacío asignando memoria para el
 // array table con el tamaño especificado,
 // y luego inicializa los campos size y count
 // en el diccionario creado. Finalmente, retorna el diccionario.
 
-int hash(char* key, int size);
+void freeDic(Dic* dict);
+//  recibe un puntero a un diccionario dict.
+//  Esta función limpia el diccionario liberando la memoria
+//  asignada para cada clave en la tabla, estableciendo los punteros
+//  de clave a NULL y restableciendo los contadores.
+//  Itera sobre la tabla y libera la memoria asignada para cada clave
+//  utilizando la función free().
+
+unsigned int hashFunction(Dic* dict, char key[MAX_STRING_LENGTH]);
 // recibe una cadena key y el tamaño de la tabla hash size.
 // Implementa una función de hash simple utilizando el método de
 // hash de multiplicación. Itera sobre cada carácter de la cadena
@@ -100,8 +105,8 @@ int hash(char* key, int size);
 // se ajuste dentro del rango válido de índices para la tabla.
 // Retorna el valor de hash calculado.
 
-void add_word(Dic* dic, char* word);
-// recibe un puntero a un diccionario dic y una cadena word.
+void insert(Dic* dict, char key[MAX_STRING_LENGTH]);
+// recibe un puntero a un diccionario dict y una cadena key.
 // Esta función agrega una palabra al diccionario.
 // Primero calcula el índice de hash utilizando la función hash
 // y el tamaño del diccionario. Luego, utiliza una estrategia de
@@ -113,8 +118,8 @@ void add_word(Dic* dic, char* word);
 // total de palabras en el diccionario. Si la posición ya contiene la
 // palabra, simplemente se incrementa el contador de ocurrencias de esa palabra.
 
-int get_word_count(Dic* dic, char* word);
-// recibe un puntero a un diccionario dic y una cadena word.
+int get_word_count(Dic* dict, char key[MAX_STRING_LENGTH]);
+// recibe un puntero a un diccionario dict y una cadena key.
 // Esta función busca la palabra en el diccionario y devuelve el
 // número de ocurrencias. Calcula el índice de hash utilizando la
 // función hash y el tamaño del diccionario. Utiliza la misma estrategia
@@ -122,37 +127,23 @@ int get_word_count(Dic* dic, char* word);
 // Si encuentra la palabra, devuelve el contador asociado a esa palabra.
 // Si no encuentra la palabra, devuelve 0.
 
-void print_most_frequent_words(Dic* dic, int n);
-// recibe un puntero a un diccionario dic y un entero n.
+void selectionSort(Node** arr, int n);
+// Recibe un arreglo de punteros a nodos arr y el tamaño del arreglo n.
+// Implementa el algoritmo de ordenamiento de selección para ordenar los nodos por frecuencia de uso.
+// El algoritmo compara las frecuencias de los nodos y realiza intercambios para ordenarlos en orden descendente.
+// Utiliza el algoritmo de selección, donde en cada iteración encuentra el nodo con la frecuencia más alta
+// y lo coloca en la posición correcta.
+// Después de completar el ordenamiento, los nodos en arr estarán ordenados por frecuencia de mayor a menor.
+
+void printTopNWords(Dic* dict, int n);
+// recibe un puntero a un diccionario dict y un entero n.
 // Esta función imprime las n palabras más frecuentes junto con su conteo.
 // Primero, ordena la tabla de nodos en orden descendente basándose en el
 // conteo de ocurrencias utilizando un algoritmo de ordenamiento
-// (en este caso, el algoritmo de burbuja). Luego, imprime las n
+// (en este caso, el Selection Sort). Luego, imprime las n
 // palabras más frecuentes junto con sus conteos utilizando un bucle.
 // Tenga en cuenta que n se usa para asegurarse de no imprimir más
 // palabras de las que hay en el diccionario.
-
-void clear_dic(Dic* dic);
-//  recibe un puntero a un diccionario dic.
-//  Esta función limpia el diccionario liberando la memoria
-//  asignada para cada clave en la tabla, estableciendo los punteros
-//  de clave a NULL y restableciendo los contadores.
-//  Itera sobre la tabla y libera la memoria asignada para cada clave
-//  utilizando la función free(). Luego, establece los punteros de
-//  clave a NULL y los contadores a 0.
-
-/**#####################################################################*/
-/**############################### POSTS ###############################*/
-typedef struct Post {
-    char* content;
-    struct Post* next;
-} Post;
-
-void print_top_10_words(Dic* wordCount);
-
-void print_all_posts(Post* posts);
-
-void clear_posts(Post** posts);
 
 /**#####################################################################*/
 
