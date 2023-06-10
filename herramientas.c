@@ -67,7 +67,6 @@ void free_stack(Stack* p) {
 
 /**#####################################################################*/
 
-
 /**########################## FUNCIONES COLA ##########################*/
 // Inicializa una cola vacía
 Queue* init_queue(){
@@ -138,40 +137,39 @@ void free_queue(Queue* q) {
 
 /*#################################????????????????####################################*/
 Queue* enviar_solicitud_amistad( char nombre[MAX_STRING_LENGTH], Queue *cola_solicitudes_amigos){
-    return enqueue(cola_solicitudes_amigos, nombre);
+    return enqueue(cola_solicitudes_amigos, nombre); // Agrega la solicitud de amistad a la cola de solicitudes de amigos
 }
 
 friends recibir_solicitud_amistad(user *usuario){
     if (is_empty_q(usuario->solicitudes_amistad) == TRUE){
-        printf("\nNo tienes solicitudes de amistad ;(\n");
+        printf("\nNo tienes solicitudes de amistad ;(\n"); // Si la cola de solicitudes de amistad está vacía, muestra un mensaje
     }else {
         while (is_empty_q(usuario->solicitudes_amistad) != TRUE) {
             char option;
-            printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
-            printf("\nQuieres aceptar la solicitud de amistad de %s?",
-                   usuario->solicitudes_amistad->A[usuario->solicitudes_amistad->head]);
-            scanf(" %c", &option);
+            printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para aceptar y 'N' para rechazar las solicitudes de amistad\n");
+            printf("\nQuieres aceptar la solicitud de amistad de %s?", usuario->solicitudes_amistad->A[usuario->solicitudes_amistad->head]); // Muestra la solicitud de amistad actual en la cabeza de la cola
+            scanf(" %c", &option); // Lee la opción del usuario
+
             if (option == '0') {
-                printf("\n Saliendo...\n");
+                printf("\n Saliendo...\n"); // Si la opción es '0', muestra un mensaje y sale del bucle
                 break;
             } else if (option == 'Y') {
-                printf("\nAhora %s y tu sois amigos <3\n", usuario->solicitudes_amistad->A[usuario->solicitudes_amistad->head]);
-                usuario->amigos.lista_amigos[usuario->amigos.cantidd_amigos] = (char *) malloc(MAX_STRING_LENGTH * sizeof(char));
-                usuario->amigos.lista_amigos[usuario->amigos.cantidd_amigos] = first(usuario->solicitudes_amistad);
-                usuario->amigos.cantidd_amigos++;
-                dequeue(usuario->solicitudes_amistad);
+                printf("\nAhora %s y tu sois amigos <3\n", usuario->solicitudes_amistad->A[usuario->solicitudes_amistad->head]); // Muestra un mensaje de amistad aceptada
+                usuario->amigos.lista_amigos[usuario->amigos.cantidd_amigos] = (char *) malloc(MAX_STRING_LENGTH * sizeof(char)); // Asigna memoria para el nombre del amigo
+                usuario->amigos.lista_amigos[usuario->amigos.cantidd_amigos] = first(usuario->solicitudes_amistad); // Copia el nombre del amigo aceptado en la lista de amigos del usuario
+                usuario->amigos.cantidd_amigos++; // Incrementa el contador de amigos del usuario
+                dequeue(usuario->solicitudes_amistad); // Elimina la solicitud de amistad de la cola
             } else if (option == 'N') {
-                dequeue(usuario->solicitudes_amistad);
-                printf("\nHas rechazado la solicitud de amistad ;(\n");
+                dequeue(usuario->solicitudes_amistad); // Elimina la solicitud de amistad de la cola
+                printf("\nHas rechazado la solicitud de amistad ;(\n"); // Muestra un mensaje de solicitud de amistad rechazada
             } else {
-                printf("\nOPCION INCORRECTA");
-                printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
+                printf("\nOPCION INCORRECTA"); // Si la opción no es válida, muestra un mensaje de error
+                printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para aceptar y 'N' para rechazar las solicitudes de amistad\n");
             }
         }
     }
-    return usuario->amigos;
+    return usuario->amigos; // Devuelve la lista de amigos actualizada del usuario
 }
-/*#####################################################################*/
 /**#####################################################################*/
 
 /**############################ DICCIONARIO ############################*/
@@ -272,7 +270,7 @@ void printTopNWords(Dic* dict, int n) {
     selectionSort(words, count);  // Ordena los nodos por frecuencia de mayor a menor
     printf("\nTOP %d palabras mas usadas:\n", n);
     for (int i = 0; i < n && i < count; i++) {
-        printf("%d# %s (%d veces)\n", i, words[i]->key, words[i]->count);  // Imprime la palabra y su frecuencia
+        printf("%d# %s (%d veces)\n", i+1, words[i]->key, words[i]->count);  // Imprime la palabra y su frecuencia
     }
     free(words);  // Libera la memoria asignada para el arreglo de nodos
 }

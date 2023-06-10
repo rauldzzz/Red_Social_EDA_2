@@ -153,9 +153,7 @@ int menu(user_list lista_de_usuarios){ //si pones una letra entra en bucle !!!!
             fflush(stdin);
         }
     }
-
 }
-
 
 //Colocar el rellenar_datos() aqui Paula
 user rellenar_datos(user user1) {
@@ -372,49 +370,43 @@ int buscar_amigo(user_list* usuarios){
 
 post* add_post(user* usuario, Dic dic) {
     if(usuario->cant_post == 0) {
+        // Si el usuario no tiene ningún post previo, se asigna memoria para un solo post
         usuario->publi = malloc(sizeof(post));
     } else {
+        // Si el usuario ya tiene posts, se redimensiona el arreglo para agregar un nuevo post
         usuario->publi = realloc(usuario->publi, (usuario->cant_post + 1) * sizeof(post));
     }
 
-    //post* aux_post = &(usuario->publi[usuario->cant_post]); // Variable auxiliar para almacenar el nuevo post
-
     printf("\nTitulo del post:");
     getchar();
-    scanf("%[^\n]", usuario->publi[usuario->cant_post].title);
+    scanf("%[^\n]", usuario->publi[usuario->cant_post].title); // Leer el título del post ingresado por el usuario
 
     printf("Escribe lo que quieras subir(120):");
     getchar();
-    fgets(usuario->publi[usuario->cant_post].post, MAX_LEN_POSTS-1, stdin);
+    fgets(usuario->publi[usuario->cant_post].post, MAX_LEN_POSTS-1, stdin); // Leer el contenido del post ingresado por el usuario
 
     if (usuario->publi[usuario->cant_post].post[strlen(usuario->publi[usuario->cant_post].post) - 1] != '\n') {
+        // Si el contenido del post no termina con un salto de línea, significa que excedió el límite de caracteres permitidos
         printf("\nTu post es muuuuuuuuy largo ;(\n");
 
         int c;
-        while ((c = getchar()) != '\n' && c != EOF) {}
+        while ((c = getchar()) != '\n' && c != EOF) {} // Limpiar el búfer de entrada
         return NULL;
     } else {
-        usuario->publi[usuario->cant_post].post[strcspn(usuario->publi[usuario->cant_post].post, "\n")] = '\0';
+        usuario->publi[usuario->cant_post].post[strcspn(usuario->publi[usuario->cant_post].post, "\n")] = '\0'; // Eliminar el salto de línea del contenido del post
 
         usuario->publi[usuario->cant_post].post_idx = usuario->cant_post;
-
-        printf("%s\n", usuario->publi->title);
-        printf("%s\n", usuario->publi->post);
 
         post aux_post = usuario->publi[usuario->cant_post];
         update_dictionary(&dic, aux_post.title); // Pasar el título del post a la función update_dictionary
         update_dictionary(&dic, aux_post.post); // Pasar el contenido del post a la función update_dictionary
 
-        printf("%s\n", usuario->publi->title);
-        printf("%s\n", usuario->publi->post);
-
-        /*
         int i = 0;
         while (usuario->publi[usuario->cant_post].title[i] != '\0') {
-            usuario->publi[usuario->cant_post].title[i] = toupper(usuario->publi[usuario->cant_post].title[i]);
+            usuario->publi[usuario->cant_post].title[i] = toupper(usuario->publi[usuario->cant_post].title[i]); // Convertir el título del post a mayúsculas (estética)
             i++;
         }
-        */
+
         return usuario->publi;
     }
 }
@@ -440,18 +432,23 @@ void imprimir_usuarios_por_genero(char genero[MAX_STRING_LENGTH], user_list* lis
 
 void update_dictionary(Dic* dic, char *text) {
     char *word = text;
-    word = strtok(word, " "); // Obtener la primera palabra del texto
+    word = strtok(word, " ,.¡!¿?()/:;"); // Obtener la primera palabra del texto
     while (word != NULL) {
+        for (int i = 0; word[i] != '\0'; i++) {
+            word[i] = tolower(word[i]); // Pasa las palabras a minúsculas, para que cuente "hola" y "HoLa" como la misma palabra.
+        }
         insert(dic, word); // Agregar la palabra al diccionario
-        word = strtok(NULL, " "); // Obtener la siguiente palabra del texto
+        word = strtok(NULL, " ,.¡!¿?()/:;"); // Obtener la siguiente palabra del texto
     }
 }
 
 void print_dictionary(Dic* dic) {
     printf("Diccionario:\n");
     for (int i = 0; i < dic->size; i++) {
-        if (dic->table[i] != NULL && dic->table[i]->key != NULL) {
+        if (dic->table[i] != NULL) {
+            // Si hay un elemento en la posición i de la tabla hash del diccionario
             printf("Palabra: %s, Apariciones: %d\n", dic->table[i]->key, dic->table[i]->count);
+            // Imprimir la palabra y el número de apariciones en el diccionario
         }
     }
 }
