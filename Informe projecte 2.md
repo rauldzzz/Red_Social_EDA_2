@@ -55,13 +55,13 @@ Paula Borregón, Karen Cabello, Raúl Diaz, Martin Jarque
 
 [SOLUTION \[At most 1500 words\]	12](#_heading=)
 
-[System Architecture \[At most 750 words\]	12](#_heading=)
+[System Architecture \	12](#_heading=)
 
-[Error Handling \[At most 250 words\]	13](#_heading=)
+[Error Handling \	13](#_heading=)
 
-[Data model design \[At most 250 words\]	14](#_heading=)
+[Data model design \	14](#_heading=)
 
-[Dataset description and processing \[At most 250 words\]	14](#_heading=)
+[Dataset description and processing \	14](#_heading=)
 
 [REFERENCES	15](#_heading=)
 
