@@ -145,7 +145,7 @@ Implementación: Utiliza las operaciones de verificación de cola vacía y obten
 
 Retorno: Devuelve la lista de amigos actualizada del usuario.
 
-1. #### <a name="_heading=h.bcpst4y5i4o4"></a>**Implementación de los algoritmos de búsqueda**
+2. #### <a name="_heading=h.bcpst4y5i4o4"></a>**Implementación de los algoritmos de búsqueda**
 El objetivo de la implementación de los algoritmos de búsqueda es buscar un usuario en una lista de usuarios.
 
 Estructuras de datos utilizadas: “user\_list”: Estructura que contiene una lista de usuarios. “user”: Estructura que representa un usuario, con campos como nombre, edad, correo electrónico, ubicación y gustos. “char\*\*”: Puntero a un puntero de caracteres utilizado para almacenar los gustos de un usuario.
@@ -180,7 +180,7 @@ Se podrían implementar funciones adicionales para agregar usuarios a la lista, 
 
 Ubicación del código de implementación: user.c
 
-1. #### <a name="_heading=h.ew43mgu9c2dd"></a>**Implementar de uno de los algoritmos de ordenamiento (InsertionSort, BubbleSort, MergeSort o QuickSort).**
+3. #### <a name="_heading=h.ew43mgu9c2dd"></a>**Implementar de uno de los algoritmos de ordenamiento (InsertionSort, BubbleSort, MergeSort o QuickSort).**
 El objetivo de implementación de los algoritmos de ordenación es ordenar la tabla de un diccionario de palabras por frecuencia descendente.
 
 Objetivo: Ordenar la tabla del diccionario por frecuencia descendente.
@@ -201,7 +201,7 @@ Bubble Sort: El algoritmo de ordenamiento utilizado en este objetivo es el bubbl
 
 Ubicación: herramientas.c
 
-1. #### <a name="_heading=h.9p32iuyxox7a"></a>**Implementación del diccionario**
+4. #### <a name="_heading=h.9p32iuyxox7a"></a>**Implementación del diccionario**
 El objetivo de implementación del código proporcionado es crear y manipular un diccionario utilizando una estructura de datos conocida como tabla hash. A continuación se explica cada una de las funciones presentes en el código: “create\_dic”: Esta función crea un diccionario vacío con el tamaño especificado. El diccionario se representa mediante una estructura llamada `Dic`, que contiene los siguientes campos: “table”: Un puntero a un array de nodos que almacenará las palabras y sus conteos. “size”: El tamaño de la tabla hash, que determina la capacidad del diccionario. “count”: El número total de palabras almacenadas en el diccionario.
 
 Para implementar esta función, se asigna memoria dinámicamente para el array de nodos utilizando `malloc`. Luego, se inicializan los campos `size` y `count` del diccionario y se retorna el diccionario creado. “hash”: Esta función calcula el índice de hash de una palabra en la tabla hash. Recibe la palabra y el tamaño de la tabla como parámetros. El cálculo del valor de hash se realiza utilizando el método de multiplicación. Se itera por cada carácter de la palabra y se realiza una operación de multiplicación y suma con el valor de hash actual. Finalmente, se aplica el módulo del tamaño de la tabla para obtener el índice de hash. El valor de hash calculado se retorna. “add\_word”: Esta función agrega una palabra al diccionario. Recibe un puntero al diccionario y la palabra a agregar como parámetros. El proceso de inserción se realiza mediante el uso de la función de hash para calcular el índice de la palabra en la tabla hash. Si el índice calculado ya está ocupado por otra palabra, se resuelve la colisión utilizando la estrategia de sondas lineales, es decir, se busca la siguiente posición disponible en la tabla. Si se encuentra una posición vacía, se asigna memoria dinámicamente para copiar la palabra en el campo `key` del nodo correspondiente y se establece el contador en 1.
@@ -222,7 +222,7 @@ El algoritmo de ordenamiento de burbuja utilizado para imprimir las palabras má
 No se manejan casos de eliminación de palabras en el diccionario.
 
 Se podría implementar un algoritmo de hash más sofisticado y una estrategia de resolución de colisiones más eficiente, como encadenamiento o direccionamiento abierto.
-1. #### <a name="_heading=h.2z7xd6jxrj7v"></a>**Uso de github**
+5. #### <a name="_heading=h.2z7xd6jxrj7v"></a>**Uso de github**
 Durante el desarrollo de este proyecto, utilizamos GitHub como plataforma de control de versiones, lo cual resultó muy práctico en general. Sin embargo, nos encontramos con algunos desafíos a lo largo del camino. En ocasiones, los Merges no se realizaban correctamente, lo que generaba conflictos en el código. Además, la sincronización en tiempo real no siempre se actualizaba de manera fluida, lo que dificultaba la colaboración simultánea. Otro problema que enfrentamos fue la gestión de los repositorios, ya que cada participante del proyecto tenía una ubicación local diferente, lo que ocasionaba que el proyecto no se ejecutara correctamente en el primer intento. A pesar de estos inconvenientes, GitHub demostró ser una herramienta invaluable en la organización y gestión del proyecto, permitiendo un seguimiento exhaustivo de los cambios y facilitando la colaboración en equipo.
 ###
 ### Objetivos deseables
@@ -248,7 +248,7 @@ En la función imprimir\_usuarios\_por\_genero del archivo “user.c”, se busc
 - Utilizar una estructura de datos más eficiente para almacenar la lista\_de\_usuarios, como una lista enlazada o un árbol binario de búsqueda, para mejorar el rendimiento en la búsqueda de usuarios por nombre.
 
 
-1. #### <a name="_heading=h.1um6rgb24l9"></a>**Temática y capa de personalización**
+2. #### <a name="_heading=h.1um6rgb24l9"></a>**Temática y capa de personalización**
 El objetivo es crear un menú tematizado y personalizado para una comunidad de cinéfilos. El código refleja esta temática a través de su estructura y las opciones presentadas. A continuación, se explica cómo se ha logrado esta tematización:
 
 El menú se presenta con el título "SER-I-ON", que es un juego de palabras relacionado con el mundo del cine. La palabra "SER-I-ON" se asemeja a "SERIE" y evoca una sensación de estar a punto de sumergirse en el mundo de las películas.
@@ -257,8 +257,8 @@ En las opciones del menú, se utilizan frases y términos relacionados con el ci
 
 1. Eres nuevo? Crea nuevo usuario”: Esta opción invita a los nuevos usuarios a unirse a la comunidad cinematográfica creando un perfil.
 
-1. “Listar nuestra comunidad de cinefilos”: Esta opción permite a los usuarios explorar y conocer a otros cinéfilos en la comunidad, enfatizando el sentido de pertenencia y conexión con otros amantes del cine.
-1. “Buscar usuarios por genero”: Esta opción permite a los usuarios encontrar otros cinéfilos que compartan sus mismos géneros cinematográficos de interés, creando así la posibilidad de establecer conexiones y discutir sobre películas específicas.
+2. “Listar nuestra comunidad de cinefilos”: Esta opción permite a los usuarios explorar y conocer a otros cinéfilos en la comunidad, enfatizando el sentido de pertenencia y conexión con otros amantes del cine.
+3. “Buscar usuarios por genero”: Esta opción permite a los usuarios encontrar otros cinéfilos que compartan sus mismos géneros cinematográficos de interés, creando así la posibilidad de establecer conexiones y discutir sobre películas específicas.
 
 En resumen, el código implementa un menú tematizado en el mundo del cine, utilizando términos y frases relacionadas con esta temática para crear una experiencia personalizada y acogedora para los amantes del séptimo arte.
 
@@ -268,7 +268,7 @@ El objetivo de este código es implementar un menú tematizado en el mundo del c
 
 Hemos usado almohadillas para decorar la consola: ##### MENÚ #####
 
-1. #### <a name="_heading=h.dr4vup5lyzlw"></a>**Implementar las funcionalidades de lectura y guardado de datos**
+2. #### <a name="_heading=h.dr4vup5lyzlw"></a>**Implementar las funcionalidades de lectura y guardado de datos**
 
 El objetivo de implementar las funcionalidades de lectura y guardado de datos desde un archivo externo (.txt o .csv) es permitir que la información de los usuarios y sus contactos se pueda almacenar y recuperar de manera persistente. Esto evita la pérdida de datos cuando el programa se cierra y permite que los usuarios puedan retomar su actividad en futuras sesiones.
 
@@ -291,7 +291,7 @@ En cuanto a la ubicación de la implementación, las funciones mencionadas se en
 En resumen, el objetivo de implementar las funcionalidades de lectura y guardado de datos desde un archivo externo es permitir la persistencia de la información de los usuarios y sus contactos. Se utilizan funciones para generar usuarios aleatorios y guardarlos en un archivo, así como para leer los datos del archivo y cargarlos en la lista de usuarios. La implementación se basa en arreglos y punteros, y se pueden realizar mejoras en la manipulación de la lista de amigos y el manejo de errores.
 
 
-1. #### <a name="_heading=h.qmp4hhcvqk4l"></a>**Funcionalidades extras**
+3. #### <a name="_heading=h.qmp4hhcvqk4l"></a>**Funcionalidades extras**
 El objetivo de implementar funcionalidades extras es proporcionar una función que permita imprimir los usuarios de una lista que tengan un género cinematográfico específico.
 
 Resumen: Para lograr este objetivo, se ha creado la función “imprimir\_usuarios\_por\_genero”. Esta función recibe como parámetros el género cinematográfico a buscar y la lista de usuarios.
@@ -320,7 +320,7 @@ El sistema está compuesto por tres archivos fuente en lenguaje C. A continuaci�
 
 1. main.c: Este archivo contiene el programa principal (main). Su función principal es la inicialización del sistema y la ejecución del flujo principal del programa.
 
-1. user.c: Este archivo se encarga de manejar todas las operaciones relacionadas con los usuarios. Contiene la implementación de funciones como:
+2. user.c: Este archivo se encarga de manejar todas las operaciones relacionadas con los usuarios. Contiene la implementación de funciones como:
 - Rellenar datos: Permite al usuario ingresar y almacenar información personal.
 - Vista de usuarios (print\_users): Imprime en pantalla la lista de usuarios almacenados en el sistema.
 - Buscar usuarios: Realiza una búsqueda de usuarios según criterios específicos, como el nombre de usuario.
