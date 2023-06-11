@@ -23,45 +23,45 @@ Paula Borregón, Karen Cabello, Raúl Diaz, Martin Jarque
 
 **ÍNDICE**
 
-[INTRODUCCIÓN	3](#_heading=)
+[INTRODUCCIÓN	](#_heading=)
 
-[OBJETIVOS DEL PROYECTO	4](#_heading=)
+[OBJETIVOS DEL PROYECTO	](#_heading=)
 
-[Objetivos obligatorios	4](#_heading=h.g7dmsmh90gii)
+[Objetivos obligatorios	](#_heading=h.g7dmsmh90gii)
 
-[1. Implementación de lista, pila y cola funcionales	4](#_heading=h.h0eea367yvbe)
+[1. Implementación de lista, pila y cola funcionales	](#_heading=h.h0eea367yvbe)
 
-[2. Implementación de los algoritmos de búsqueda	5](#_heading=h.bcpst4y5i4o4)
+[2. Implementación de los algoritmos de búsqueda	](#_heading=h.bcpst4y5i4o4)
 
-[3. Implementar de uno de los algoritmos de ordenamiento (InsertionSort, BubbleSort, MergeSort o QuickSort).	6](#_heading=h.ew43mgu9c2dd)
+[3. Implementar de uno de los algoritmos de ordenamiento (InsertionSort, BubbleSort, MergeSort o QuickSort).	](#_heading=h.ew43mgu9c2dd)
 
-[4. Implementación del diccionario	6](#_heading=h.9p32iuyxox7a)
+[4. Implementación del diccionario	](#_heading=h.9p32iuyxox7a)
 
-[5. Uso de github	7](#_heading=h.2z7xd6jxrj7v)
+[5. Uso de github	](#_heading=h.2z7xd6jxrj7v)
 
-[Objetivos deseables	8](#_heading=)
+[Objetivos deseables	](#_heading=)
 
-[1. Leer datos de una fuente externa como un archivo de texto o CSV	8](#_heading=h.lpsi1d33dnql)
+[1. Leer datos de una fuente externa como un archivo de texto o CSV	](#_heading=h.lpsi1d33dnql)
 
-[2. Temática y capa de personalización	9](#_heading=h.1um6rgb24l9)
+[2. Temática y capa de personalización	](#_heading=h.1um6rgb24l9)
 
-[Objetivos libres	9](#_heading=)
+[Objetivos libres	](#_heading=)
 
-[1. Capa estética	9](#_heading=h.zbgwrgpdivzb)
+[1. Capa estética	](#_heading=h.zbgwrgpdivzb)
 
-[2. Implementar las funcionalidades de lectura y guardado de datos	10](#_heading=h.dr4vup5lyzlw)
+[2. Implementar las funcionalidades de lectura y guardado de datos	](#_heading=h.dr4vup5lyzlw)
 
-[3. Funcionalidades extras	11](#_heading=h.qmp4hhcvqk4l)
+[3. Funcionalidades extras	](#_heading=h.qmp4hhcvqk4l)
 
-[SOLUTION \[At most 1500 words\]	12](#_heading=)
+[SOLUTION \[At most 1500 words\]	](#_heading=)
 
-[System Architecture \	12](#_heading=)
+[System Architecture \	](#_heading=)
 
-[Error Handling \	13](#_heading=)
+[Error Handling \	](#_heading=)
 
-[Data model design \	14](#_heading=)
+[Data model design \	](#_heading=)
 
-[Dataset description and processing \	14](#_heading=)
+[Dataset description and processing \	](#_heading=)
 
 [REFERENCES	15](#_heading=)
 
