@@ -9,10 +9,10 @@
 /**########################## FUNCIONES PILA ##########################*/
 
 Nodo* crearNodo(char* usuarioID) {
-    Nodo* nodo = (Nodo*)malloc(sizeof(Nodo));
-    nodo->usuarioID = strdup(usuarioID);
-    nodo->siguiente = NULL;
-    return nodo;
+    Nodo* nodo = (Nodo*)malloc(sizeof(Nodo)); // Se reserva memoria para el nuevo nodo
+    nodo->usuarioID = strdup(usuarioID); // Se copia el usuarioID en el nuevo nodo
+    nodo->siguiente = NULL; // El siguiente nodo se establece como NULL, ya que es el último nodo en la pila
+    return nodo; // Se devuelve el nuevo nodo creado
 }
 
 int estaVacia(Nodo* pila) {
@@ -20,18 +20,18 @@ int estaVacia(Nodo* pila) {
 }
 
 void agregarLike(Nodo** pila, char* usuarioID) {
-    Nodo* nuevoNodo = crearNodo(usuarioID);
-    nuevoNodo->siguiente = *pila;
-    *pila = nuevoNodo;
-    printf("El usuario %s ha dado like al post.\n", usuarioID);
+    Nodo* nuevoNodo = crearNodo(usuarioID); // Crea un nuevo nodo con el usuarioID proporcionado
+    nuevoNodo->siguiente = *pila; // El nuevo nodo apunta al nodo actual de la pila
+    *pila = nuevoNodo; // Actualiza la pila para que apunte al nuevo nodo (se agrega el nodo al inicio de la pila)
+    printf("El usuario %s ha dado like al post.\n", usuarioID); // Imprime un mensaje indicando que el usuario ha dado like al post
 }
 
 void quitarLike(Nodo** pila, char* usuarioID) {
-    Nodo* nodoTemp = *pila;
-    *pila = (*pila)->siguiente;
-    free(nodoTemp->usuarioID);
-    free(nodoTemp);
-    printf("El usuario %s ha quitado su like del post.\n", usuarioID);
+    Nodo* nodoTemp = *pila; // Guarda una referencia al nodo actual en una variable temporal
+    *pila = (*pila)->siguiente; // Actualiza la pila para que apunte al siguiente nodo (se elimina el nodo actual)
+    free(nodoTemp->usuarioID); // Libera la memoria asignada para el usuarioID en el nodo actual
+    free(nodoTemp); // Libera la memoria asignada para el nodo actual
+    printf("El usuario %s ha quitado su like del post.\n", usuarioID); // Imprime un mensaje indicando que el usuario ha quitado su like
 }
 
 /**#####################################################################*/
@@ -106,13 +106,13 @@ void free_queue(Queue* q) {
 }
 
 int haDadoLike(Nodo* pila, char* usuarioID) {
-    while (pila != NULL) {
-        if (strcmp(pila->usuarioID, usuarioID) == 0) {
-            return TRUE;
+    while (pila != NULL) { // Recorre la pila hasta que llegue al final
+        if (strcmp(pila->usuarioID, usuarioID) == 0) { // Compara el ID del usuario en el nodo actual con el usuarioID dado
+            return TRUE; // Si hay una coincidencia, significa que el usuario ha dado like
         }
-        pila = pila->siguiente;
+        pila = pila->siguiente; // Avanza al siguiente nodo en la pila
     }
-    return FALSE;
+    return FALSE; // Si no se encuentra el usuario en la pila, significa que no ha dado like
 }
 
 /*#################################????????????????####################################*/
@@ -121,9 +121,11 @@ Queue* enviar_solicitud_amistad( char nombre[MAX_STRING_LENGTH], Queue *cola_sol
 }
 
 friends recibir_solicitud_amistad(user *usuario){
+    // Verificar si no hay solicitudes de amistad
     if (is_empty_q(usuario->solicitudes_amistad) == TRUE){
         printf("\nNo tienes solicitudes de amistad ;(\n");
     }else {
+        // Procesar cada solicitud de amistad
         while (is_empty_q(usuario->solicitudes_amistad) != TRUE) {
             char option;
             printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
@@ -134,20 +136,26 @@ friends recibir_solicitud_amistad(user *usuario){
                 printf("\n Saliendo...\n");
                 break;
             } else if (option == 'Y') {
+                // Aceptar solicitud de amistad
                 printf("\nAhora %s y tu sois amigos <3\n", usuario->solicitudes_amistad->A[usuario->solicitudes_amistad->head]);
+                // Reservar memoria para el nombre del amigo y asignarlo a la lista de amigos
                 usuario->amigos.lista_amigos[usuario->amigos.cantidd_amigos] = (char *) malloc(MAX_STRING_LENGTH * sizeof(char));
                 usuario->amigos.lista_amigos[usuario->amigos.cantidd_amigos] = first(usuario->solicitudes_amistad);
                 usuario->amigos.cantidd_amigos++;
+                // Retirar la solicitud de amistad de la cola
                 dequeue(usuario->solicitudes_amistad);
             } else if (option == 'N') {
+                // Rechazar solicitud de amistad
                 dequeue(usuario->solicitudes_amistad);
                 printf("\nHas rechazado la solicitud de amistad ;(\n");
             } else {
+                // Opción incorrecta
                 printf("\nOPCION INCORRECTA");
                 printf("\nPulsa '0' para salir de las solicitudes de amistad, escribe 'Y' para acepar y 'N' para rechazar las solicitudes de amistad\n");
             }
         }
     }
+    // Retornar la lista de amigos actualizada
     return usuario->amigos;
 }
 /*#####################################################################*/

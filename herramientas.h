@@ -7,19 +7,40 @@
 /**########################## FUNCIONES PILA ##########################*/
 
 typedef struct Nodo {
-    char* usuarioID;
-    struct Nodo* siguiente;
+    char* usuarioID; // Identificador del usuario en el nodo
+    struct Nodo* siguiente; // Puntero al siguiente nodo en la pila
 } Nodo;
 
 Nodo* crearNodo(char* usuarioID);
+// crea un nuevo nodo para la pila. Toma como parámetro el usuarioID que se va a almacenar en el nodo. La función
+// reserva memoria para el nuevo nodo utilizando malloc y asigna el usuarioID al campo usuarioID del nodo utilizando
+// strdup, que realiza una copia duplicada de la cadena. Luego, se establece el campo siguiente del nodo como NULL,
+// ya que es el último nodo en la pila. Finalmente, se devuelve el nodo creado.
 
 int estaVacia(Nodo* pila);
+// verifica si la pila está vacía. Toma como parámetro un puntero a la pila y devuelve 1 si la pila está vacía
+// (es decir, si el puntero es NULL) o 0 si la pila contiene elementos. La función simplemente compara el puntero de la
+// pila con NULL y devuelve el resultado de la comparación. Si el puntero es NULL, se considera que la pila está vacía y
+// se devuelve 1; de lo contrario, se considera que la pila contiene elementos y se devuelve 0.
 
 void agregarLike(Nodo** pila, char* usuarioID);
+// agrega un nuevo nodo a la pila de likes para indicar que un usuario ha dado like a una publicación. Toma como
+// parámetros un puntero a la pila de likes y el ID del usuario que ha dado like. Se crea un nuevo nodo con el usuarioID
+// proporcionado, se establece su siguiente nodo como el nodo actual de la pila, y luego se actualiza la pila para que
+// apunte al nuevo nodo (se agrega el nodo al inicio de la pila). También se imprime un mensaje indicando que el usuario
+// ha dado like al post.
 
 void quitarLike(Nodo** pila, char* usuarioID);
+// elimina el nodo correspondiente a un usuario que ha dado like a una publicación. Toma como parámetros un puntero a
+// la pila de likes y el ID del usuario a quitar el like. El nodo actual se guarda en una variable temporal, luego se
+// actualiza la pila para que apunte al siguiente nodo (se elimina el nodo actual), y finalmente se liberan las memorias
+// asignadas para el usuarioID y el nodo actual. También se imprime un mensaje indicando que el usuario ha quitado su like del post.
 
 int haDadoLike(Nodo* pila, char* usuarioID);
+// verificar si un usuario ha dado "like" a una publicación. Recorre la pila de likes, que está compuesta por nodos,
+// y compara el ID del usuario en cada nodo con el usuarioID dado. Si hay una coincidencia, se devuelve TRUE, lo que
+// indica que el usuario ha dado like. Si se recorre toda la pila sin encontrar una coincidencia, se devuelve FALSE,
+// lo que indica que el usuario no ha dado like.
 
 /**#####################################################################*/
 /**########################## FUNCIONES COLA ##########################*/
