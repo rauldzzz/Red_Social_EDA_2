@@ -222,6 +222,7 @@ El algoritmo de ordenamiento de burbuja utilizado para imprimir las palabras má
 No se manejan casos de eliminación de palabras en el diccionario.
 
 Se podría implementar un algoritmo de hash más sofisticado y una estrategia de resolución de colisiones más eficiente, como encadenamiento o direccionamiento abierto.
+
 5. #### <a name="_heading=h.2z7xd6jxrj7v"></a>**Uso de github**
 Durante el desarrollo de este proyecto, utilizamos GitHub como plataforma de control de versiones, lo cual resultó muy práctico en general. Sin embargo, nos encontramos con algunos desafíos a lo largo del camino. En ocasiones, los Merges no se realizaban correctamente, lo que generaba conflictos en el código. Además, la sincronización en tiempo real no siempre se actualizaba de manera fluida, lo que dificultaba la colaboración simultánea. Otro problema que enfrentamos fue la gestión de los repositorios, ya que cada participante del proyecto tenía una ubicación local diferente, lo que ocasionaba que el proyecto no se ejecutara correctamente en el primer intento. A pesar de estos inconvenientes, GitHub demostró ser una herramienta invaluable en la organización y gestión del proyecto, permitiendo un seguimiento exhaustivo de los cambios y facilitando la colaboración en equipo.
 ###
