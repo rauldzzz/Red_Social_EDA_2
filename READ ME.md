@@ -53,15 +53,15 @@ Paula Borregón, Karen Cabello, Raúl Diaz, Martin Jarque
 
 [3. Funcionalidades extras	](#_heading=h.qmp4hhcvqk4l)
 
-[SOLUTION \[At most 1500 words\]	](#_heading=)
+[SOLUTION	](#_heading=)
 
-[System Architecture \	](#_heading=)
+[System Architecture 	](#_heading=)
 
-[Error Handling \	](#_heading=)
+[Error Handling 	](#_heading=)
 
-[Data model design \	](#_heading=)
+[Data model design 	](#_heading=)
 
-[Dataset description and processing \	](#_heading=)
+[Dataset description and processing \](#_heading=)
 
 [REFERENCES	15](#_heading=)
 
