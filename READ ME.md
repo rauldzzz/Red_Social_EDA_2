@@ -61,8 +61,6 @@ Paula Borregón, Karen Cabello, Raúl Diaz, Martin Jarque
 
 [Data model design 	](#_heading=)
 
-[Dataset description and processing \](#_heading=)
-
 [REFERENCES	15](#_heading=)
 
 #
